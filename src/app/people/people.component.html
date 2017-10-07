@@ -1,0 +1,123 @@
+<section class="red">
+    <div class="container width">
+        <div class="one unit row">
+            <h1>People</h1>
+        </div>
+        <div class="one unit row">
+            <h3>Tell us who you will be coming to Hack Cambridge.</h3>
+        </div>
+        <div class="one half unit row">
+            <div class="twelve unit column">
+                <p>
+                    Everyone coming to Hack Cambridge will be added to our Slack
+                    channel before the event so you can chat to the hackers. You
+                    will also be added to HELPq, a ticketing system built by
+                    HackMIT specifically for hackathons. To do so we need to know
+                    who is coming in advance. Phone numbers will only be used if
+                    we need to contact you during the event urgently.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section>
+    <div class="container width">
+        <div class="one unit row">
+            <h2>Mentors</h2>
+        </div>
+        <div class="one unit row">
+            <h3>You may bring an unlimited number of mentors.</h3>
+        </div>
+        <div class="half unit row">
+            <div class="twelve unit column">
+                <p>
+                    Mentors should have technical backgrounds, as they role is to help hackers with
+                    problems they are having with their projects.
+                </p>
+            </div>
+        </div>
+        <div class="half unit row">
+            <fieldset>
+                <input type="button" value="Add Mentor." (click)="addMentor()" [disabled]="!mentorDetailsCompleted">
+            </fieldset>
+        </div>
+        <div class="half unit row" *ngFor="let mentor of mentors; let i = index">
+            <fieldset>
+                <input type="text" [(ngModel)]="mentors[i].name" (ngModelChange)="onMentorChanges()" placeholder="Name">
+                <input type="text" [(ngModel)]="mentors[i].email" (ngModelChange)="onMentorChanges()" placeholder="Email">
+                <input type="text" [(ngModel)]="mentors[i].phoneNumber" (ngModelChange)="onMentorChanges()" placeholder="Phone">
+                <input type="button" value="Delete." (click)="deleteMentor(i)">
+            </fieldset>
+        </div>
+    </div>
+</section>
+
+<section *ngIf="recruiterLimit > 0">
+    <div class="container width">
+        <div class="one unit row">
+            <h2>Recruiters</h2>
+        </div>
+        <div class="one unit row">
+            <h3>You may bring {{ recruiterLimit }} recruiters.</h3>
+        </div>
+        <div class="half unit row">
+            <fieldset>
+                <input type="button" value="Add Recruiter." (click)="addRecruiter()" [hidden]="recruiters.length >= recruiterLimit" [disabled]="!recruiterDetailsCompleted">
+            </fieldset>
+        </div>
+        <div class="half unit row" *ngFor="let recruiter of recruiters; let i = index">
+            <fieldset>
+                <input type="text" [(ngModel)]="recruiters[i].name" (ngModelChange)="onRecruiterChanges()" placeholder="Name">
+                <input type="text" [(ngModel)]="recruiters[i].email" (ngModelChange)="onRecruiterChanges()" placeholder="Email">
+                <input type="text" [(ngModel)]="recruiters[i].phoneNumber" (ngModelChange)="onRecruiterChanges()" placeholder="Phone">
+                <input type="button" value="Delete." (click)="deleteRecruiter(i)">
+            </fieldset>
+        </div>
+    </div>
+</section>
+
+<section>
+    <div class="container width">
+        <div class="one unit row">
+            <h2>Hack Cambridge Judge</h2>
+        </div>
+        <div class="one unit row">
+            <h3>Nominate one mentor to be a Hack Cambridge judge.</h3>
+        </div>
+        <div class="one half unit row">
+            <div class="twelve unit column">
+                <p>
+                    Hack Cambridge judges take part in deciding who gets the overall
+                    Hack Cambridge prizes. If you would like to take part in this,
+                    nominate one of your mentors. Note that this does not mean anything for
+                    prizes which are run by you &ndash; you may run your own competitions
+                    as you wish. Judging will be done using Gavel, an expo judging system
+                    originally developed for HackMIT.<br>
+                    <a rel="external" href="https://github.com/anishathalye/gavel">Read about Gavel.</a>
+                </p>
+            </div>
+        </div>
+        <div class="half unit row">
+            <select [(ngModel)]="judge">
+                <option [value]="undefined">We do not wish to nominate a judge</option>
+                <option *ngFor="let mentor of mentors; let i = index" [value]="mentor">{{ mentor.name }}</option>
+            </select>
+        </div>
+    </div>
+</section>
+
+<section class="red">
+    <div class="container width">
+        <div class="half unit row">
+            <h3>
+                Changes are saved automatically.<br>
+            </h3>
+        </div>
+        <div class="half unit row">
+            <p>
+                <a rel="prev" [routerLink]="[ '' ]">Return to Portal</a><br>
+            </p>
+        </div>
+    </div>
+</section>

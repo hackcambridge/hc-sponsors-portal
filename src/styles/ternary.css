@@ -61,6 +61,9 @@ section.black + section.home-link, section.red + section.home-link {
 header {
     padding-top: var(--one);
 }
+section:first-child {
+    padding-top: var(--one);
+}
 section.image {
     z-index: -1;
 }
@@ -289,19 +292,19 @@ input:placeholder-shown {
     border-bottom: 1px solid var(--accent-color);
 }
 
-input[type="submit"]{
+input[type="submit"], input[type="button"]{
     background-color: unset;
     color: var(--accent-color);
     border: 1px solid var(--accent-color);
 }
 
-input[type="submit"]:hover{
+input[type="submit"]:hover, input[type="button"]:hover{
     background-color: unset;
     color: var(--secondary-color);
     border: 1px solid var(--secondary-color);
 }
 
-input[type="submit"]:active{
+input[type="submit"]:active, input[type="button"]:active{
     background-color: var(--secondary-color);
     color: var(--primary-color);
     border: 1px solid var(--secondary-color);
