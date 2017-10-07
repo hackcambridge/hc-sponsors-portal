@@ -7,17 +7,20 @@ import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 import { PortalComponent } from 'app/portal/portal.component';
 import { PeopleComponent } from 'app/people/people.component';
+import { SocialMediaComponent } from 'app/social-media/social-media.component';
 
 const appRoutes: Routes = [
   { path: '', component: PortalComponent },
-  { path: 'people', component: PeopleComponent }
+  { path: 'people', component: PeopleComponent },
+  { path: 'social-media', component: SocialMediaComponent }
 ];
 
 @NgModule({
   declarations: [
     AppComponent,
     PortalComponent,
-    PeopleComponent
+    PeopleComponent,
+    SocialMediaComponent
   ],
   imports: [
     BrowserModule,
