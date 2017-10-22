@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { TechListingModel, TechListingType } from 'app/tech/tech-listing.model';
 
 @Component({
-    selector: 'app-mentors',
+    selector: 'app-swag',
     templateUrl: './tech.component.html'
 })
 export class TechComponent {

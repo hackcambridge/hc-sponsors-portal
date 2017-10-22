@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { PersonModel } from 'app/people/person.model';
 
 @Component({
-    selector: 'app-mentors',
+    selector: 'app-people',
     templateUrl: './people.component.html'
 })
 export class PeopleComponent {

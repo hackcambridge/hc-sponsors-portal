@@ -10,13 +10,15 @@ import { PeopleComponent } from 'app/people/people.component';
 import { SocialMediaComponent } from 'app/social-media/social-media.component';
 import { WorkshopComponent } from 'app/workshops/workshops.component';
 import { TechComponent } from 'app/tech/tech.component';
+import { SwagComponent } from 'app/swag/swag.component';
 
 const appRoutes: Routes = [
   { path: '', component: PortalComponent },
   { path: 'people', component: PeopleComponent },
   { path: 'social-media', component: SocialMediaComponent },
   { path: 'workshops', component: WorkshopComponent },
-  { path: 'tech', component: TechComponent }
+  { path: 'tech', component: TechComponent },
+  { path: 'swag', component: SwagComponent }
 ];
 
 @NgModule({
@@ -26,7 +28,8 @@ const appRoutes: Routes = [
     PeopleComponent,
     SocialMediaComponent,
     WorkshopComponent,
-    TechComponent
+    TechComponent,
+    SwagComponent
   ],
   imports: [
     BrowserModule,
