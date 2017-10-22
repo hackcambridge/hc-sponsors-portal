@@ -8,11 +8,13 @@ import { AppComponent } from './app.component';
 import { PortalComponent } from 'app/portal/portal.component';
 import { PeopleComponent } from 'app/people/people.component';
 import { SocialMediaComponent } from 'app/social-media/social-media.component';
+import { WorkshopComponent } from 'app/workshops/workshops.component';
 
 const appRoutes: Routes = [
   { path: '', component: PortalComponent },
   { path: 'people', component: PeopleComponent },
-  { path: 'social-media', component: SocialMediaComponent }
+  { path: 'social-media', component: SocialMediaComponent },
+  { path: 'workshops', component: WorkshopComponent }
 ];
 
 @NgModule({
@@ -20,7 +22,8 @@ const appRoutes: Routes = [
     AppComponent,
     PortalComponent,
     PeopleComponent,
-    SocialMediaComponent
+    SocialMediaComponent,
+    WorkshopComponent
   ],
   imports: [
     BrowserModule,
