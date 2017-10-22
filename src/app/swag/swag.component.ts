@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { TechListingModel, TechListingType } from 'app/tech/tech-listing.model';
 import { SwagModel } from 'app/swag/swag.model';
 
 @Component({

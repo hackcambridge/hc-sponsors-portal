@@ -11,6 +11,7 @@ import { SocialMediaComponent } from 'app/social-media/social-media.component';
 import { WorkshopComponent } from 'app/workshops/workshops.component';
 import { TechComponent } from 'app/tech/tech.component';
 import { SwagComponent } from 'app/swag/swag.component';
+import { EventsComponent } from 'app/events/events.component';
 
 const appRoutes: Routes = [
   { path: '', component: PortalComponent },
@@ -18,7 +19,8 @@ const appRoutes: Routes = [
   { path: 'social-media', component: SocialMediaComponent },
   { path: 'workshops', component: WorkshopComponent },
   { path: 'tech', component: TechComponent },
-  { path: 'swag', component: SwagComponent }
+  { path: 'swag', component: SwagComponent },
+  { path: 'events', component: EventsComponent }
 ];
 
 @NgModule({
@@ -29,7 +31,8 @@ const appRoutes: Routes = [
     SocialMediaComponent,
     WorkshopComponent,
     TechComponent,
-    SwagComponent
+    SwagComponent,
+    EventsComponent
   ],
   imports: [
     BrowserModule,
