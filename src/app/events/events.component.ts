@@ -1,11 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { EventModel, CompetitionModel } from 'app/events/events.model';
+import { BenefitsService } from 'app/benefits/benefits.service';
 
 @Component({
     selector: 'app-events',
     templateUrl: './events.component.html'
 })
-export class EventsComponent {
+export class EventsComponent implements OnInit {
     /** Holds any details about the themed prize that the sponsor wants to run. */
     themedPrize: CompetitionModel;
 
@@ -19,19 +20,19 @@ export class EventsComponent {
      * Indicates whether the sponsor's benefits includes being able to award a
      * themed prize.
      */
-    canAwardThemedPrize: boolean = true;
+    canAwardThemedPrize: boolean;
 
     /**
      * Indicates whether the sponsor\s benefits includes being able to run a
      * side-event.
      */
-    canRunSideEvent: boolean = true;
+    canRunSideEvent: boolean;
 
     /**
      * Indicates whether the sponsor's benefits includes being able to run a
      * hardware/API prize.
      */
-    canRunHardwareApiPrize: boolean = false;
+    canRunHardwareApiPrize: boolean;
 
     /** Indicates whether the sponsor plans to run a themed prize. */
     doingThemedPrize = false;
@@ -41,6 +42,14 @@ export class EventsComponent {
 
     /** Indicates whether the sponsor plans to run a hardware/API prize. */
     doingHardwareApiPrize = false;
+
+    constructor(private benefitsService: BenefitsService) {}
+
+    ngOnInit(): void {
+        this.canAwardThemedPrize = this.benefitsService.canAwardThemedPrize();
+        this.canRunHardwareApiPrize = this.benefitsService.canRunHardwareApiPrize();
+        this.canRunSideEvent = this.benefitsService.canRunSideEvent();
+    }
 
     /**
      * Called whenever the sponsor selects that they will or will not do run a

@@ -1,21 +1,29 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { BenefitsService } from 'app/benefits/benefits.service';
 
 @Component({
     selector: 'app-mentors',
     templateUrl: './workshops.component.html'
 })
-export class WorkshopComponent {
-    hasWorkshopSlot = true;
-    hasProductDemoSlot = true;
+export class WorkshopComponent implements OnInit {
+    hasWorkshopSlot: boolean;
+    hasProductDemoSlot: boolean;
 
-    productDemoTitle = '';
-    productDemoDescription = '';
-    productDemoSpeaker = '';
+    productDemoTitle: string;
+    productDemoDescription: string;
+    productDemoSpeaker: string;
 
-    workshopTitle = '';
-    workshopDescription = '';
-    workshopSpeaker = '';
+    workshopTitle: string;
+    workshopDescription: string;
+    workshopSpeaker: string;
 
-    doingWorkshop = false;
-    doingProductDemo = false;
+    doingWorkshop: boolean;
+    doingProductDemo: boolean;
+
+    constructor(private benefitsService: BenefitsService) {}
+
+    ngOnInit(): void {
+        this.hasProductDemoSlot = this.benefitsService.hasProductDemoSlot();
+        this.hasWorkshopSlot = this.benefitsService.hasWorkshopSlot();
+    }
 }

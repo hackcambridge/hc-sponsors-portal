@@ -64,6 +64,36 @@ export class BenefitsService {
         // TODO Hard coded or now
         return true;
     }
+
+    canAwardThemedPrize(): boolean {
+        // TODO Hard coded for now
+        return true;
+    }
+
+    canRunHardwareApiPrize(): boolean {
+        // TODO hard coded for now
+        return true;
+    }
+
+    canRunSideEvent(): boolean {
+        // TODO hard coded for now
+        return true;
+    }
+
+    getMaxNumberOfRecruiters(): number {
+        // TODO hard coded for now
+        return 5;
+    }
+
+    hasWorkshopSlot(): boolean {
+        // TODO hard coded for now
+        return true;
+    }
+
+    hasProductDemoSlot(): boolean {
+        // TODO hard coded for now
+        return true;
+    }
 }
 
 export enum SponsorBenefitTypes {

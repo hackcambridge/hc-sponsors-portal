@@ -1,41 +1,20 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { PersonModel } from 'app/people/person.model';
+import { BenefitsService } from 'app/benefits/benefits.service';
 
 @Component({
     selector: 'app-people',
     templateUrl: './people.component.html'
 })
-export class PeopleComponent {
-    henry: PersonModel = {
-        name: 'Henry Thompson',
-        email: 'hello@henrythompson.me',
-        phoneNumber: '07501252170'
-    };
+export class PeopleComponent implements OnInit {
+    /** The mentors chosen by the sponsor to come to the event. */
+    mentors: PersonModel[] = [];
 
-    mentors: PersonModel[] = [
-        this.henry,
-        {
-            name: 'Justin Malcic',
-            email: 'jmalcic@icloud.com',
-            phoneNumber: '07320838798'
-        }
-    ];
-
-    recruiters: PersonModel[] = [
-        {
-            name: 'Henry Thompson',
-            email: 'hello@henrythompson.me',
-            phoneNumber: '07501252170'
-        },
-        {
-            name: 'Justin Malcic',
-            email: 'jmalcic@icloud.com',
-            phoneNumber: '07320838798'
-        }
-    ];
+    /** The recruiters chosen by the sponsor to come to the event. */
+    recruiters: PersonModel[] = [];
 
     /** The maximum number of recruiters this sponsor may bring. */
-    recruiterLimit = 5;
+    recruiterLimit: number;
 
     /** True if the entries for all mentors have been filled out. */
     mentorDetailsCompleted = true;
@@ -44,7 +23,13 @@ export class PeopleComponent {
     recruiterDetailsCompleted = true;
 
     /** The mentor nominated to be Hack Cambridge judge. */
-    judge: PersonModel = this.henry;
+    judge: PersonModel;
+
+    constructor(private benefitsService: BenefitsService) {}
+
+    ngOnInit(): void {
+        this.recruiterLimit = this.benefitsService.getMaxNumberOfRecruiters();
+    }
 
     addMentor(): void {
         // Only allow a mentor to be added if the rest are completed

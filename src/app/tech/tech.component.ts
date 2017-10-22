@@ -6,13 +6,7 @@ import { TechListingModel, TechListingType } from 'app/tech/tech-listing.model';
     templateUrl: './tech.component.html'
 })
 export class TechComponent {
-    techListings: TechListingModel[] = [
-        {
-            name: 'Android SDK',
-            description: 'Allows you to develop Android applications.',
-            type: TechListingType.SDK
-        }
-    ];
+    techListings: TechListingModel[] = [];
 
     addTechListing(): void {
         this.techListings.unshift(new TechListingModel());

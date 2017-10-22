@@ -6,13 +6,7 @@ import { SwagModel } from 'app/swag/swag.model';
     templateUrl: './swag.component.html'
 })
 export class SwagComponent {
-    swagList: SwagModel[] = [
-        {
-            name: 'Powerbank',
-            description: 'An Acme Inc. branded powerbank.',
-            orderByUs: true
-        }
-    ];
+    swagList: SwagModel[] = [];
 
     addSwag(): void {
         this.swagList.unshift(new SwagModel());

@@ -7,10 +7,7 @@ import { PresentationModel } from 'app/presentation/presenetation.model';
 })
 export class PresentationComponent {
     /** The link to the uploaded presentation slides. */
-    presentation: PresentationModel = {
-        fileName: 'Example.pptx',
-        fileUrl: 'http://test.com'
-    };
+    presentation: PresentationModel;
 
     /** Upload a new set of slides. */
     uploadFile(): void {
