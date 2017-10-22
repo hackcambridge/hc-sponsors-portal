@@ -12,6 +12,7 @@ import { WorkshopComponent } from 'app/workshops/workshops.component';
 import { TechComponent } from 'app/tech/tech.component';
 import { SwagComponent } from 'app/swag/swag.component';
 import { EventsComponent } from 'app/events/events.component';
+import { PresentationComponent } from 'app/presentation/presentation.component';
 
 const appRoutes: Routes = [
   { path: '', component: PortalComponent },
@@ -20,7 +21,8 @@ const appRoutes: Routes = [
   { path: 'workshops', component: WorkshopComponent },
   { path: 'tech', component: TechComponent },
   { path: 'swag', component: SwagComponent },
-  { path: 'events', component: EventsComponent }
+  { path: 'events', component: EventsComponent },
+  { path: 'presentation', component: PresentationComponent }
 ];
 
 @NgModule({
@@ -32,7 +34,8 @@ const appRoutes: Routes = [
     WorkshopComponent,
     TechComponent,
     SwagComponent,
-    EventsComponent
+    EventsComponent,
+    PresentationComponent
   ],
   imports: [
     BrowserModule,
