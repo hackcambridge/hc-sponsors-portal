@@ -13,6 +13,7 @@ import { TechComponent } from 'app/tech/tech.component';
 import { SwagComponent } from 'app/swag/swag.component';
 import { EventsComponent } from 'app/events/events.component';
 import { PresentationComponent } from 'app/presentation/presentation.component';
+import { BenefitsService } from 'app/benefits/benefits.service';
 
 const appRoutes: Routes = [
   { path: '', component: PortalComponent },
@@ -45,7 +46,11 @@ const appRoutes: Routes = [
       appRoutes
     )
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [
+    BenefitsService
+  ],
+  bootstrap: [
+    AppComponent
+  ]
 })
 export class AppModule { }
