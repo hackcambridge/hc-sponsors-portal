@@ -15,6 +15,10 @@ import { EventsComponent } from 'app/events/events.component';
 import { PresentationComponent } from 'app/presentation/presentation.component';
 import { BenefitsService } from 'app/benefits/benefits.service';
 
+import { AngularFireModule } from 'angularfire2';
+import { AngularFirestoreModule } from 'angularfire2/firestore';
+import { firebase } from '../environments/firebase';
+
 const appRoutes: Routes = [
   { path: '', component: PortalComponent },
   { path: 'people', component: PeopleComponent },
@@ -42,6 +46,8 @@ const appRoutes: Routes = [
     BrowserModule,
     FormsModule,
     HttpModule,
+    AngularFireModule.initializeApp(firebase),
+    AngularFirestoreModule.enablePersistence(),
     RouterModule.forRoot(
       appRoutes
     )
