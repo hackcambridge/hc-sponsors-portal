@@ -1,16 +1,24 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
+import { SponsorsService } from 'app/sponsors/sponsors.service';
+import { SponsorModel } from 'app/sponsors/sponsor.model';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
     selector: 'app-root',
     templateUrl: './app.component.html'
 })
 export class AppComponent implements OnInit {
-    companyName = 'Acme Inc';
+    sponsor: SponsorModel;
 
-    constructor(private router: Router) { }
+    constructor(private sponsorsService: SponsorsService,
+                private router: Router) { }
 
     ngOnInit() {
+        this.sponsorsService.getSponsor().subscribe(
+            sponsor => this.sponsor = sponsor
+        );
+
         // When we navigate to a new page, we want to scroll to the top of the
         // page.
         this.router.events.subscribe(event => {

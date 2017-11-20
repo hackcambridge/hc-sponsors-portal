@@ -1,12 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { BenefitsService, SponsorBenefitTypes } from 'app/benefits/benefits.service';
 import { SponsorshipBenefitModel } from 'app/benefits/sponsorship-benefit.model';
+import { SponsorsService } from 'app/sponsors/sponsors.service';
+import { BaseComponent } from 'app/base.component';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'app-portal',
     templateUrl: './portal.component.html'
 })
-export class PortalComponent implements OnInit {
+export class PortalComponent extends BaseComponent implements OnInit {
     sponsorshipTier = 'Tera';
     sponsorshipBenefits: SponsorshipBenefitModel[] = [];
 
@@ -14,7 +17,11 @@ export class PortalComponent implements OnInit {
     portalLinksCentre: PortalLink[] = [];
     portalLinksRight: PortalLink[] = [];
 
-    constructor(private benefitsService: BenefitsService) {}
+    constructor(private benefitsService: BenefitsService,
+                private sponsorsService: SponsorsService,
+                private activatedRoute: ActivatedRoute) {
+        super(sponsorsService, activatedRoute);
+    }
 
     ngOnInit(): void {
         this.populateBenefitsList();

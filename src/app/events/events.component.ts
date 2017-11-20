@@ -1,12 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { EventModel, CompetitionModel } from 'app/events/events.model';
 import { BenefitsService } from 'app/benefits/benefits.service';
+import { BaseComponent } from 'app/base.component';
+import { SponsorsService } from 'app/sponsors/sponsors.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'app-events',
     templateUrl: './events.component.html'
 })
-export class EventsComponent implements OnInit {
+export class EventsComponent extends BaseComponent implements OnInit {
     /** Holds any details about the themed prize that the sponsor wants to run. */
     themedPrize: CompetitionModel;
 
@@ -43,7 +46,11 @@ export class EventsComponent implements OnInit {
     /** Indicates whether the sponsor plans to run a hardware/API prize. */
     doingHardwareApiPrize = false;
 
-    constructor(private benefitsService: BenefitsService) {}
+    constructor(private sponsorsService: SponsorsService,
+                private activatedRoute: ActivatedRoute,
+                private benefitsService: BenefitsService) {
+        super(sponsorsService, activatedRoute);
+    }
 
     ngOnInit(): void {
         this.canAwardThemedPrize = this.benefitsService.canAwardThemedPrize();

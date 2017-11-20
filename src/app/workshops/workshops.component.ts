@@ -1,11 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { BenefitsService } from 'app/benefits/benefits.service';
+import { BaseComponent } from 'app/base.component';
+import { SponsorsService } from 'app/sponsors/sponsors.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'app-mentors',
     templateUrl: './workshops.component.html'
 })
-export class WorkshopComponent implements OnInit {
+export class WorkshopComponent extends BaseComponent implements OnInit {
     hasWorkshopSlot: boolean;
     hasProductDemoSlot: boolean;
 
@@ -20,7 +23,11 @@ export class WorkshopComponent implements OnInit {
     doingWorkshop: boolean;
     doingProductDemo: boolean;
 
-    constructor(private benefitsService: BenefitsService) {}
+    constructor(private sponsorsService: SponsorsService,
+                private activatedRoute: ActivatedRoute,
+                private benefitsService: BenefitsService) {
+        super(sponsorsService, activatedRoute);
+    }
 
     ngOnInit(): void {
         this.hasProductDemoSlot = this.benefitsService.hasProductDemoSlot();

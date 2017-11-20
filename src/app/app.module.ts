@@ -18,16 +18,19 @@ import { BenefitsService } from 'app/benefits/benefits.service';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { firebase } from '../environments/firebase';
+import { SponsorsService } from 'app/sponsors/sponsors.service';
+import { AngularFireDatabase, AngularFireDatabaseModule } from 'angularfire2/database';
+import { ChangesSavedComponent } from 'app/changes-saved/changes-saved.component';
 
 const appRoutes: Routes = [
-  { path: '', component: PortalComponent },
-  { path: 'people', component: PeopleComponent },
-  { path: 'social-media', component: SocialMediaComponent },
-  { path: 'workshops', component: WorkshopComponent },
-  { path: 'tech', component: TechComponent },
-  { path: 'swag', component: SwagComponent },
-  { path: 'events', component: EventsComponent },
-  { path: 'presentation', component: PresentationComponent }
+  { path: ':code', component: PortalComponent },
+  { path: ':code/people', component: PeopleComponent },
+  { path: ':code/social-media', component: SocialMediaComponent },
+  { path: ':code/workshops', component: WorkshopComponent },
+  { path: ':code/tech', component: TechComponent },
+  { path: ':code/swag', component: SwagComponent },
+  { path: ':code/events', component: EventsComponent },
+  { path: ':code/presentation', component: PresentationComponent }
 ];
 
 @NgModule({
@@ -40,7 +43,8 @@ const appRoutes: Routes = [
     TechComponent,
     SwagComponent,
     EventsComponent,
-    PresentationComponent
+    PresentationComponent,
+    ChangesSavedComponent
   ],
   imports: [
     BrowserModule,
@@ -53,7 +57,9 @@ const appRoutes: Routes = [
     )
   ],
   providers: [
-    BenefitsService
+    BenefitsService,
+    SponsorsService,
+    AngularFireDatabase
   ],
   bootstrap: [
     AppComponent

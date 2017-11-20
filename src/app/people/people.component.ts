@@ -1,12 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { PersonModel } from 'app/people/person.model';
 import { BenefitsService } from 'app/benefits/benefits.service';
+import { SponsorsService } from 'app/sponsors/sponsors.service';
+import { ActivatedRoute } from '@angular/router';
+import { BaseComponent } from 'app/base.component';
 
 @Component({
     selector: 'app-people',
     templateUrl: './people.component.html'
 })
-export class PeopleComponent implements OnInit {
+export class PeopleComponent extends BaseComponent implements OnInit {
     /** The mentors chosen by the sponsor to come to the event. */
     mentors: PersonModel[] = [];
 
@@ -25,7 +28,11 @@ export class PeopleComponent implements OnInit {
     /** The mentor nominated to be Hack Cambridge judge. */
     judge: PersonModel;
 
-    constructor(private benefitsService: BenefitsService) {}
+    constructor(private benefitsService: BenefitsService,
+                private sponsorsService: SponsorsService,
+                private activatedRoute: ActivatedRoute) {
+        super(sponsorsService, activatedRoute);
+    }
 
     ngOnInit(): void {
         this.recruiterLimit = this.benefitsService.getMaxNumberOfRecruiters();
