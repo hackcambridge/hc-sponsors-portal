@@ -29,7 +29,13 @@ export class PortalComponent extends BaseComponent implements OnInit {
     }
 
     private populateBenefitsList(): void {
-        this.sponsorshipBenefits = this.benefitsService.getSponsorBenefitDescriptions();
+        this.activatedRoute.params.subscribe(
+            params => {
+                this.benefitsService.getSponsorBenefitDescriptions(params['code']).subscribe(
+                    benefits => this.sponsorshipBenefits = benefits
+                );
+            }
+        );
     }
 
     /**

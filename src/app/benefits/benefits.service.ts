@@ -1,5 +1,8 @@
 import { Injectable } from '@angular/core';
 import { SponsorshipBenefitModel } from 'app/benefits/sponsorship-benefit.model';
+import { SponsorsService } from 'app/sponsors/sponsors.service';
+import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
+import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 /**
@@ -7,25 +10,13 @@ import { SponsorshipBenefitModel } from 'app/benefits/sponsorship-benefit.model'
  * sponsor is entitled to based on their sponsorship package.
  */
 export class BenefitsService {
-    getSponsorBenefitDescriptions(): SponsorshipBenefitModel[] {
-        // Hard coded for now
-        return [
-            {
-                id: SponsorBenefitTypes.ProductDemoSlot,
-                name: 'Product Demo',
-                description: 'Demo your API'
-            },
-            {
-                id: SponsorBenefitTypes.WorkshopSlot,
-                name: 'Workshop Slot',
-                description: 'Run a 30 minute workshop'
-            },
-            {
-                id: SponsorBenefitTypes.BrandedSwag,
-                name: 'Bring Branded Swag',
-                description: 'You can bring unlimited swag to the event'
-            }
-        ];
+    constructor(private db: AngularFireDatabase,
+                private sponsorsService: SponsorsService) {}
+
+    getSponsorBenefitDescriptions(magicLink: string): Observable<SponsorshipBenefitModel[]> {
+        return this.sponsorsService.getSponsorGuid(magicLink).flatMap(
+            guid => this.db.list('/sponsors/' + guid + '/benefits').valueChanges()
+        );
     }
 
     getSponsorBenefits(): SponsorBenefitTypes[] {
