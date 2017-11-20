@@ -11,7 +11,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class PortalComponent extends BaseComponent implements OnInit {
     sponsorshipTier = 'Tera';
-    sponsorshipBenefits: SponsorshipBenefitModel[] = [];
+    sponsorshipBenefits: SponsorshipBenefitModel[];
 
     portalLinksLeft: PortalLink[] = [];
     portalLinksCentre: PortalLink[] = [];
@@ -24,18 +24,7 @@ export class PortalComponent extends BaseComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.populateBenefitsList();
         this.determineVisibleLinks();
-    }
-
-    private populateBenefitsList(): void {
-        this.activatedRoute.params.subscribe(
-            params => {
-                this.benefitsService.getSponsorBenefitDescriptions(params['code']).subscribe(
-                    benefits => this.sponsorshipBenefits = benefits
-                );
-            }
-        );
     }
 
     /**
@@ -43,28 +32,43 @@ export class PortalComponent extends BaseComponent implements OnInit {
      * show and hide different links on the 'What You Need To Do' section.
      */
     private determineVisibleLinks(): void {
+        const routeParams = this.activatedRoute.params.subscribe(
+            params => this.showLinksForMagicLink(params['code'])
+        );
+    }
+
+    private showLinksForMagicLink(magicLink: string) {
+        this.benefitsService.getSponsorBenefitDescriptions(magicLink).first().subscribe(
+            benefits => {
+                this.showLinksFromBenefits(benefits);
+                this.sponsorshipBenefits = benefits;
+            }
+        );
+    }
+
+    private showLinksFromBenefits(benefits: SponsorshipBenefitModel[]): void {
         const portalLinks: PortalLink[] = [];
 
         portalLinks.push({ pageUrl: 'people', text: 'Let Us Know Who\'s Coming' });
         portalLinks.push({ pageUrl: 'social-media', text: 'Provide Social Media Assets' });
 
-        if (this.benefitsService.canRunWorkshopLikeEvent()) {
+        if (this.benefitsService.canRunWorkshopLikeEvent(benefits)) {
             portalLinks.push({ pageUrl: 'workshops', text: 'Tell us about any workshops' });
         }
 
-        if (this.benefitsService.canListHardwareAndApis()) {
+        if (this.benefitsService.canListHardwareAndApis(benefits)) {
             portalLinks.push({ pageUrl: 'tech', text: 'Register your tech with us' });
         }
 
-        if (this.benefitsService.canBringSwag()) {
+        if (this.benefitsService.canBringSwag(benefits)) {
             portalLinks.push({ pageUrl: 'swag', text: 'Ensure your swag is OK' });
         }
 
-        if (this.benefitsService.canRunCompetitionAndEvents()) {
+        if (this.benefitsService.canRunCompetitionAndEvents(benefits)) {
             portalLinks.push({ pageUrl: 'events', text: 'Plan any competitions and events' });
         }
 
-        if (this.benefitsService.canRunOpeningCeremonyPresentation()) {
+        if (this.benefitsService.canRunOpeningCeremonyPresentation(benefits)) {
             portalLinks.push({ pageUrl: 'presentation', text: 'Send us your presentation' });
         }
 

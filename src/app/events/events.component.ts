@@ -53,9 +53,18 @@ export class EventsComponent extends BaseComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.canAwardThemedPrize = this.benefitsService.canAwardThemedPrize();
-        this.canRunHardwareApiPrize = this.benefitsService.canRunHardwareApiPrize();
-        this.canRunSideEvent = this.benefitsService.canRunSideEvent();
+        this.activatedRoute.params.subscribe(
+            params => this.getBenefits(params['code'])
+        );
+    }
+
+    private getBenefits(magicLink: string): void {
+        this.benefitsService.getSponsorBenefitDescriptions(magicLink).first().subscribe(
+            benefits => {
+                this.canAwardThemedPrize = this.benefitsService.canAwardThemedPrize(benefits);
+                this.canRunHardwareApiPrize = this.benefitsService.canRunHardwareApiPrize(benefits);
+                this.canRunSideEvent = this.benefitsService.canRunSideEvent(benefits);
+            });
     }
 
     /**

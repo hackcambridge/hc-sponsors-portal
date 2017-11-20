@@ -19,56 +19,39 @@ export class BenefitsService {
         );
     }
 
-    getSponsorBenefits(): SponsorBenefitTypes[] {
-        // TODO Hardcoded test data
-        return [
-            SponsorBenefitTypes.ThemedPrize,
-            SponsorBenefitTypes.SideEvent,
-            SponsorBenefitTypes.WorkshopSlot,
-            SponsorBenefitTypes.OpeningCeremonyPresentation,
-            SponsorBenefitTypes.StallInFoyer,
-            SponsorBenefitTypes.LogoOnBanner
-        ];
+    canRunWorkshopLikeEvent(benefits: SponsorshipBenefitModel[]): boolean {
+        return this.hasWorkshopSlot(benefits) || this.hasProductDemoSlot(benefits);
     }
 
-    canRunWorkshopLikeEvent(): boolean {
-        // TODO Hard coded for now.
-        return false;
+    canListHardwareAndApis(benefits: SponsorshipBenefitModel[]): boolean {
+        return benefits.some((benefit, i, a) => benefit.id === SponsorBenefitTypes.AdvertiseHardwareApiBeforeEvent);
     }
 
-    canListHardwareAndApis(): boolean {
-        // TODO Hard coded for now.
-        return true;
+    canBringSwag(benefits: SponsorshipBenefitModel[]): boolean {
+        return benefits.some((benefit, i, a) => benefit.id === SponsorBenefitTypes.BrandedSwag);
     }
 
-    canBringSwag(): boolean {
-        // TODO Hard coded for now
-        return false;
+    canRunCompetitionAndEvents(benefits: SponsorshipBenefitModel[]): boolean {
+        return benefits.some((benefit, i, a) =>
+            benefit.id === SponsorBenefitTypes.SideEvent ||
+            benefit.id === SponsorBenefitTypes.ThemedPrize ||
+            benefit.id === SponsorBenefitTypes.AwardHardwareApiPrize);
     }
 
-    canRunCompetitionAndEvents(): boolean {
-        // TODO Hard coded for now.
-        return true;
+    canRunOpeningCeremonyPresentation(benefits: SponsorshipBenefitModel[]): boolean {
+        return benefits.some((benefit, i, a) => benefit.id === SponsorBenefitTypes.OpeningCeremonyPresentation);
     }
 
-    canRunOpeningCeremonyPresentation(): boolean {
-        // TODO Hard coded or now
-        return true;
+    canAwardThemedPrize(benefits: SponsorshipBenefitModel[]): boolean {
+        return benefits.some((benefit, i, a) => benefit.id === SponsorBenefitTypes.ThemedPrize);
     }
 
-    canAwardThemedPrize(): boolean {
-        // TODO Hard coded for now
-        return true;
+    canRunHardwareApiPrize(benefits: SponsorshipBenefitModel[]): boolean {
+        return benefits.some((benefit, i, a) => benefit.id === SponsorBenefitTypes.AwardHardwareApiPrize);
     }
 
-    canRunHardwareApiPrize(): boolean {
-        // TODO hard coded for now
-        return true;
-    }
-
-    canRunSideEvent(): boolean {
-        // TODO hard coded for now
-        return true;
+    canRunSideEvent(benefits: SponsorshipBenefitModel[]): boolean {
+        return benefits.some((benefit, i, a) => benefit.id === SponsorBenefitTypes.SideEvent);
     }
 
     getMaxNumberOfRecruiters(): number {
@@ -76,14 +59,12 @@ export class BenefitsService {
         return 5;
     }
 
-    hasWorkshopSlot(): boolean {
-        // TODO hard coded for now
-        return true;
+    hasWorkshopSlot(benefits: SponsorshipBenefitModel[]): boolean {
+        return benefits.some((benefit, i, a) => benefit.id === SponsorBenefitTypes.WorkshopSlot);
     }
 
-    hasProductDemoSlot(): boolean {
-        // TODO hard coded for now
-        return true;
+    hasProductDemoSlot(benefits: SponsorshipBenefitModel[]): boolean {
+        return benefits.some((benefit, i, a) => benefit.id === SponsorBenefitTypes.ProductDemoSlot);
     }
 }
 

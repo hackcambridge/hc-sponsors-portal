@@ -30,7 +30,17 @@ export class WorkshopComponent extends BaseComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.hasProductDemoSlot = this.benefitsService.hasProductDemoSlot();
-        this.hasWorkshopSlot = this.benefitsService.hasWorkshopSlot();
+        this.activatedRoute.params.subscribe(
+            params => this.getWorkshops(params['code'])
+        );
+    }
+
+    private getWorkshops(magicLink: string): void {
+        this.benefitsService.getSponsorBenefitDescriptions(magicLink).first().subscribe(
+            benefits => {
+                this.hasProductDemoSlot = this.benefitsService.hasProductDemoSlot(benefits);
+                this.hasWorkshopSlot = this.benefitsService.hasWorkshopSlot(benefits);
+            }
+        );
     }
 }
