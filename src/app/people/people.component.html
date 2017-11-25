@@ -46,7 +46,7 @@
             <fieldset>
                 <input type="text" [(ngModel)]="mentors[i].name" (ngModelChange)="onMentorChanges()" placeholder="Name">
                 <input type="text" [(ngModel)]="mentors[i].email" (ngModelChange)="onMentorChanges()" placeholder="Email">
-                <input type="text" [(ngModel)]="mentors[i].phoneNumber" (ngModelChange)="onMentorChanges()" placeholder="Phone">
+                <input type="text" [(ngModel)]="mentors[i].phone" (ngModelChange)="onMentorChanges()" placeholder="Phone">
                 <input type="button" value="Delete." (click)="deleteMentor(i)">
             </fieldset>
         </div>
@@ -70,7 +70,7 @@
             <fieldset>
                 <input type="text" [(ngModel)]="recruiters[i].name" (ngModelChange)="onRecruiterChanges()" placeholder="Name">
                 <input type="text" [(ngModel)]="recruiters[i].email" (ngModelChange)="onRecruiterChanges()" placeholder="Email">
-                <input type="text" [(ngModel)]="recruiters[i].phoneNumber" (ngModelChange)="onRecruiterChanges()" placeholder="Phone">
+                <input type="text" [(ngModel)]="recruiters[i].phone" (ngModelChange)="onRecruiterChanges()" placeholder="Phone">
                 <input type="button" value="Delete." (click)="deleteRecruiter(i)">
             </fieldset>
         </div>
@@ -99,9 +99,9 @@
             </div>
         </div>
         <div class="half unit row">
-            <select [(ngModel)]="judge">
+            <select [(ngModel)]="judge" (ngModelChange)="onJudgeChange()">
                 <option [value]="undefined">We do not wish to nominate a judge</option>
-                <option *ngFor="let mentor of mentors; let i = index" [value]="mentor">{{ mentor.name }}</option>
+                <option *ngFor="let mentor of mentors; let i = index" [value]="i">{{ mentor.name }}</option>
             </select>
         </div>
     </div>

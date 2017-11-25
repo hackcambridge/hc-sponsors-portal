@@ -4,6 +4,7 @@ import { BenefitsService } from 'app/benefits/benefits.service';
 import { SponsorsService } from 'app/sponsors/sponsors.service';
 import { ActivatedRoute } from '@angular/router';
 import { BaseComponent } from 'app/base.component';
+import { PeopleService } from 'app/people/people.service';
 
 @Component({
     selector: 'app-people',
@@ -25,19 +26,36 @@ export class PeopleComponent extends BaseComponent implements OnInit {
     /** True if the entries for all recruiters have been filled out. */
     recruiterDetailsCompleted = true;
 
-    /** The mentor nominated to be Hack Cambridge judge. */
-    judge: PersonModel;
+    /** The index of the mentor nominated to be Hack Cambridge judge. */
+    judge: number;
 
     constructor(private benefitsService: BenefitsService,
                 private sponsorsService: SponsorsService,
-                private activatedRoute: ActivatedRoute) {
+                private activatedRoute: ActivatedRoute,
+                private peopleService: PeopleService) {
         super(sponsorsService, activatedRoute);
     }
 
     ngOnInit(): void {
-         this.benefitsService.getMaxNumberOfRecruiters().subscribe(
-            limit => this.recruiterLimit = limit
-         );
+        this.activatedRoute.params.subscribe(
+            params => {
+                this.benefitsService.getMaxNumberOfRecruiters().subscribe(
+                   limit => this.recruiterLimit = limit
+                );
+
+                this.peopleService.getMentors(params['code']).first().subscribe(
+                    mentors => this.mentors = mentors
+                );
+
+                this.peopleService.getRecruiters(params['code']).first().subscribe(
+                    recruiters => this.recruiters = recruiters
+                );
+
+                this.peopleService.getJudge(params['code']).first().subscribe(
+                    judge => this.judge = judge
+                );
+            }
+        );
     }
 
     addMentor(): void {
@@ -46,20 +64,28 @@ export class PeopleComponent extends BaseComponent implements OnInit {
             this.mentors.unshift(new PersonModel());
             this.mentorDetailsCompleted = false;
         }
+
+        // The index of the judge must have increased
+        this.judge++;
+
+        this.onMentorChanges();
     }
 
     deleteMentor(index: number): void {
-        if (this.mentors[index] === this.judge) {
+        if (index === this.judge) {
             this.judge = undefined;
         }
 
         if (this.mentors[index]) {
             this.mentors.splice(index, 1);
         }
+
+        this.onMentorChanges();
     }
 
     onMentorChanges(): void {
         this.mentorDetailsCompleted = this.mentors.every((mentor, index, array) => this.isPersonModelComplete(mentor));
+        this.saveChanges();
     }
 
     addRecruiter(): void {
@@ -84,9 +110,23 @@ export class PeopleComponent extends BaseComponent implements OnInit {
 
     onRecruiterChanges(): void {
         this.recruiterDetailsCompleted = this.recruiters.every((recruiter, index, array) => this.isPersonModelComplete(recruiter));
+        this.saveChanges();
+    }
+
+    onJudgeChange(): void {
+        this.saveChanges();
     }
 
     private isPersonModelComplete(person: PersonModel): boolean {
-        return !!person.name && !!person.email && !!person.phoneNumber;
+        return !!person.name && !!person.email && !!person.phone;
+    }
+
+    private saveChanges(): void {
+        this.activatedRoute.params.first().subscribe(
+            params => this.peopleService.saveState(params['code'],
+                this.mentors,
+                this.recruiters,
+                this.judge)
+        );
     }
 }
