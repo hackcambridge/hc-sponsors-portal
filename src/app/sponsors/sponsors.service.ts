@@ -3,7 +3,6 @@ import { SponsorModel } from 'app/sponsors/sponsor.model';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/mergeMap';
-import 'rxjs/add/operator/first';
 import 'rxjs/Rx';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
@@ -24,7 +23,7 @@ export class SponsorsService {
         this.getSponsorGuid(magicLink)
             .subscribe(guid => {
                 if (guid) {
-                    this.db.object('sponsors/' + guid).valueChanges().first().subscribe(
+                    this.db.object('sponsors/' + guid).valueChanges().subscribe(
                         sponsor => this.sponsor$.next(<SponsorModel>sponsor)
                     );
                 }

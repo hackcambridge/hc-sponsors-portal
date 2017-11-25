@@ -35,7 +35,9 @@ export class PeopleComponent extends BaseComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.recruiterLimit = this.benefitsService.getMaxNumberOfRecruiters();
+         this.benefitsService.getMaxNumberOfRecruiters().subscribe(
+            limit => this.recruiterLimit = limit
+         );
     }
 
     addMentor(): void {

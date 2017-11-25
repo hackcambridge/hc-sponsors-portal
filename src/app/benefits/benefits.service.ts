@@ -54,9 +54,10 @@ export class BenefitsService {
         return benefits.some((benefit, i, a) => benefit.id === SponsorBenefitTypes.SideEvent);
     }
 
-    getMaxNumberOfRecruiters(): number {
-        // TODO hard coded for now
-        return 5;
+    getMaxNumberOfRecruiters(): Observable<number> {
+        return this.sponsorsService.getSponsor().map(
+            sponsor => sponsor ? sponsor.maxRecruiters : 0
+        );
     }
 
     hasWorkshopSlot(benefits: SponsorshipBenefitModel[]): boolean {
