@@ -22,6 +22,7 @@ import { SponsorsService } from 'app/sponsors/sponsors.service';
 import { AngularFireDatabase, AngularFireDatabaseModule } from 'angularfire2/database';
 import { ChangesSavedComponent } from 'app/changes-saved/changes-saved.component';
 import { PeopleService } from 'app/people/people.service';
+import { EventsService } from 'app/events/events.service';
 
 const appRoutes: Routes = [
   { path: ':code', component: PortalComponent },
@@ -61,6 +62,7 @@ const appRoutes: Routes = [
     BenefitsService,
     SponsorsService,
     PeopleService,
+    EventsService,
     AngularFireDatabase
   ],
   bootstrap: [

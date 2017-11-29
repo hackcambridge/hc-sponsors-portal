@@ -1,10 +1,16 @@
 export class EventModel {
-    name: string;
+    title: string;
     description: string;
 }
 
 export class CompetitionModel {
-    name: string;
+    title: string;
     description: string;
     prizes: string;
+}
+
+export class EventsSummaryModel {
+    hardwareApiCompetition: CompetitionModel;
+    themedCompetition: CompetitionModel;
+    sideEvent: EventModel;
 }

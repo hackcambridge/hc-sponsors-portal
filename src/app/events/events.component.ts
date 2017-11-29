@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { EventModel, CompetitionModel } from 'app/events/events.model';
+import { EventModel, CompetitionModel, EventsSummaryModel } from 'app/events/events.model';
 import { BenefitsService } from 'app/benefits/benefits.service';
 import { BaseComponent } from 'app/base.component';
 import { SponsorsService } from 'app/sponsors/sponsors.service';
 import { ActivatedRoute } from '@angular/router';
+import { EventsService } from 'app/events/events.service';
+import { PACKAGE_ROOT_URL } from '@angular/core/src/application_tokens';
 
 @Component({
     selector: 'app-events',
@@ -37,18 +39,25 @@ export class EventsComponent extends BaseComponent implements OnInit {
      */
     canRunHardwareApiPrize: boolean;
 
-    /** Indicates whether the sponsor plans to run a themed prize. */
-    doingThemedPrize = false;
+    /**
+     * Indicates if the user is doing a hardware or API prize competition.
+     */
+    doingHardwareApiPrize: boolean;
 
-    /** Indicates whether the sponsor plans to run as side-event. */
-    doingSideEvent = false;
+    /**
+     * Indicates if the user is doing a side event.
+     */
+    doingSideEvent: boolean;
 
-    /** Indicates whether the sponsor plans to run a hardware/API prize. */
-    doingHardwareApiPrize = false;
+    /**
+     * Indicates if the user is doing a themed prize.
+     */
+    doingThemedPrize: boolean;
 
     constructor(private sponsorsService: SponsorsService,
                 private activatedRoute: ActivatedRoute,
-                private benefitsService: BenefitsService) {
+                private benefitsService: BenefitsService,
+                private eventsService: EventsService) {
         super(sponsorsService, activatedRoute);
     }
 
@@ -65,6 +74,25 @@ export class EventsComponent extends BaseComponent implements OnInit {
                 this.canRunHardwareApiPrize = this.benefitsService.canRunHardwareApiPrize(benefits);
                 this.canRunSideEvent = this.benefitsService.canRunSideEvent(benefits);
             });
+
+        this.eventsService.getHardwareApiCompetition(magicLink).first().subscribe(
+            competitions => {
+                if (competitions) {
+                    this.hardwareApiPrize = competitions.hardwareApiCompetition;
+                    this.sideEvent = competitions.sideEvent;
+                    this.themedPrize = competitions.themedCompetition;
+                }
+                else {
+                    this.hardwareApiPrize = undefined;
+                    this.sideEvent = undefined;
+                    this.themedPrize = undefined;
+                }
+
+                this.doingHardwareApiPrize = this.hardwareApiPrize !== undefined;
+                this.doingSideEvent = this.sideEvent !== undefined;
+                this.doingThemedPrize = this.themedPrize !== undefined;
+            }
+        )
     }
 
     /**
@@ -83,6 +111,9 @@ export class EventsComponent extends BaseComponent implements OnInit {
         else {
             this.themedPrize = undefined;
         }
+
+        this.doingThemedPrize = doingThemedPrize;
+        this.saveEventsState();
     }
 
     /**
@@ -102,6 +133,9 @@ export class EventsComponent extends BaseComponent implements OnInit {
         else {
             this.sideEvent = undefined;
         }
+
+        this.doingSideEvent = doingSideEvent;
+        this.saveEventsState()
     }
 
     /**
@@ -121,5 +155,23 @@ export class EventsComponent extends BaseComponent implements OnInit {
         else {
             this.hardwareApiPrize = undefined;
         }
+
+        this.doingHardwareApiPrize = doingCompetition;
+        this.saveEventsState();
+    }
+
+    /**
+     * Saves the currenty entered events into the database.
+     */
+    saveEventsState(): void {
+        const events: EventsSummaryModel = {
+            hardwareApiCompetition: this.hardwareApiPrize,
+            sideEvent: this.sideEvent,
+            themedCompetition: this.themedPrize
+        };
+
+        this.activatedRoute.params.first().subscribe(
+            params => this.eventsService.saveEvents(params['code'], events)
+        );
     }
 }

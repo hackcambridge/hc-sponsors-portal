@@ -46,10 +46,9 @@
         </div>
         <div class="half unit row" *ngIf="doingThemedPrize">
             <fieldset>
-                <input type="text" [(ngModel)]="themedPrize.name" placeholder="Name">
-                <input type="text" [(ngModel)]="themedPrize.description" placeholder="Description">
-                <input type="text" [(ngModel)]="themedPrize.prizes" placeholder="Prize(s)">
-                <input type="button" value="Delete." (click)="deleteEvent(i)">
+                <input type="text" [(ngModel)]="themedPrize.title" (ngModelChange)="saveEventsState()" placeholder="Title">
+                <input type="text" [(ngModel)]="themedPrize.description" (ngModelChange)="saveEventsState()" placeholder="Description">
+                <input type="text" [(ngModel)]="themedPrize.prizes" (ngModelChange)="saveEventsState()" placeholder="Prize(s)">
             </fieldset>
         </div>
     </div>
@@ -84,9 +83,8 @@
         </div>
         <div class="half unit row" *ngIf="doingSideEvent">
             <fieldset>
-                <input type="text" [(ngModel)]="sideEvent.name" placeholder="Name">
-                <input type="text" [(ngModel)]="sideEvent.description" placeholder="Description">
-                <input type="button" value="Delete." (click)="deleteEvent(i)">
+                <input type="text" [(ngModel)]="sideEvent.title" (ngModelChange)="saveEventsState()" placeholder="Title">
+                <input type="text" [(ngModel)]="sideEvent.description" (ngModelChange)="saveEventsState()" placeholder="Description">
             </fieldset>
         </div>
     </div>
@@ -121,9 +119,9 @@
         </div>
         <div class="half unit row" *ngIf="doingHardwareApiPrize">
             <fieldset>
-                <input type="text" [(ngModel)]="sideEvent.name" placeholder="Name">
-                <input type="text" [(ngModel)]="sideEvent.description" placeholder="Description">
-                <input type="button" value="Delete." (click)="deleteEvent(i)">
+                <input type="text" [(ngModel)]="hardwareApiPrize.title" (ngModelChange)="saveEventsState()" placeholder="Title">
+                <input type="text" [(ngModel)]="hardwareApiPrize.description" (ngModelChange)="saveEventsState()" placeholder="Description">
+                <input type="text" [(ngModel)]="hardwareApiPrize.prizes" (ngModelChange)="saveEventsState()" placeholder="Prizes">
             </fieldset>
         </div>
     </div>
