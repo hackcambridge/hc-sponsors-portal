@@ -17,26 +17,37 @@
         <div class="one unit row">
             <h3>Please provide us with your slides.</h3>
         </div>
-        <div class="half unit row">
+        <div *ngIf="uploadInProgress" class="half unit row">
+            <div class="twelve unit column">
+                <p>
+                    Your file is being uploaded...
+                </p>
+            </div>
+        </div>
+        <div *ngIf="!uploadInProgress && (!presentation || uploadNewFile)" class="half unit row">
             <div class="twelve unit column">
                 <p>
                     Please send us the slides as a PowerPoint, Keynote or PDF file.
                 </p>
             </div>
         </div>
-        <div class="one unit row">
+        <div *ngIf="!uploadInProgress && (presentation && !uploadNewFile)" class="one half unit row">
                 <div class="twelve unit column">
-                <p *ngIf="presentation">
-                    Press "Upload File" to replace your previously uploaded slides
-                    with a newer version. The file you uploaded before is:
-                    <a rel="diagonal" [href]="presentation.fileUrl">{{ presentation.fileName }}</a>
-                    
+                <p>
+                    You've already uploaded a slideshow for your presentation.
+                    You can download it here:
+                </p>
+                <p>
+                    <a rel="diagonal" [href]="presentation.url">{{ presentation.name }}</a>
+                </p>
+                <p>
+                    <input type="button" value="Upload New File" (click)="uploadNewFile = true">
                 </p>
             </div>
         </div>
-        <div class="half unit row">
+        <div *ngIf="!uploadInProgress && (!presentation || uploadNewFile)" class="half unit row">
             <div class="three unit column">
-                <input type="button" value="Upload File" (click)="uploadFile()">
+                <input type="file" (change)="uploadFile($event)" value="Upload File" placeholder="Upload File" accept=".pptx,.ppt,.pdf,.key">
             </div>
         </div>
     </div>
