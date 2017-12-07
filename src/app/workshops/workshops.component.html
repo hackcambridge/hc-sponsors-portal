@@ -51,19 +51,19 @@
                 </label>
             </fieldset>
         </div>
-        <div class="half unit row" *ngIf="productDemo !== undefined">
+        <div class="half unit row" *ngIf="doingProductDemo">
             <fieldset>
-                <input type="text" [(ngModel)]="productDemo.title" placeholder="Title">
+                <input (ngModelChange)="saveProductDemo()" type="text" [(ngModel)]="productDemo.title" placeholder="Title">
             </fieldset>
         </div>
-        <div class="half unit row" *ngIf="productDemo !== undefined">
+        <div class="half unit row" *ngIf="doingProductDemo">
             <fieldset>
-                <input type="text" [(ngModel)]="productDemo.speaker" placeholder="Speaker(s)">
+                <input (ngModelChange)="saveProductDemo()" type="text" [(ngModel)]="productDemo.speaker" placeholder="Speaker(s)">
             </fieldset>
         </div>
-        <div class="half unit row" *ngIf="productDemo !== undefined">
+        <div class="half unit row" *ngIf="doingProductDemo">
             <fieldset>
-                <textarea [(ngModel)]="productDemo.description" placeholder="Description"></textarea>
+                <textarea (ngModelChange)="saveProductDemo()" [(ngModel)]="productDemo.description" placeholder="Description"></textarea>
             </fieldset>
         </div>
     </div>
@@ -97,19 +97,19 @@
                 </label>
             </fieldset>
         </div>
-        <div *ngIf="workshop !== undefined" class="half unit row">
+        <div *ngIf="doingWorkshop" class="half unit row">
             <fieldset>
-                <input type="text" [(ngModel)]="workshop.title" placeholder="Title">
+                <input (ngModelChange)="saveWorkshop()" type="text" [(ngModel)]="workshop.title" placeholder="Title">
             </fieldset>
         </div>
-        <div *ngIf="workshop !== undefined" class="half unit row">
+        <div *ngIf="doingWorkshop" class="half unit row">
             <fieldset>
-                <input type="text" [(ngModel)]="workshop.speaker" placeholder="Speaker(s)">
+                <input (ngModelChange)="saveWorkshop()" type="text" [(ngModel)]="workshop.speaker" placeholder="Speaker(s)">
             </fieldset>
         </div>
-        <div *ngIf="workshop !== undefined" class="half unit row">
+        <div *ngIf="doingWorkshop" class="half unit row">
             <fieldset>
-                <textarea [(ngModel)]="workshop.description" placeholder="Description"></textarea>
+                <textarea (ngModelChange)="saveWorkshop()" [(ngModel)]="workshop.description" placeholder="Description"></textarea>
             </fieldset>
         </div>
     </div>

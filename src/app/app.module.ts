@@ -24,6 +24,7 @@ import { ChangesSavedComponent } from 'app/changes-saved/changes-saved.component
 import { PeopleService } from 'app/people/people.service';
 import { EventsService } from 'app/events/events.service';
 import { PresentationService } from 'app/presentation/presentation.service';
+import { WorkshopService } from 'app/workshops/workshop.service';
 
 const appRoutes: Routes = [
   { path: ':code', component: PortalComponent },
@@ -65,6 +66,7 @@ const appRoutes: Routes = [
     PeopleService,
     EventsService,
     PresentationService,
+    WorkshopService,
     AngularFireDatabase
   ],
   bootstrap: [
