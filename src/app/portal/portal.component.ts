@@ -50,7 +50,11 @@ export class PortalComponent extends BaseComponent implements OnInit {
         const portalLinks: PortalLink[] = [];
 
         portalLinks.push({ pageUrl: 'people', text: 'Let Us Know Who\'s Coming' });
-        portalLinks.push({ pageUrl: 'social-media', text: 'Provide Social Media Assets' });
+
+        // This year we will not be asking for social media via this, as we have
+        // already asked for it via email
+
+        // portalLinks.push({ pageUrl: 'social-media', text: 'Provide Social Media Assets' });
 
         if (this.benefitsService.canRunWorkshopLikeEvent(benefits)) {
             portalLinks.push({ pageUrl: 'workshops', text: 'Tell us about any workshops' });
@@ -60,9 +64,12 @@ export class PortalComponent extends BaseComponent implements OnInit {
             portalLinks.push({ pageUrl: 'tech', text: 'Register your tech with us' });
         }
 
-        if (this.benefitsService.canBringSwag(benefits)) {
-            portalLinks.push({ pageUrl: 'swag', text: 'Ensure your swag is OK' });
-        }
+        // This year we will not be asking for swag details via this, as we have
+        // already asked for it via email
+        //
+        // if (this.benefitsService.canBringSwag(benefits)) {
+        //     portalLinks.push({ pageUrl: 'swag', text: 'Ensure your swag is OK' });
+        // }
 
         if (this.benefitsService.canRunCompetitionAndEvents(benefits)) {
             portalLinks.push({ pageUrl: 'events', text: 'Plan competitions and events' });
