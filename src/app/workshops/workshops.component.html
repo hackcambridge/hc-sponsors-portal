@@ -44,26 +44,26 @@
             <fieldset>
                 <label>
                     Do you plan to do a product demo?
-                    <select [(ngModel)]="doingProductDemo">
+                    <select (ngModelChange)="onDoingProductDemoChange($event)" [(ngModel)]="doingProductDemo">
                         <option [ngValue]="false">No</option>
                         <option [ngValue]="true">Yes</option>
                     </select>
                 </label>
             </fieldset>
         </div>
-        <div class="half unit row" *ngIf="doingProductDemo">
+        <div class="half unit row" *ngIf="productDemo !== undefined">
             <fieldset>
-                <input type="text" [(ngModel)]="productDemoTitle" placeholder="Title">
+                <input type="text" [(ngModel)]="productDemo.title" placeholder="Title">
             </fieldset>
         </div>
-        <div class="half unit row" *ngIf="doingProductDemo">
+        <div class="half unit row" *ngIf="productDemo !== undefined">
             <fieldset>
-                <input type="text" [(ngModel)]="productDemoSpeaker" placeholder="Speaker(s)">
+                <input type="text" [(ngModel)]="productDemo.speaker" placeholder="Speaker(s)">
             </fieldset>
         </div>
-        <div class="half unit row" *ngIf="doingProductDemo">
+        <div class="half unit row" *ngIf="productDemo !== undefined">
             <fieldset>
-                <textarea [(ngModel)]="productDemoDescription" placeholder="Description"></textarea>
+                <textarea [(ngModel)]="productDemo.description" placeholder="Description"></textarea>
             </fieldset>
         </div>
     </div>
@@ -90,26 +90,26 @@
             <fieldset>
                 <label>
                     Do you plan to do a workshop?
-                    <select [(ngModel)]="doingWorkshop">
+                    <select (ngModelChange)="onDoingWorkshopChange($event)" [(ngModel)]="doingWorkshop">
                         <option [ngValue]="false">No</option>
                         <option [ngValue]="true">Yes</option>
                     </select>
                 </label>
             </fieldset>
         </div>
-        <div *ngIf="doingWorkshop" class="half unit row">
+        <div *ngIf="workshop !== undefined" class="half unit row">
             <fieldset>
-                <input type="text" [(ngModel)]="workshopTitle" placeholder="Title">
+                <input type="text" [(ngModel)]="workshop.title" placeholder="Title">
             </fieldset>
         </div>
-        <div *ngIf="doingWorkshop" class="half unit row">
+        <div *ngIf="workshop !== undefined" class="half unit row">
             <fieldset>
-                <input type="text" [(ngModel)]="workshopSpeaker" placeholder="Speaker(s)">
+                <input type="text" [(ngModel)]="workshop.speaker" placeholder="Speaker(s)">
             </fieldset>
         </div>
-        <div *ngIf="doingWorkshop" class="half unit row">
+        <div *ngIf="workshop !== undefined" class="half unit row">
             <fieldset>
-                <textarea [(ngModel)]="workshopDescription" placeholder="Description"></textarea>
+                <textarea [(ngModel)]="workshop.description" placeholder="Description"></textarea>
             </fieldset>
         </div>
     </div>

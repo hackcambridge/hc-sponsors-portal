@@ -65,14 +65,13 @@ export class PortalComponent extends BaseComponent implements OnInit {
         }
 
         if (this.benefitsService.canRunCompetitionAndEvents(benefits)) {
-            portalLinks.push({ pageUrl: 'events', text: 'Plan any competitions and events' });
+            portalLinks.push({ pageUrl: 'events', text: 'Plan competitions and events' });
         }
 
         if (this.benefitsService.canRunOpeningCeremonyPresentation(benefits)) {
             portalLinks.push({ pageUrl: 'presentation', text: 'Send us your presentation' });
         }
 
-        portalLinks.push({ pageUrl: 'details', text: 'Confirm your details' });
         portalLinks.push({ pageUrl: 'tips', text: 'Read our tips and tricks' });
 
         // Now split the links evenly across the three columns
