@@ -25,6 +25,7 @@ import { PeopleService } from 'app/people/people.service';
 import { EventsService } from 'app/events/events.service';
 import { PresentationService } from 'app/presentation/presentation.service';
 import { WorkshopService } from 'app/workshops/workshop.service';
+import { TipsComponent } from 'app/tips/tips.component';
 
 const appRoutes: Routes = [
   { path: ':code', component: PortalComponent },
@@ -34,7 +35,8 @@ const appRoutes: Routes = [
   { path: ':code/tech', component: TechComponent },
   { path: ':code/swag', component: SwagComponent },
   { path: ':code/events', component: EventsComponent },
-  { path: ':code/presentation', component: PresentationComponent }
+  { path: ':code/presentation', component: PresentationComponent },
+  { path: ':code/tips', component: TipsComponent }
 ];
 
 @NgModule({
@@ -48,7 +50,8 @@ const appRoutes: Routes = [
     SwagComponent,
     EventsComponent,
     PresentationComponent,
-    ChangesSavedComponent
+    ChangesSavedComponent,
+    TipsComponent
   ],
   imports: [
     BrowserModule,

@@ -49,6 +49,8 @@ export class PortalComponent extends BaseComponent implements OnInit {
     private showLinksFromBenefits(benefits: SponsorshipBenefitModel[]): void {
         const portalLinks: PortalLink[] = [];
 
+        portalLinks.push({ pageUrl: 'tips', text: 'Read our tips and tricks' });
+
         portalLinks.push({ pageUrl: 'people', text: 'Let Us Know Who\'s Coming' });
 
         // This year we will not be asking for social media via this, as we have
@@ -78,8 +80,6 @@ export class PortalComponent extends BaseComponent implements OnInit {
         if (this.benefitsService.canRunOpeningCeremonyPresentation(benefits)) {
             portalLinks.push({ pageUrl: 'presentation', text: 'Send us your presentation' });
         }
-
-        portalLinks.push({ pageUrl: 'tips', text: 'Read our tips and tricks' });
 
         // Now split the links evenly across the three columns
         this.portalLinksLeft = [];

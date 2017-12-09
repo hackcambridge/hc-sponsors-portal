@@ -1,4 +1,4 @@
-import { SponsorsService } from "app/sponsors/sponsors.service";
+import { SponsorsService } from 'app/sponsors/sponsors.service';
 import { ActivatedRoute } from '@angular/router';
 
 /**
