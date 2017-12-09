@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { SponsorsService } from 'app/sponsors/sponsors.service';
-import { AngularFireDatabase } from 'angularfire2/database';
+import { AngularFireDatabase, AngularFireObject } from 'angularfire2/database';
 import { EventsSummaryModel } from 'app/events/events.model';
 import { Observable } from 'rxjs/Observable';
 
@@ -9,9 +9,14 @@ export class EventsService {
     constructor(private db: AngularFireDatabase,
                 private sponsorsService: SponsorsService) {}
 
+
+    private getCompetitionsObject(guid: string): AngularFireObject<EventsSummaryModel> {
+        return this.db.object(`/sponsors/${guid}/competitions`);
+    }
+
     getHardwareApiCompetition(magicLink: string): Observable<EventsSummaryModel> {
         return this.sponsorsService.getSponsorGuid(magicLink).flatMap(
-            guid => this.db.object('competitions/' + guid).valueChanges()
+            guid => this.getCompetitionsObject(guid).valueChanges()
         );
     }
 
@@ -29,7 +34,7 @@ export class EventsService {
         }
 
         this.sponsorsService.getSponsorGuid(magicLink).first().subscribe(
-            guid => this.db.object('competitions/' + guid).set(events)
+            guid => this.getCompetitionsObject(guid).set(events)
         );
     }
 }

@@ -2,37 +2,49 @@ import { Injectable } from '@angular/core';
 import { SponsorsService } from 'app/sponsors/sponsors.service';
 import { PersonModel } from 'app/people/person.model';
 import { Observable } from 'rxjs/Observable';
-import { AngularFireDatabase } from 'angularfire2/database';
+import { AngularFireDatabase, AngularFireObject } from 'angularfire2/database';
 
 @Injectable()
 export class PeopleService {
     constructor(private db: AngularFireDatabase,
                 private sponsorsService: SponsorsService) {}
 
+    private getMentorsObject(guid: string): AngularFireObject<PersonModel[]> {
+        return this.db.object(`sponsors/${guid}/people/mentors`)
+    }
+
+    private getRecruitersObject(guid: string): AngularFireObject<PersonModel[]> {
+        return this.db.object(`sponsors/${guid}/people/recruiters`)
+    }
+
+    private getJudgeObject(guid: string): AngularFireObject<number> {
+        return this.db.object(`sponsors/${guid}/people/judge`)
+    }
+
     getMentors(magicLink: string): Observable<PersonModel[]> {
         return this.sponsorsService.getSponsorGuid(magicLink).flatMap(
-            guid => this.db.list('people/' + guid + '/mentors').valueChanges()
+            guid => this.getMentorsObject(guid).valueChanges()
         );
     }
 
     getRecruiters(magicLink: string): Observable<PersonModel[]> {
         return this.sponsorsService.getSponsorGuid(magicLink).flatMap(
-            guid => this.db.list('people/' + guid + '/recruiters').valueChanges()
+            guid => this.getRecruitersObject(guid).valueChanges()
         );
     }
 
     getJudge(magicLink: string): Observable<number> {
         return this.sponsorsService.getSponsorGuid(magicLink).flatMap(
-            guid => this.db.object('people/' + guid + '/judge').valueChanges()
+            guid => this.getJudgeObject(guid).valueChanges()
         );
     }
 
     saveState(magicLink: string, mentors: PersonModel[], recruiters: PersonModel[], judge: number) {
         return this.sponsorsService.getSponsorGuid(magicLink).first().subscribe(
             guid => {
-                this.db.object('people/' + guid + '/mentors').set(mentors);
-                this.db.object('people/' + guid + '/recruiters').set(recruiters);
-                this.db.object('people/' + guid + '/judge').set(judge);
+                this.getMentorsObject(guid).set(mentors);
+                this.getRecruitersObject(guid).set(recruiters);
+                this.getJudgeObject(guid).set(judge);
             }
         );
     }

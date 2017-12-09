@@ -15,7 +15,7 @@ export class BenefitsService {
 
     getSponsorBenefitDescriptions(magicLink: string): Observable<SponsorshipBenefitModel[]> {
         return this.sponsorsService.getSponsorGuid(magicLink).flatMap(
-            guid => this.db.list('/sponsors/' + guid + '/benefits').valueChanges()
+            guid => this.db.list(`/sponsors/${guid }/benefits`).valueChanges()
         );
     }
 

@@ -71,7 +71,7 @@
         </div>
         <div class="half unit row">
             <fieldset>
-                <input type="button" value="Add Recruiter." (click)="addRecruiter()" [hidden]="recruiters.length >= recruiterLimit" [disabled]="!recruiterDetailsCompleted">
+                <input type="button" value="Add Recruiter." (click)="addRecruiter()" [hidden]="recruiters ? recruiters.length >= recruiterLimit : true" [disabled]="!recruiterDetailsCompleted">
             </fieldset>
         </div>
         <div class="half unit row" *ngFor="let recruiter of recruiters; let i = index">
@@ -108,7 +108,7 @@
         </div>
         <div class="half unit row">
             <select [(ngModel)]="judge" (ngModelChange)="onJudgeChange()">
-                <option [value]="undefined">We do not wish to nominate a judge</option>
+                <option [value]="null">We do not wish to nominate a judge</option>
                 <option *ngFor="let mentor of mentors; let i = index" [value]="i">{{ mentor.name }}</option>
             </select>
         </div>

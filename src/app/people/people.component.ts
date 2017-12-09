@@ -44,15 +44,15 @@ export class PeopleComponent extends BaseComponent implements OnInit {
                 );
 
                 this.peopleService.getMentors(params['code']).first().subscribe(
-                    mentors => this.mentors = mentors
+                    mentors => this.mentors = mentors ? mentors : []
                 );
 
                 this.peopleService.getRecruiters(params['code']).first().subscribe(
-                    recruiters => this.recruiters = recruiters
+                    recruiters => this.recruiters = recruiters ? recruiters : []
                 );
 
                 this.peopleService.getJudge(params['code']).first().subscribe(
-                    judge => this.judge = judge
+                    judge => this.judge =judge
                 );
             }
         );
@@ -65,15 +65,17 @@ export class PeopleComponent extends BaseComponent implements OnInit {
             this.mentorDetailsCompleted = false;
         }
 
-        // The index of the judge must have increased
-        this.judge++;
+        if (this.judge !== null) {
+            // The index of the judge must have increased
+            this.judge++;
+        }
 
         this.onMentorChanges();
     }
 
     deleteMentor(index: number): void {
         if (index === this.judge) {
-            this.judge = undefined;
+            this.judge = null;
         }
 
         if (this.mentors[index]) {

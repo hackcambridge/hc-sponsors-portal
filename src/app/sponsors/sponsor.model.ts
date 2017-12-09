@@ -2,7 +2,6 @@ import { SponsorshipBenefitModel } from 'app/benefits/sponsorship-benefit.model'
 
 export class SponsorModel {
     name: string;
-    priceGbp: number;
     tier: SponsorshipTier;
     maxRecruiters: number;
     benefits: SponsorshipBenefitModel[];
