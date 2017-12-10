@@ -1,0 +1,27 @@
+{
+  "rules": {
+    "sponsors": {
+      "$guid": {
+        ".read": true,
+        "competitions": {
+          ".write": true
+        },
+        "people": {
+          ".write": true
+        },
+        "presentation": {
+          ".write": true
+        },
+        "workshop": {
+          ".write": true
+        },
+        "demo": {
+          ".write": true
+        },
+        "tech": {
+          ".write": true
+        }
+      }
+    }
+  }
+}
