@@ -32,13 +32,13 @@ export class PortalComponent extends BaseComponent implements OnInit {
      * show and hide different links on the 'What You Need To Do' section.
      */
     private determineVisibleLinks(): void {
-        const routeParams = this.activatedRoute.params.subscribe(
-            params => this.showLinksForMagicLink(params['guid'])
+        this.guid$.subscribe(
+            guid => this.showLinksForSponsor(guid)
         );
     }
 
-    private showLinksForMagicLink(magicLink: string) {
-        this.benefitsService.getSponsorBenefitDescriptions(magicLink).first().subscribe(
+    private showLinksForSponsor(guid: string) {
+        this.benefitsService.getSponsorBenefitDescriptions(guid).first().subscribe(
             benefits => {
                 this.showLinksFromBenefits(benefits);
                 this.sponsorshipBenefits = benefits;

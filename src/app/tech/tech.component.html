@@ -29,11 +29,18 @@
         <div class="one half unit row">
             <div class="twelve unit column">
                 <p>
-                    We reccomend you list tech that hackers will find useful
-                    during the hackathon. If you have lots of tech, this may
-                    be more overwhelming than helpful; we recommend you list
-                    perhaps 3 or 4 things that you think may be useful for a
-                    weekend hackathon project.
+                    You may list as many pieces of tech that your company
+                    produces, and we will advertise it before the hackathon.
+                    This is a great opportunity to increase adoption of
+                    your products ahead of the hackathon, but please bear in mind items
+                    you list should be related to soft/hardware engineering
+                    and design, not generic commercial products. If you have
+                    lots of relevant items, this may be more overwhelming
+                    than helpful; we recommend you focus on the perhaps 3 or 4
+                    technologies that you think may be most useful
+                    for a weekend hackathon project. If you are running any
+                    competitions, workshops or side-events, be sure to list any
+                    related tech!
                 </p>
             </div>
         </div>
@@ -44,11 +51,11 @@
         </div>
         <div class="half unit row" *ngFor="let techListing of techListings; let i = index">
             <fieldset>
-                <input type="text" [(ngModel)]="techListings[i].name" placeholder="Name">
-                <input type="text" [(ngModel)]="techListings[i].description" placeholder="Description">
+                <input type="text" [(ngModel)]="techListings[i].name" (ngModelChange)="saveTechListing()" placeholder="Name">
+                <input type="text" [(ngModel)]="techListings[i].description" (ngModelChange)="saveTechListing()" placeholder="Description">
                 <label>
                     Type:
-                    <select [(ngModel)]="techListings[i].type">
+                    <select [(ngModel)]="techListings[i].type" (ngModelChange)="saveTechListing()">
                         <option [value]="'api'">API</option>
                         <option [value]="'framework'">Framework</option>
                         <option [value]="'hardware'">Hardware</option>

@@ -28,7 +28,9 @@ export class BenefitsService {
     }
 
     canListHardwareAndApis(benefits: SponsorshipBenefitModel[]): boolean {
-        return benefits.some((benefit, i, a) => benefit.id === SponsorBenefitTypes.AdvertiseHardwareApiBeforeEvent);
+        return benefits.some((benefit, i, a) =>
+            benefit.id === SponsorBenefitTypes.AdvertiseTechBeforeEvent ||
+            benefit.id === SponsorBenefitTypes.BringHardwareListTech);
     }
 
     canBringSwag(benefits: SponsorshipBenefitModel[]): boolean {
@@ -85,7 +87,7 @@ export enum SponsorBenefitTypes {
     CVsBeforeEvent = 'cvs-before-event',
     AwardHardwareApiPrize = 'award-hardware-api-prize',
     LargeStall = 'large-stall',
-    AdvertiseHardwareApiBeforeEvent = 'advertise-hardware-apis-before-event',
+    AdvertiseTechBeforeEvent = 'advertise-tech',
 
     // Mega sponsor packages
     CVsAfterEvent = 'cvs-after-event',
@@ -95,7 +97,7 @@ export enum SponsorBenefitTypes {
     SendRecruiters = 'send-recruiters',
 
     // Kilo sponsor packages
-    BringHardwareListApis = 'bring-hardware-list-apis',
+    BringHardwareListTech = 'bring-hardware-list-tech',
     LogoOnWebsite = 'logo-on-website',
     SendMentors = 'send-mentors',
     AnnouncementOnSocialMedia = 'social-media'

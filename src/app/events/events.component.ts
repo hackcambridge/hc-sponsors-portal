@@ -61,20 +61,20 @@ export class EventsComponent extends BaseComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.activatedRoute.params.subscribe(
-            params => this.getBenefits(params['guid'])
+        this.guid$.subscribe(
+            guid => this.getBenefits(guid)
         );
     }
 
-    private getBenefits(magicLink: string): void {
-        this.benefitsService.getSponsorBenefitDescriptions(magicLink).first().subscribe(
+    private getBenefits(guid: string): void {
+        this.benefitsService.getSponsorBenefitDescriptions(guid).first().subscribe(
             benefits => {
                 this.canAwardThemedPrize = this.benefitsService.canAwardThemedPrize(benefits);
                 this.canRunHardwareApiPrize = this.benefitsService.canRunHardwareApiPrize(benefits);
                 this.canRunSideEvent = this.benefitsService.canRunSideEvent(benefits);
             });
 
-        this.eventsService.getHardwareApiCompetition(magicLink).first().subscribe(
+        this.eventsService.getHardwareApiCompetition(guid).first().subscribe(
             competitions => {
                 if (competitions) {
                     this.hardwareApiPrize = competitions.hardwareApiCompetition;
@@ -169,8 +169,8 @@ export class EventsComponent extends BaseComponent implements OnInit {
             themedCompetition: this.themedPrize
         };
 
-        this.activatedRoute.params.first().subscribe(
-            params => this.eventsService.saveEvents(params['guid'], events)
+        this.guid$.subscribe(
+            guid => this.eventsService.saveEvents(guid, events)
         );
     }
 }

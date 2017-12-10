@@ -26,6 +26,7 @@ import { PresentationService } from 'app/presentation/presentation.service';
 import { WorkshopService } from 'app/workshops/workshop.service';
 import { TipsComponent } from 'app/tips/tips.component';
 import { SponsorsService } from 'app/sponsors/sponsors.service';
+import { TechService } from 'app/tech/tech.service';
 
 const appRoutes: Routes = [
   { path: ':guid', component: PortalComponent },
@@ -70,6 +71,7 @@ const appRoutes: Routes = [
     PresentationService,
     WorkshopService,
     SponsorsService,
+    TechService,
     AngularFireDatabase
   ],
   bootstrap: [

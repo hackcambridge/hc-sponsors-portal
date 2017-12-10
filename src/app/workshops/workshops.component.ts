@@ -28,10 +28,10 @@ export class WorkshopComponent extends BaseComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.activatedRoute.params.first().subscribe(
-            params => {
-                this.getIsAllowedWorkshops(params['guid']);
-                this.getWorkshops(params['guid']);
+        this.guid$.first().subscribe(
+            guid => {
+                this.getIsAllowedWorkshops(guid);
+                this.getWorkshops(guid);
             }
         );
     }
@@ -62,8 +62,8 @@ export class WorkshopComponent extends BaseComponent implements OnInit {
         this.saveWorkshop();
     }
 
-    private getIsAllowedWorkshops(magicLink: string): void {
-        this.benefitsService.getSponsorBenefitDescriptions(magicLink).first().subscribe(
+    private getIsAllowedWorkshops(guid: string): void {
+        this.benefitsService.getSponsorBenefitDescriptions(guid).first().subscribe(
             benefits => {
                 this.hasProductDemoSlot = this.benefitsService.hasProductDemoSlot(benefits);
                 this.hasWorkshopSlot = this.benefitsService.hasWorkshopSlot(benefits);
@@ -71,15 +71,15 @@ export class WorkshopComponent extends BaseComponent implements OnInit {
         );
     }
 
-    private getWorkshops(magicLink: string): void {
-        this.workshopService.getWorkshop(magicLink).first().subscribe(
+    private getWorkshops(guid: string): void {
+        this.workshopService.getWorkshop(guid).first().subscribe(
             workshop => {
                 this.workshop = workshop;
                 this.doingWorkshop = workshop !== null;
             }
         );
 
-        this.workshopService.getProductDemos(magicLink).first().subscribe(
+        this.workshopService.getProductDemos(guid).first().subscribe(
             demo => {
                 this.productDemo = demo;
                 this.doingProductDemo = demo !== null;
@@ -90,16 +90,16 @@ export class WorkshopComponent extends BaseComponent implements OnInit {
     saveProductDemo(): void {
         const productDemo = this.doingProductDemo ? this.productDemo : null;
 
-        this.activatedRoute.params.first().subscribe(
-            params => this.workshopService.saveProductDemo(params['guid'], productDemo)
+        this.guid$.first().subscribe(
+            guid => this.workshopService.saveProductDemo(guid, productDemo)
         );
     }
 
     saveWorkshop(): void {
         const workshop = this.doingWorkshop ? this.workshop : null;
 
-        this.activatedRoute.params.first().subscribe(
-            params => this.workshopService.saveWorkshop(params['guid'], workshop)
+        this.guid$.first().subscribe(
+            guid => this.workshopService.saveWorkshop(guid, workshop)
         );
     }
 }

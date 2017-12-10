@@ -37,10 +37,8 @@ export class PeopleComponent extends BaseComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.activatedRoute.params.subscribe(
-            params => {
-                const guid = params['guid'];
-
+        this.guid$.subscribe(
+            guid => {
                 this.benefitsService.getMaxNumberOfRecruiters(guid).subscribe(
                    limit => this.recruiterLimit = limit
                 );
@@ -113,7 +111,8 @@ export class PeopleComponent extends BaseComponent implements OnInit {
     }
 
     onRecruiterChanges(): void {
-        this.recruiterDetailsCompleted = this.recruiters.every((recruiter, index, array) => this.isPersonModelComplete(recruiter));
+        this.recruiterDetailsCompleted = this.recruiters.every(
+            (recruiter, index, array) => this.isPersonModelComplete(recruiter));
         this.saveChanges();
     }
 
@@ -126,11 +125,9 @@ export class PeopleComponent extends BaseComponent implements OnInit {
     }
 
     private saveChanges(): void {
-        this.activatedRoute.params.first().subscribe(
-            params => this.peopleService.saveState(params['guid'],
-                this.mentors,
-                this.recruiters,
-                this.judge)
+        this.guid$.first().subscribe(
+            guid => this.peopleService.saveState(guid, this.mentors,
+                this.recruiters, this.judge)
         );
     }
 }

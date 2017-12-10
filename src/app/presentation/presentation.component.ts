@@ -26,9 +26,9 @@ export class PresentationComponent extends BaseComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.activatedRoute.params.subscribe(
-            params => {
-                this.presentationService.getUploadedPresentation(params['guid']).subscribe(
+        this.guid$.subscribe(
+            guid => {
+                this.presentationService.getUploadedPresentation(guid).subscribe(
                     presentation => this.presentation = presentation
                 );
             }
@@ -42,10 +42,10 @@ export class PresentationComponent extends BaseComponent implements OnInit {
         if (fileList.length > 0) {
             const file: File = fileList[0];
 
-            this.activatedRoute.params.subscribe(
-                param => {
+            this.guid$.subscribe(
+                guid => {
                     this.uploadInProgress = true;
-                    const upload = this.presentationService.uploadPresentation(param['guid'], file);
+                    const upload = this.presentationService.uploadPresentation(guid, file);
 
                     upload.then(
                         presentation => {
