@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { SponsorsService } from 'app/sponsors/sponsors.service';
 import { AngularFireDatabase, AngularFireObject } from 'angularfire2/database';
 import { FirebaseApp } from 'angularfire2';
 import { PresentationModel } from 'app/presentation/presentation.model';
@@ -9,43 +8,48 @@ import 'firebase/storage';
 @Injectable()
 export class PresentationService {
     constructor(private db: AngularFireDatabase,
-                private af: FirebaseApp,
-                private sponsorsService: SponsorsService) {}
+                private af: FirebaseApp) {}
 
     private getPresentationObject(guid: string): AngularFireObject<PresentationModel> {
         return this.db.object(`sponsors/${guid}/presentation`);
     }
 
-    getUploadedPresentation(magicLink: string): Observable<PresentationModel> {
-        return this.sponsorsService.getSponsorGuid(magicLink).first().flatMap(
-            guid => this.getPresentationObject(guid).valueChanges()
+    getUploadedPresentation(guid: string): Observable<PresentationModel> {
+        return this.getPresentationObject(guid).valueChanges();
+    }
+
+    uploadPresentation(guid: string, data: File): Promise<PresentationModel> {
+        return this.deletePresentation(guid).then(
+            success => this.pushUpload(guid, data)
         );
     }
 
-    uploadPresentation(magicLink: string, data: File): Observable<PresentationModel> {
-        return this.sponsorsService.getSponsorGuid(magicLink).first().flatMap(
-            guid => {
-                this.deletePresentation(guid);
-                return this.pushUpload(guid, data);
-            }
-        );
-    }
-
-    private deletePresentation(sponsorGuid: string) {
-        const presentationObject = this.getPresentationObject(sponsorGuid);
-
-        presentationObject.valueChanges().first().subscribe(
-            (presentation: PresentationModel) => {
+    private deletePresentation(guid: string): Promise<void> {
+        const del = this.getUploadedPresentation(guid).flatMap(
+            presentation => {
                 if (presentation) {
-                    this.af.storage().ref(presentation.refPath).delete();
-                    presentationObject.remove();
+                    const deleteTask = this.af.storage().ref(presentation.refPath).delete();
+
+                    return deleteTask.then(
+                        success => this.getPresentationObject(guid).remove()
+                    )
+                    .catch(
+                        error => this.getPresentationObject(guid).remove()
+                    );
+                }
+                else {
+                    return Observable.of(null);
                 }
             }
-        );
+        ).first();
+
+        const subscription = del.subscribe();
+
+        return del.toPromise();
     }
 
-    private pushUpload(sponsorGuid: string, data: File): Promise<PresentationModel> {
-        const refPath = `${sponsorGuid}/${data.name}`;
+    private pushUpload(guid: string, data: File): Promise<PresentationModel> {
+        const refPath = `${guid}/${data.name}`;
         const task = this.af.storage().ref(refPath).put(data);
 
         return task.then(
@@ -56,7 +60,7 @@ export class PresentationService {
                     refPath: refPath
                 };
 
-                this.getPresentationObject(sponsorGuid).set(presentation);
+                this.getPresentationObject(guid).set(presentation);
 
                 return presentation;
             }

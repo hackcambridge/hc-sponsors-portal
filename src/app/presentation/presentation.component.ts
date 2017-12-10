@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { BaseComponent } from 'app/base.component';
-import { SponsorsService } from 'app/sponsors/sponsors.service';
 import { ActivatedRoute } from '@angular/router';
 import { PresentationService } from 'app/presentation/presentation.service';
 import { PresentationModel } from 'app/presentation/presentation.model';
+import { SponsorsService } from 'app/sponsors/sponsors.service';
+import { BaseComponent } from 'app/base.component';
 
 @Component({
     selector: 'app-presentation',
@@ -12,9 +12,6 @@ import { PresentationModel } from 'app/presentation/presentation.model';
 export class PresentationComponent extends BaseComponent implements OnInit {
     /** The link to the uploaded presentation slides. */
     presentation: PresentationModel;
-
-    /** The current user magic link. */
-    private magicLink: string;
 
     /** The user is uploading a new file, despite having uploaded one previously. */
     uploadNewFile: boolean;
@@ -31,8 +28,7 @@ export class PresentationComponent extends BaseComponent implements OnInit {
     ngOnInit(): void {
         this.activatedRoute.params.subscribe(
             params => {
-                this.magicLink = params['code'];
-                this.presentationService.getUploadedPresentation(params['code']).subscribe(
+                this.presentationService.getUploadedPresentation(params['guid']).subscribe(
                     presentation => this.presentation = presentation
                 );
             }
@@ -49,9 +45,9 @@ export class PresentationComponent extends BaseComponent implements OnInit {
             this.activatedRoute.params.subscribe(
                 param => {
                     this.uploadInProgress = true;
-                    const upload = this.presentationService.uploadPresentation(param['code'], file);
+                    const upload = this.presentationService.uploadPresentation(param['guid'], file);
 
-                    upload.subscribe(
+                    upload.then(
                         presentation => {
                             this.presentation = presentation;
                             this.uploadInProgress = false;

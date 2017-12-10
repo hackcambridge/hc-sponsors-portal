@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { EventModel, CompetitionModel, EventsSummaryModel } from 'app/events/events.model';
 import { BenefitsService } from 'app/benefits/benefits.service';
-import { BaseComponent } from 'app/base.component';
-import { SponsorsService } from 'app/sponsors/sponsors.service';
 import { ActivatedRoute } from '@angular/router';
 import { EventsService } from 'app/events/events.service';
-import { PACKAGE_ROOT_URL } from '@angular/core/src/application_tokens';
+import { BaseComponent } from 'app/base.component';
+import { SponsorsService } from 'app/sponsors/sponsors.service';
 
 @Component({
     selector: 'app-events',
@@ -63,7 +62,7 @@ export class EventsComponent extends BaseComponent implements OnInit {
 
     ngOnInit(): void {
         this.activatedRoute.params.subscribe(
-            params => this.getBenefits(params['code'])
+            params => this.getBenefits(params['guid'])
         );
     }
 
@@ -171,7 +170,7 @@ export class EventsComponent extends BaseComponent implements OnInit {
         };
 
         this.activatedRoute.params.first().subscribe(
-            params => this.eventsService.saveEvents(params['code'], events)
+            params => this.eventsService.saveEvents(params['guid'], events)
         );
     }
 }

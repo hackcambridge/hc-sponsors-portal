@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { SocialMediaPostModel } from 'app/social-media/social-media.model';
+import { ActivatedRoute } from '@angular/router';
 import { BaseComponent } from 'app/base.component';
 import { SponsorsService } from 'app/sponsors/sponsors.service';
-import { ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'app-social-media',

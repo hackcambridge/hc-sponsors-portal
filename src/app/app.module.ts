@@ -18,7 +18,6 @@ import { BenefitsService } from 'app/benefits/benefits.service';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { firebase } from '../environments/firebase';
-import { SponsorsService } from 'app/sponsors/sponsors.service';
 import { AngularFireDatabase, AngularFireDatabaseModule } from 'angularfire2/database';
 import { ChangesSavedComponent } from 'app/changes-saved/changes-saved.component';
 import { PeopleService } from 'app/people/people.service';
@@ -26,17 +25,18 @@ import { EventsService } from 'app/events/events.service';
 import { PresentationService } from 'app/presentation/presentation.service';
 import { WorkshopService } from 'app/workshops/workshop.service';
 import { TipsComponent } from 'app/tips/tips.component';
+import { SponsorsService } from 'app/sponsors/sponsors.service';
 
 const appRoutes: Routes = [
-  { path: ':code', component: PortalComponent },
-  { path: ':code/people', component: PeopleComponent },
-  { path: ':code/social-media', component: SocialMediaComponent },
-  { path: ':code/workshops', component: WorkshopComponent },
-  { path: ':code/tech', component: TechComponent },
-  { path: ':code/swag', component: SwagComponent },
-  { path: ':code/events', component: EventsComponent },
-  { path: ':code/presentation', component: PresentationComponent },
-  { path: ':code/tips', component: TipsComponent }
+  { path: ':guid', component: PortalComponent },
+  { path: ':guid/people', component: PeopleComponent },
+  { path: ':guid/social-media', component: SocialMediaComponent },
+  { path: ':guid/workshops', component: WorkshopComponent },
+  { path: ':guid/tech', component: TechComponent },
+  { path: ':guid/swag', component: SwagComponent },
+  { path: ':guid/events', component: EventsComponent },
+  { path: ':guid/presentation', component: PresentationComponent },
+  { path: ':guid/tips', component: TipsComponent }
 ];
 
 @NgModule({
@@ -65,11 +65,11 @@ const appRoutes: Routes = [
   ],
   providers: [
     BenefitsService,
-    SponsorsService,
     PeopleService,
     EventsService,
     PresentationService,
     WorkshopService,
+    SponsorsService,
     AngularFireDatabase
   ],
   bootstrap: [

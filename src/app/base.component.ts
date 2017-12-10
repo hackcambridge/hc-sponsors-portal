@@ -11,7 +11,7 @@ export abstract class BaseComponent {
         sponsorsService: SponsorsService,
         activatedRoute: ActivatedRoute) {
         activatedRoute.params.subscribe(
-            params => sponsorsService.setSponsorMagicLink(params['code'])
-        )
+            params => sponsorsService.setSponsorGuid(params['guid'])
+        );
     }
 }

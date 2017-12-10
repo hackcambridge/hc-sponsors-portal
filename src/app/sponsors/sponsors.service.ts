@@ -1,39 +1,27 @@
-import { Router, NavigationEnd } from '@angular/router';
-import { SponsorModel } from 'app/sponsors/sponsor.model';
-import { AngularFireDatabase } from 'angularfire2/database';
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/mergeMap';
-import 'rxjs/Rx';
+import { AngularFireDatabase, AngularFireObject } from 'angularfire2/database';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { SponsorshipTier } from 'app/sponsors/sponsorship-tier.enum';
+import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class SponsorsService {
-    private sponsor$ = new BehaviorSubject<SponsorModel>(undefined);
+    private sponsorName$ = new BehaviorSubject<string>(undefined);
+    private sponsorTier$ = new BehaviorSubject<SponsorshipTier>(undefined);
 
-    /** The route is required to extract the user's magic link from. */
-    constructor(private router: Router,
-                private db: AngularFireDatabase) {}
+    constructor(private db: AngularFireDatabase) {}
 
-    getSponsorGuid(magicLink: string): Observable<string> {
-        return this.db.object('magic-links/' + magicLink).valueChanges();
+    private getSponsorNameObject(guid: string): AngularFireObject<string> {
+        return this.db.object(`sponsors/${guid}/name`);
     }
 
-    setSponsorMagicLink(magicLink: string): void {
-        this.getSponsorGuid(magicLink)
-            .subscribe(guid => {
-                if (guid) {
-                    this.db.object('sponsors/' + guid).valueChanges().subscribe(
-                        sponsor => this.sponsor$.next(<SponsorModel>sponsor)
-                    );
-                }
-                else {
-                    this.sponsor$.next(undefined);
-                }
-            });
+    setSponsorGuid(guid: string): void {
+        this.getSponsorNameObject(guid).valueChanges<string>().subscribe(
+            name => this.sponsorName$.next(name)
+        );
     }
 
-    getSponsor(): Observable<SponsorModel> {
-        return this.sponsor$;
+    getSponsorName(): Observable<string> {
+        return this.sponsorName$;
     }
 }

@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { BenefitsService } from 'app/benefits/benefits.service';
-import { BaseComponent } from 'app/base.component';
-import { SponsorsService } from 'app/sponsors/sponsors.service';
 import { ActivatedRoute } from '@angular/router';
 import { WorkshopModel } from 'app/workshops/workshop.model';
 import { WorkshopService } from 'app/workshops/workshop.service';
+import { BaseComponent } from 'app/base.component';
+import { SponsorsService } from 'app/sponsors/sponsors.service';
 
 @Component({
     selector: 'app-mentors',
@@ -30,8 +30,8 @@ export class WorkshopComponent extends BaseComponent implements OnInit {
     ngOnInit(): void {
         this.activatedRoute.params.first().subscribe(
             params => {
-                this.getIsAllowedWorkshops(params['code']);
-                this.getWorkshops(params['code']);
+                this.getIsAllowedWorkshops(params['guid']);
+                this.getWorkshops(params['guid']);
             }
         );
     }
@@ -91,7 +91,7 @@ export class WorkshopComponent extends BaseComponent implements OnInit {
         const productDemo = this.doingProductDemo ? this.productDemo : null;
 
         this.activatedRoute.params.first().subscribe(
-            params => this.workshopService.saveProductDemo(params['code'], productDemo)
+            params => this.workshopService.saveProductDemo(params['guid'], productDemo)
         );
     }
 
@@ -99,7 +99,7 @@ export class WorkshopComponent extends BaseComponent implements OnInit {
         const workshop = this.doingWorkshop ? this.workshop : null;
 
         this.activatedRoute.params.first().subscribe(
-            params => this.workshopService.saveWorkshop(params['code'], workshop)
+            params => this.workshopService.saveWorkshop(params['guid'], workshop)
         );
     }
 }

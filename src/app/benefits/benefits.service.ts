@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { SponsorshipBenefitModel } from 'app/benefits/sponsorship-benefit.model';
-import { SponsorsService } from 'app/sponsors/sponsors.service';
-import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
+import { AngularFireDatabase, AngularFireList, AngularFireObject } from 'angularfire2/database';
 import { Observable } from 'rxjs/Observable';
 
 @Injectable()
@@ -10,13 +9,18 @@ import { Observable } from 'rxjs/Observable';
  * sponsor is entitled to based on their sponsorship package.
  */
 export class BenefitsService {
-    constructor(private db: AngularFireDatabase,
-                private sponsorsService: SponsorsService) {}
+    constructor(private db: AngularFireDatabase) {}
 
-    getSponsorBenefitDescriptions(magicLink: string): Observable<SponsorshipBenefitModel[]> {
-        return this.sponsorsService.getSponsorGuid(magicLink).flatMap(
-            guid => this.db.list(`/sponsors/${guid }/benefits`).valueChanges()
-        );
+    private getSponsorBenefitDescriptionsObject(guid: string): AngularFireObject<SponsorshipBenefitModel[]> {
+        return this.db.object(`/sponsors/${guid}/benefits`);
+    }
+
+    private getMaxRecruitersObject(guid: string): AngularFireObject<number> {
+        return this.db.object(`/sponsors/${guid}/maxRecruiters`);
+    }
+
+    getSponsorBenefitDescriptions(guid: string): Observable<SponsorshipBenefitModel[]> {
+        return this.getSponsorBenefitDescriptionsObject(guid).valueChanges();
     }
 
     canRunWorkshopLikeEvent(benefits: SponsorshipBenefitModel[]): boolean {
@@ -54,10 +58,8 @@ export class BenefitsService {
         return benefits.some((benefit, i, a) => benefit.id === SponsorBenefitTypes.SideEvent);
     }
 
-    getMaxNumberOfRecruiters(): Observable<number> {
-        return this.sponsorsService.getSponsor().map(
-            sponsor => sponsor ? sponsor.maxRecruiters : 0
-        );
+    getMaxNumberOfRecruiters(guid: string): Observable<number> {
+        return this.getMaxRecruitersObject(guid).valueChanges();
     }
 
     hasWorkshopSlot(benefits: SponsorshipBenefitModel[]): boolean {

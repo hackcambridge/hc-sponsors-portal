@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { PersonModel } from 'app/people/person.model';
 import { BenefitsService } from 'app/benefits/benefits.service';
-import { SponsorsService } from 'app/sponsors/sponsors.service';
 import { ActivatedRoute } from '@angular/router';
-import { BaseComponent } from 'app/base.component';
 import { PeopleService } from 'app/people/people.service';
+import { SponsorsService } from 'app/sponsors/sponsors.service';
+import { BaseComponent } from 'app/base.component';
 
 @Component({
     selector: 'app-people',
@@ -29,8 +29,8 @@ export class PeopleComponent extends BaseComponent implements OnInit {
     /** The index of the mentor nominated to be Hack Cambridge judge. */
     judge: number;
 
-    constructor(private benefitsService: BenefitsService,
-                private sponsorsService: SponsorsService,
+    constructor(private sponsorsService: SponsorsService,
+                private benefitsService: BenefitsService,
                 private activatedRoute: ActivatedRoute,
                 private peopleService: PeopleService) {
         super(sponsorsService, activatedRoute);
@@ -39,19 +39,21 @@ export class PeopleComponent extends BaseComponent implements OnInit {
     ngOnInit(): void {
         this.activatedRoute.params.subscribe(
             params => {
-                this.benefitsService.getMaxNumberOfRecruiters().subscribe(
+                const guid = params['guid'];
+
+                this.benefitsService.getMaxNumberOfRecruiters(guid).subscribe(
                    limit => this.recruiterLimit = limit
                 );
 
-                this.peopleService.getMentors(params['code']).first().subscribe(
+                this.peopleService.getMentors(guid).first().subscribe(
                     mentors => this.mentors = mentors ? mentors : []
                 );
 
-                this.peopleService.getRecruiters(params['code']).first().subscribe(
+                this.peopleService.getRecruiters(guid).first().subscribe(
                     recruiters => this.recruiters = recruiters ? recruiters : []
                 );
 
-                this.peopleService.getJudge(params['code']).first().subscribe(
+                this.peopleService.getJudge(guid).first().subscribe(
                     judge => this.judge =judge
                 );
             }
@@ -125,7 +127,7 @@ export class PeopleComponent extends BaseComponent implements OnInit {
 
     private saveChanges(): void {
         this.activatedRoute.params.first().subscribe(
-            params => this.peopleService.saveState(params['code'],
+            params => this.peopleService.saveState(params['guid'],
                 this.mentors,
                 this.recruiters,
                 this.judge)

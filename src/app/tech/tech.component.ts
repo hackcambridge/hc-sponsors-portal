@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { TechListingModel, TechListingType } from 'app/tech/tech-listing.model';
+import { ActivatedRoute } from '@angular/router';
 import { BaseComponent } from 'app/base.component';
 import { SponsorsService } from 'app/sponsors/sponsors.service';
-import { ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'app-swag',
@@ -11,8 +11,8 @@ import { ActivatedRoute } from '@angular/router';
 export class TechComponent extends BaseComponent {
     techListings: TechListingModel[] = [];
 
-    constructor(sponsorsService: SponsorsService,
-                activatedRoute: ActivatedRoute) {
+    constructor(private sponsorsService: SponsorsService,
+                private activatedRoute: ActivatedRoute) {
         super(sponsorsService, activatedRoute);
     }
 

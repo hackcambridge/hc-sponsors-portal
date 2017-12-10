@@ -8,6 +8,7 @@ import { ActivatedRoute } from '@angular/router';
     templateUrl: './tips.component.html'
 })
 export class TipsComponent extends BaseComponent {
+
     constructor(sponsorsService: SponsorsService,
                 activatedRoute: ActivatedRoute) {
         super(sponsorsService, activatedRoute);

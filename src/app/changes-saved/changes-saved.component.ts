@@ -6,11 +6,11 @@ import { ActivatedRoute } from '@angular/router';
     templateUrl: './changes-saved.component.html'
 })
 export class ChangesSavedComponent {
-    magicUrl: string;
+    guid: string;
 
     constructor(activatedRoute: ActivatedRoute) {
         activatedRoute.params.subscribe(
-            params => this.magicUrl = params['code']
+            params => this.guid = params['guid']
         );
     }
 }
