@@ -1,6 +1,7 @@
 {
   "rules": {
     "sponsors": {
+      ".write": "auth != null",
       "$guid": {
         ".read": true,
         "competitions": {
@@ -22,6 +23,14 @@
           ".write": true
         }
       }
+    },
+    "admin": {
+      ".read": "auth != null",
+      ".write": "auth != null"
+    },
+    "benefits": {
+      ".read": "auth != null",
+      ".write": "auth != null"
     }
   }
 }

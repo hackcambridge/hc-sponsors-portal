@@ -27,8 +27,17 @@ import { WorkshopService } from 'app/workshops/workshop.service';
 import { TipsComponent } from 'app/tips/tips.component';
 import { SponsorsService } from 'app/sponsors/sponsors.service';
 import { TechService } from 'app/tech/tech.service';
+import { AdminComponent } from 'app/admin/admin.component';
+import { AdminService } from 'app/admin/admin.service';
+import { NewSponsorComponent } from 'app/newSponsor/new-sponsor.component';
+import { LoginComponent } from 'app/login/login.component';
+import { AngularFireAuth } from 'angularfire2/auth';
+import { AuthGuard } from 'app/auth-guard';
 
 const appRoutes: Routes = [
+  { path: 'login', component: LoginComponent },
+  { path: 'admin', component: AdminComponent, canActivate: [AuthGuard] },
+  { path: 'admin/new', component: NewSponsorComponent, canActivate: [AuthGuard] },
   { path: ':guid', component: PortalComponent },
   { path: ':guid/people', component: PeopleComponent },
   { path: ':guid/social-media', component: SocialMediaComponent },
@@ -52,7 +61,10 @@ const appRoutes: Routes = [
     EventsComponent,
     PresentationComponent,
     ChangesSavedComponent,
-    TipsComponent
+    TipsComponent,
+    AdminComponent,
+    NewSponsorComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -72,7 +84,10 @@ const appRoutes: Routes = [
     WorkshopService,
     SponsorsService,
     TechService,
-    AngularFireDatabase
+    AdminService,
+    AngularFireDatabase,
+    AngularFireAuth,
+    AuthGuard
   ],
   bootstrap: [
     AppComponent
