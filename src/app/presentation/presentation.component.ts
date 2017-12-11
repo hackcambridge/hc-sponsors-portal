@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { PresentationService } from 'app/presentation/presentation.service';
 import { PresentationModel } from 'app/presentation/presentation.model';
 import { SponsorsService } from 'app/sponsors/sponsors.service';
@@ -19,10 +19,11 @@ export class PresentationComponent extends BaseComponent implements OnInit {
     /** true if an upload is being performed. */
     uploadInProgress: boolean;
 
-    constructor(private sponsorsService: SponsorsService,
-                private activatedRoute: ActivatedRoute,
+    constructor(sponsorsService: SponsorsService,
+                activatedRoute: ActivatedRoute,
+                router: Router,
                 private presentationService: PresentationService) {
-        super(sponsorsService, activatedRoute);
+        super(sponsorsService, activatedRoute, router);
     }
 
     ngOnInit(): void {

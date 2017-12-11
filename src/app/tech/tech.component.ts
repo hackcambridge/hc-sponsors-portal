@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TechListingModel, TechListingType } from 'app/tech/tech-listing.model';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { BaseComponent } from 'app/base.component';
 import { SponsorsService } from 'app/sponsors/sponsors.service';
 import { TechService } from 'app/tech/tech.service';
@@ -12,10 +12,11 @@ import { TechService } from 'app/tech/tech.service';
 export class TechComponent extends BaseComponent implements OnInit {
     techListings: TechListingModel[] = [];
 
-    constructor(private sponsorsService: SponsorsService,
-                private activatedRoute: ActivatedRoute,
+    constructor(sponsorsService: SponsorsService,
+                activatedRoute: ActivatedRoute,
+                router: Router,
                 private techService: TechService) {
-        super(sponsorsService, activatedRoute);
+        super(sponsorsService, activatedRoute, router);
     }
 
     ngOnInit(): void {

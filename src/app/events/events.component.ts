@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { EventModel, CompetitionModel, EventsSummaryModel } from 'app/events/events.model';
 import { BenefitsService } from 'app/benefits/benefits.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { EventsService } from 'app/events/events.service';
 import { BaseComponent } from 'app/base.component';
 import { SponsorsService } from 'app/sponsors/sponsors.service';
@@ -53,11 +53,12 @@ export class EventsComponent extends BaseComponent implements OnInit {
      */
     doingThemedPrize: boolean;
 
-    constructor(private sponsorsService: SponsorsService,
-                private activatedRoute: ActivatedRoute,
+    constructor(sponsorsService: SponsorsService,
+                activatedRoute: ActivatedRoute,
+                router: Router,
                 private benefitsService: BenefitsService,
                 private eventsService: EventsService) {
-        super(sponsorsService, activatedRoute);
+        super(sponsorsService, activatedRoute, router);
     }
 
     ngOnInit(): void {

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BenefitsService, SponsorBenefitTypes } from 'app/benefits/benefits.service';
 import { SponsorshipBenefitModel } from 'app/benefits/sponsorship-benefit.model';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { BaseComponent } from 'app/base.component';
 import { SponsorsService } from 'app/sponsors/sponsors.service';
 
@@ -15,10 +15,11 @@ export class PortalComponent extends BaseComponent implements OnInit {
 
     portalLinks: PortalLink[] = [];
 
-    constructor(private sponsorsService: SponsorsService,
-                private benefitsService: BenefitsService,
-                private activatedRoute: ActivatedRoute) {
-        super(sponsorsService, activatedRoute);
+    constructor(sponsorsService: SponsorsService,
+                activatedRoute: ActivatedRoute,
+                router: Router,
+                private benefitsService: BenefitsService) {
+        super(sponsorsService, activatedRoute, router);
     }
 
     ngOnInit(): void {

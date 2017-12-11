@@ -27,8 +27,19 @@ import { WorkshopService } from 'app/workshops/workshop.service';
 import { TipsComponent } from 'app/tips/tips.component';
 import { SponsorsService } from 'app/sponsors/sponsors.service';
 import { TechService } from 'app/tech/tech.service';
+import { AdminComponent } from 'app/admin/admin.component';
+import { AdminService } from 'app/admin/admin.service';
+import { NewSponsorComponent } from 'app/newSponsor/new-sponsor.component';
+import { LoginComponent } from 'app/login/login.component';
+import { AngularFireAuth } from 'angularfire2/auth';
+import { AuthGuard } from 'app/auth-guard';
+import { NotFoundComponent } from 'app/404/not-found.component';
 
 const appRoutes: Routes = [
+  { path: 'login', component: LoginComponent },
+  { path: 'admin', component: AdminComponent, canActivate: [AuthGuard] },
+  { path: 'admin/new', component: NewSponsorComponent, canActivate: [AuthGuard] },
+  { path: '404', component: NotFoundComponent },
   { path: ':guid', component: PortalComponent },
   { path: ':guid/people', component: PeopleComponent },
   { path: ':guid/social-media', component: SocialMediaComponent },
@@ -37,7 +48,8 @@ const appRoutes: Routes = [
   { path: ':guid/swag', component: SwagComponent },
   { path: ':guid/events', component: EventsComponent },
   { path: ':guid/presentation', component: PresentationComponent },
-  { path: ':guid/tips', component: TipsComponent }
+  { path: ':guid/tips', component: TipsComponent },
+  { path: '**', redirectTo: '/404' }
 ];
 
 @NgModule({
@@ -52,7 +64,11 @@ const appRoutes: Routes = [
     EventsComponent,
     PresentationComponent,
     ChangesSavedComponent,
-    TipsComponent
+    TipsComponent,
+    AdminComponent,
+    NewSponsorComponent,
+    LoginComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,
@@ -72,7 +88,10 @@ const appRoutes: Routes = [
     WorkshopService,
     SponsorsService,
     TechService,
-    AngularFireDatabase
+    AdminService,
+    AngularFireDatabase,
+    AngularFireAuth,
+    AuthGuard
   ],
   bootstrap: [
     AppComponent

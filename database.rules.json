@@ -1,0 +1,36 @@
+{
+  "rules": {
+    "sponsors": {
+      ".write": "auth != null",
+      "$guid": {
+        ".read": true,
+        "competitions": {
+          ".write": true
+        },
+        "people": {
+          ".write": true
+        },
+        "presentation": {
+          ".write": true
+        },
+        "workshop": {
+          ".write": true
+        },
+        "demo": {
+          ".write": true
+        },
+        "tech": {
+          ".write": true
+        }
+      }
+    },
+    "admin": {
+      ".read": "auth != null",
+      ".write": "auth != null"
+    },
+    "benefits": {
+      ".read": "auth != null",
+      ".write": "auth != null"
+    }
+  }
+}
