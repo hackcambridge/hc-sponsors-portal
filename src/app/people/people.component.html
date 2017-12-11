@@ -1,13 +1,12 @@
-<section class="red">
-    <div class="container width">
-        <div class="one unit row">
-            <h1>People</h1>
+<section>
+    <div class="container a4">
+        <div class="three unit row">
+            <div class="unit column grows">
+                <h1>People</h1>
+            </div>
         </div>
-        <div class="one unit row">
-            <h3>Tell us who you will be coming to Hack Cambridge.</h3>
-        </div>
-        <div class="one half unit row">
-            <div class="twelve unit column">
+        <div class="three unit row">
+            <div class="unit column grows">
                 <p>
                     Everyone coming to Hack Cambridge will be added to our Slack
                     channel before the event so you can chat to the hackers. You
@@ -18,22 +17,19 @@
                 </p>
             </div>
         </div>
-    </div>
-</section>
-
-<section>
-    <div class="container width">
-        <div class="one unit row">
-            <h2>Mentors</h2>
+        <div class="two unit row">
+            <div class="unit column grows">
+                <h4>Mentors</h4>
+            </div>
         </div>
-        <div class="one unit row">
-            <h3>You may bring an unlimited number of mentors.</h3>
-        </div>
-        <div class="one half unit row">
-            <div class="twelve unit column">
+        <div class="four unit row">
+            <div class="unit column grows">
                 <p>
-                    Mentors should be technically focused people — software
-                    engineers, developers and the like. Their primary concern is
+                    You may bring an unlimited number of mentors.
+                </p>
+                <p>
+                    Mentors are technically focused people—software
+                    engineers, developers, or similar. Their primary concern is
                     to help hackers with technical issues, though they may also
                     discuss the your company and your products. We recommend
                     sending developers whose expertise covers a wide range of
@@ -45,72 +41,79 @@
                 </p>
             </div>
         </div>
-        <div class="half unit row">
-            <fieldset>
-                <input type="button" value="Add Mentor." (click)="addMentor()" [disabled]="!mentorDetailsCompleted">
-            </fieldset>
+        <div class="two unit row">
+            <div class="one half unit column">
+                <button (click)="addMentor()" [disabled]="!mentorDetailsCompleted">Add Mentor.</button>
+            </div>
         </div>
-        <div class="half unit row" *ngFor="let mentor of mentors; let i = index">
-            <fieldset>
+        <fieldset class="one unit persistent row content" *ngFor="let mentor of mentors; let i = index">
+            <div class="two unit column">
                 <input type="text" [(ngModel)]="mentors[i].name" (ngModelChange)="onMentorChanges()" placeholder="Name">
+            </div>
+            <div class="three unit column">
                 <input type="text" [(ngModel)]="mentors[i].email" (ngModelChange)="onMentorChanges()" placeholder="Email">
+            </div>
+            <div class="one half unit column">
                 <input type="text" [(ngModel)]="mentors[i].phone" (ngModelChange)="onMentorChanges()" placeholder="Phone">
-                <input type="button" value="Delete." (click)="deleteMentor(i)">
-            </fieldset>
+            </div>
+            <div class="one unit column">
+                <button (click)="deleteMentor(i)">Delete!</button>
+            </div>
+        </fieldset>
+        <div class="two unit row" *ngIf="recruiterLimit > 0">
+            <div class="unit column grows">
+                <h4>Recruiters</h4>
+            </div>
         </div>
-    </div>
-</section>
-
-<section *ngIf="recruiterLimit > 0">
-    <div class="container width">
-        <div class="one unit row">
-            <h2>Recruiters</h2>
+        <div class="two unit row" *ngIf="recruiterLimit > 0">
+            <div class="unit column grows">
+                <p>You may bring {{ recruiterLimit }} recruiters.</p>
+            </div>
         </div>
-        <div class="one unit row">
-            <h3>You may bring {{ recruiterLimit }} recruiters.</h3>
+        <div class="two unit row" *ngIf="recruiterLimit > 0">
+            <div class="one half unit column">
+                <button (click)="addRecruiter()" [hidden]="recruiters ? recruiters.length >= recruiterLimit : true" [disabled]="!recruiterDetailsCompleted">Add Recruiter.</button>
+            </div>
         </div>
-        <div class="half unit row">
-            <fieldset>
-                <input type="button" value="Add Recruiter." (click)="addRecruiter()" [hidden]="recruiters ? recruiters.length >= recruiterLimit : true" [disabled]="!recruiterDetailsCompleted">
-            </fieldset>
-        </div>
-        <div class="half unit row" *ngFor="let recruiter of recruiters; let i = index">
-            <fieldset>
+        <fieldset class="one unit persistent row content" *ngFor="let recruiter of recruiters; let i = index">
+            <div class="two unit column">
                 <input type="text" [(ngModel)]="recruiters[i].name" (ngModelChange)="onRecruiterChanges()" placeholder="Name">
+            </div>
+            <div class="three unit column">
                 <input type="text" [(ngModel)]="recruiters[i].email" (ngModelChange)="onRecruiterChanges()" placeholder="Email">
+            </div>
+            <div class="one half unit column">
                 <input type="text" [(ngModel)]="recruiters[i].phone" (ngModelChange)="onRecruiterChanges()" placeholder="Phone">
-                <input type="button" value="Delete." (click)="deleteRecruiter(i)">
-            </fieldset>
+            </div>
+            <div class="one unit column">
+                <button (click)="deleteRecruiter(i)">Delete.</button>
+            </div>
+        </fieldset>
+        <div class="two unit row">
+            <div class="unit column grows">
+                <h4>Nominate a mentor to be a judge</h4>
+            </div>
         </div>
-    </div>
-</section>
-
-<section>
-    <div class="container width">
-        <div class="one unit row">
-            <h2>Hack Cambridge Judge</h2>
-        </div>
-        <div class="one unit row">
-            <h3>Nominate one mentor to be a Hack Cambridge judge.</h3>
-        </div>
-        <div class="one half unit row">
-            <div class="twelve unit column">
+        <div class="three unit row">
+            <div class="unit column grows">
                 <p>
                     Hack Cambridge judges take part in deciding who gets the overall
                     Hack Cambridge prizes. If you would like to take part in this,
                     nominate one of your mentors. Note that this does not mean anything for
-                    prizes which are run by you &ndash; you may run your own competitions
+                    prizes which are run by you—you may run your own competitions
                     as you wish. Judging will be done using Gavel, an expo judging system
-                    originally developed for HackMIT.<br>
-                    <a rel="external" href="https://github.com/anishathalye/gavel">Read about Gavel.</a>
+                    originally developed for HackMIT.
                 </p>
+                <a rel="external" href="https://github.com/anishathalye/gavel">More about Gavel</a>
             </div>
         </div>
-        <div class="half unit row">
-            <select [(ngModel)]="judge" (ngModelChange)="onJudgeChange()">
-                <option [value]="null">We do not wish to nominate a judge</option>
-                <option *ngFor="let mentor of mentors; let i = index" [value]="i">{{ mentor.name }}</option>
-            </select>
+        <div class="one unit persistent row content">
+            <div class="three half unit column">
+                <select [(ngModel)]="judge" (ngModelChange)="onJudgeChange()">
+                    <option [value]="null">We do not wish to nominate a judge</option>
+                    <option *ngFor="let mentor of mentors; let i = index" [value]="i">{{ mentor.name }}</option>
+                </select>
+            </div>
         </div>
     </div>
 </section>

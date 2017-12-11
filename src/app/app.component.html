@@ -1,42 +1,43 @@
-<section class="black">
-  <div class="container width">
-    <div class="fourteen unit column">
-      <div class="one half unit row">
-        <div class="one half unit column">
-          <img draggable="false" src="/assets/images/logo.svg" alt="Hack Cambridge Logo">
+<header class="black">
+    <div class="container width">
+        <div class="three unit row">
+            <div class="one half unit column">
+                <img draggable="false" src="/assets/images/logo.svg" alt="Hack Cambridge Logo">
+            </div>
+            <div class="six unit column">
+                <h2>Hack Cambridge<br><span class="pixel">Ternary</span></h2>
+            </div>
         </div>
-        <div class="six unit column">
-          <h2>Hack Cambridge<br><span class="pixel">Ternary</span></h2>
+        <div class="one unit row">
+            <div class="one half unit column"></div>
+            <div class="six unit column">
+                <h3>{{ companyName ? "Hi " + companyName + "!" : 'Sponsorship Portal' }}</h3>
+            </div>
         </div>
-      </div>
     </div>
-
-    <div class="one unit row">
-      <div class="one half unit column"></div>
-      <div class="six unit column">
-        <h3>{{ companyName ? companyName : 'Sponsorship Portal' }}</h3>
-      </div>
-    </div>
-  </div>
-</section>
+</header>
 
 <router-outlet></router-outlet>
-
+<section class="black">
+    <div class="container width">
+        <div class="one half unit row">
+            <div class="unit column grows">
+                <a rel="external" href="https://hackcambridge.com/">Hack Cambridge Main Site</a>
+            </div>
+        </div>
+    </div>
+</section>
 <footer>
-  <div class="container width">
-      <div class="one half unit row">
-          <div class="six unit column intro-collapses">
-              <div class="one half unit row">
-                  <div class="six unit column">
-                      <p>
-                        Copyright © Hack Cambridge 2017. All rights reserved.
-                      </p>
-                      <a rel="next" href="https://hackcambridge.com/terms-and-conditions">Terms and Conditions</a>
-                      <br>
-                      <a rel="next" href="https://hackcambridge.com/privacy-policy">Privacy Policy</a>
-                  </div>
-              </div>
-          </div>
-      </div>
-  </div>
+    <div class="container width">
+        <div class="three unit row">
+            <div class="unit column grows">
+                <p>
+                    Copyright © Hack Cambridge 2017. All rights reserved.
+                </p>
+                <a rel="next" href="https://hackcambridge.com/terms-and-conditions">Terms and Conditions</a>
+                <br>
+                <a rel="next" href="https://hackcambridge.com/privacy-policy">Privacy Policy</a>
+            </div>
+        </div>
+    </div>
 </footer>
