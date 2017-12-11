@@ -15,9 +15,12 @@ export class SponsorsService {
         return this.db.object(`sponsors/${guid}/name`);
     }
 
-    setSponsorGuid(guid: string): void {
+    setSponsorGuid(guid: string, onSet: (name: string) => void): void {
         this.getSponsorNameObject(guid).valueChanges<string>().subscribe(
-            name => this.sponsorName$.next(name)
+            name => {
+                this.sponsorName$.next(name);
+                onSet(name);
+            }
         );
     }
 

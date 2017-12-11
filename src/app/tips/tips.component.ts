@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { BaseComponent } from 'app/base.component';
 import { SponsorsService } from 'app/sponsors/sponsors.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
     selector: 'app-tips',
@@ -10,7 +10,8 @@ import { ActivatedRoute } from '@angular/router';
 export class TipsComponent extends BaseComponent {
 
     constructor(sponsorsService: SponsorsService,
-                activatedRoute: ActivatedRoute) {
-        super(sponsorsService, activatedRoute);
+                activatedRoute: ActivatedRoute,
+                router: Router) {
+        super(sponsorsService, activatedRoute, router);
     }
 }

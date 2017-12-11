@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { SwagModel } from 'app/swag/swag.model';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { BaseComponent } from 'app/base.component';
 import { SponsorsService } from 'app/sponsors/sponsors.service';
 
@@ -12,8 +12,9 @@ export class SwagComponent extends BaseComponent {
     swagList: SwagModel[] = [];
 
     constructor(sponsorsService: SponsorsService,
-        activatedRoute: ActivatedRoute) {
-        super(sponsorsService, activatedRoute);
+                activatedRoute: ActivatedRoute,
+                router: Router) {
+        super(sponsorsService, activatedRoute, router);
     }
 
     addSwag(): void {

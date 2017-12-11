@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PersonModel } from 'app/people/person.model';
 import { BenefitsService } from 'app/benefits/benefits.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { PeopleService } from 'app/people/people.service';
 import { SponsorsService } from 'app/sponsors/sponsors.service';
 import { BaseComponent } from 'app/base.component';
@@ -29,11 +29,12 @@ export class PeopleComponent extends BaseComponent implements OnInit {
     /** The index of the mentor nominated to be Hack Cambridge judge. */
     judge: number;
 
-    constructor(private sponsorsService: SponsorsService,
+    constructor(sponsorsService: SponsorsService,
+                activatedRoute: ActivatedRoute,
+                router: Router,
                 private benefitsService: BenefitsService,
-                private activatedRoute: ActivatedRoute,
                 private peopleService: PeopleService) {
-        super(sponsorsService, activatedRoute);
+        super(sponsorsService, activatedRoute, router);
     }
 
     ngOnInit(): void {

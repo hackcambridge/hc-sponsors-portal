@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { SocialMediaPostModel } from 'app/social-media/social-media.model';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { BaseComponent } from 'app/base.component';
 import { SponsorsService } from 'app/sponsors/sponsors.service';
 
@@ -14,8 +14,9 @@ export class SocialMediaComponent extends BaseComponent {
     instagramPost = new SocialMediaPostModel();
 
     constructor(sponsorsService: SponsorsService,
-                activatedRoute: ActivatedRoute) {
-        super(sponsorsService, activatedRoute);
+                activatedRoute: ActivatedRoute,
+                router: Router) {
+        super(sponsorsService, activatedRoute, router);
     }
 
     publishToFacebook(): void {

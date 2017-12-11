@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BenefitsService } from 'app/benefits/benefits.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { WorkshopModel } from 'app/workshops/workshop.model';
 import { WorkshopService } from 'app/workshops/workshop.service';
 import { BaseComponent } from 'app/base.component';
@@ -20,11 +20,12 @@ export class WorkshopComponent extends BaseComponent implements OnInit {
     doingProductDemo: boolean;
     doingWorkshop: boolean;
 
-    constructor(private sponsorsService: SponsorsService,
+    constructor(sponsorsService: SponsorsService,
+                activatedRoute: ActivatedRoute,
+                router: Router,
                 private workshopService: WorkshopService,
-                private activatedRoute: ActivatedRoute,
                 private benefitsService: BenefitsService) {
-        super(sponsorsService, activatedRoute);
+        super(sponsorsService, activatedRoute, router);
     }
 
     ngOnInit(): void {
