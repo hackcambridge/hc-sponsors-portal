@@ -1,10 +1,14 @@
 <section class="red">
-    <div class="container width">
+    <div class="container a4">
         <div class="one unit row">
-            <h1>Sponsorship Portal Admin</h1>
+            <div class="unit column grows">
+                <h1>Sponsorship Portal Admin</h1>
+            </div>
         </div>
         <div class="one unit row">
-            <h3>Manage sponsors' accounts.</h3>
+            <div class="unit column grows">
+                <h3>Manage sponsors' accounts.</h3>
+            </div>
         </div>
     </div>
 </section>
@@ -12,20 +16,28 @@
 <section>
     <div class="container width">
         <div class="one unit row">
-            <h2>Sponsors</h2>
+            <div class="unit column grows">
+                <h2>Sponsors</h2>
+            </div>
         </div>
         <div class="one unit row">
-            <h3>These sponsors are registered:</h3>
+            <div class="unit column grows">
+                <h3>These sponsors are registered:</h3>
+            </div>
         </div>
         <div *ngFor="let sponsor of sponsors" class="half unit row">
-            <p>
-                <a rel="next" [routerLink]="[ '/', sponsor.id ]">{{ sponsor.name }}</a>
-            </p>
+            <div class="unit column grows">
+                <p>
+                    <a rel="next" [routerLink]="[ '/', sponsor.id ]">{{ sponsor.name }}</a>
+                </p>
+            </div>
         </div>
         <div class="half unit row">
-            <p>
-                <a [routerLink]="[ '/admin/new' ]">Add Sponsor</a>
-            </p>
+            <div class="unit column grows">
+                <p>
+                    <a [routerLink]="[ '/admin/new' ]">Add Sponsor</a>
+                </p>
+            </div>
         </div>
     </div>
 </section>
