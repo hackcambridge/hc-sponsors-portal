@@ -96,6 +96,10 @@
         <div class="two unit persistent row content" *ngIf="doingWorkshop">
             <textarea (ngModelChange)="saveWorkshop()" [(ngModel)]="workshop.description" placeholder="Description"></textarea>
         </div>
+        <div class="one half unit row">
+            <app-home-button class="one unit column">
+            </app-home-button>
+        </div>
     </div>
 </section>
 

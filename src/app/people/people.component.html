@@ -43,11 +43,11 @@
             </div>
         </div>
         <div class="two unit row">
-            <div class="one half unit column">
-                <button (click)="addMentor()" [disabled]="!mentorDetailsCompleted">Add Mentor.</button>
+            <div class="two unit column">
+                <button (click)="addMentor()" [disabled]="!mentorDetailsCompleted">Add Mentor &rarr;</button>
             </div>
         </div>
-        <fieldset class="one unit persistent row content" *ngFor="let mentor of mentors; let i = index">
+        <div class="one unit persistent row content" *ngFor="let mentor of mentors; let i = index">
             <div class="two unit column">
                 <input type="text" [(ngModel)]="mentors[i].name" (ngModelChange)="onMentorChanges()" placeholder="Name">
             </div>
@@ -60,7 +60,7 @@
             <div class="one unit column">
                 <button (click)="deleteMentor(i)">Delete!</button>
             </div>
-        </fieldset>
+        </div>
         <div class="two unit row" *ngIf="recruiterLimit > 0">
             <div class="unit column grows">
                 <h4>Recruiters</h4>
@@ -72,11 +72,11 @@
             </div>
         </div>
         <div class="two unit row" *ngIf="recruiterLimit > 0">
-            <div class="one half unit column">
-                <button (click)="addRecruiter()" [hidden]="recruiters ? recruiters.length >= recruiterLimit : true" [disabled]="!recruiterDetailsCompleted">Add Recruiter.</button>
+            <div class="two unit column">
+                <button (click)="addRecruiter()" [hidden]="recruiters ? recruiters.length >= recruiterLimit : true" [disabled]="!recruiterDetailsCompleted">Add Recruiter &rarr;</button>
             </div>
         </div>
-        <fieldset class="one unit persistent row content" *ngFor="let recruiter of recruiters; let i = index">
+        <div class="one unit persistent row content" *ngFor="let recruiter of recruiters; let i = index">
             <div class="two unit column">
                 <input type="text" [(ngModel)]="recruiters[i].name" (ngModelChange)="onRecruiterChanges()" placeholder="Name">
             </div>
@@ -89,7 +89,7 @@
             <div class="one unit column">
                 <button (click)="deleteRecruiter(i)">Delete.</button>
             </div>
-        </fieldset>
+        </div>
         <div class="two unit row">
             <div class="unit column grows">
                 <h4>Nominate a mentor to be a judge</h4>
@@ -115,6 +115,10 @@
                     <option *ngFor="let mentor of mentors; let i = index" [value]="i">{{ mentor.name }}</option>
                 </select>
             </div>
+        </div>
+        <div class="one half unit row">
+            <app-home-button class="one unit column">
+            </app-home-button>
         </div>
     </div>
 </section>
