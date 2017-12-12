@@ -46,8 +46,6 @@ export class PortalComponent extends BaseComponent implements OnInit {
     }
 
     private showLinksFromBenefits(benefits: SponsorshipBenefitModel[]): void {
-        // const portalLinks: PortalLink[] = [];
-
         this.portalLinks.push({ pageUrl: 'tips', text: 'Read our tips and tricks' });
 
         this.portalLinks.push({ pageUrl: 'people', text: 'Let us know who’s coming' });
@@ -79,13 +77,6 @@ export class PortalComponent extends BaseComponent implements OnInit {
         if (this.benefitsService.canRunOpeningCeremonyPresentation(benefits)) {
             this.portalLinks.push({ pageUrl: 'presentation', text: 'Send us your presentation' });
         }
-
-        // Now split the links evenly across the three columns
-        // this.portalLinks = [];
-
-        // for (let i = 0; i < portalLinks.length; i++) {
-        //    this.portalLinks.push(portalLinks[i]);
-        // }
     }
 }
 
