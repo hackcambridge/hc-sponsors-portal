@@ -49,8 +49,8 @@ section, header, footer {
 section {
     border-top: 1pt solid var(--primary-color);
 }
-section:not(.black):not(.red) + footer {
-    border-top: 1pt solid var(--secondary-color);
+main > section:last-child:not(.black):not(.red), *:last-child > section:last-child:not(.black):not(.red) {
+    border-bottom: 1pt solid var(--secondary-color);
 }
 section:not(.black):not(.red) + section:not(.black):not(.red) {
     border-top: 1pt solid var(--secondary-color);
@@ -159,6 +159,14 @@ h4:not(:last-child) {
 h5, h5 span {
     font-size: 16pt;
     line-height: 120%;
+}
+h6 {
+    font-size: 11pt;
+    font-weight: bold;
+    margin: 0pt;
+}
+h6:not(:last-child) {
+    margin-bottom: 10pt;
 }
 p {
     font-size: 11pt;
@@ -351,7 +359,7 @@ input[type="email"]:-webkit-autofill {
     border-bottom: 1pt solid var(--accent-color);
 }
 
-input::placeholder {
+::placeholder {
     color: var(--accent-color);
 }
 
@@ -367,7 +375,11 @@ input:placeholder-shown {
     border-bottom: 1pt solid var(--accent-color);
 }
 
-input[type="submit"], input[type="checkbox"], button{
+textarea:placeholder-shown {
+    border: 1pt solid var(--accent-color);
+}
+
+input[type="submit"], input[type="checkbox"], button {
     background-color: unset;
     color: var(--accent-color);
     border: 1pt solid var(--accent-color);
@@ -399,7 +411,7 @@ legend {
     margin-bottom: var(--gutter);
 }
 
-input[type="submit"]:hover, button:hover{
+input[type="submit"]:hover, button:hover, select {
     background-color: unset;
     color: var(--secondary-color);
     border: 1pt solid var(--secondary-color);
