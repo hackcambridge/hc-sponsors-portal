@@ -48,17 +48,14 @@
                 <input type="text" [(ngModel)]="techListings[i].description" (ngModelChange)="saveTechListing()" placeholder="Description">
             </div>
             <div class="two unit column">
-                <label>
-                    Type:
-                    <select [(ngModel)]="techListings[i].type" (ngModelChange)="saveTechListing()">
-                        <option [value]="'api'">API</option>
-                        <option [value]="'framework'">Framework</option>
-                        <option [value]="'hardware'">Hardware</option>
-                        <option [value]="'sdk'">SDK</option>
-                        <option [value]="'tooling'">Dev Tool</option>
-                        <option [value]="'other'">Other</option>
-                    </select>
-                </label>
+                <select [(ngModel)]="techListings[i].type" (ngModelChange)="saveTechListing()">
+                    <option [value]="'api'">API</option>
+                    <option [value]="'framework'">Framework</option>
+                    <option [value]="'hardware'">Hardware</option>
+                    <option [value]="'sdk'">SDK</option>
+                    <option [value]="'tooling'">Dev Tool</option>
+                    <option [value]="'other'">Other</option>
+                </select>
             </div>
             <div class="one unit column">
                 <button (click)="deleteTechListing(i)">Delete!</button>
