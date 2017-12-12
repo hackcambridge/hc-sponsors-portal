@@ -41,7 +41,7 @@
                 </select>
             </div>
         </div>
-        <fieldset class="one half unit persistent row content" *ngIf="doingThemedPrize">
+        <div class="one half unit persistent row content" *ngIf="doingThemedPrize">
             <div class="three unit column">
                 <input type="text" [(ngModel)]="themedPrize.title" (ngModelChange)="saveEventsState()" placeholder="Title">
             </div>
@@ -51,7 +51,7 @@
             <div class="three unit column">
                 <input type="text" [(ngModel)]="themedPrize.prizes" (ngModelChange)="saveEventsState()" placeholder="Prize(s)">
             </div>
-        </fieldset>
+        </div>
         <div class="two unit row" *ngIf="canRunSideEvent">
             <div class="unit column grows">
                 <h4>Register a Side Event</h4>
@@ -77,14 +77,14 @@
                 </select>
             </div>
         </div>
-        <fieldset class="one unit persistent row content" *ngIf="doingSideEvent">
+        <div class="one unit persistent row content" *ngIf="doingSideEvent">
             <div class="three unit column">
                 <input type="text" [(ngModel)]="sideEvent.title" (ngModelChange)="saveEventsState()" placeholder="Title">
             </div>
             <div class="five unit column">
                 <input type="text" [(ngModel)]="sideEvent.description" (ngModelChange)="saveEventsState()" placeholder="Description">
             </div>
-        </fieldset>
+        </div>
         <div class="two unit row">
             <div class="unit column grows">
                 <h4>Run an API Prize</h4>
@@ -117,7 +117,7 @@
                 </select>
             </div>
         </div>
-        <fieldset class="one unit persistent row content" *ngIf="doingHardwareApiPrize">
+        <div class="one unit persistent row content" *ngIf="doingHardwareApiPrize">
             <div class="three unit column">
                 <input type="text" [(ngModel)]="hardwareApiPrize.title" (ngModelChange)="saveEventsState()" placeholder="Title">
             </div>
@@ -127,7 +127,6 @@
             <div class="three unit column">
                 <input type="text" [(ngModel)]="hardwareApiPrize.prizes" (ngModelChange)="saveEventsState()" placeholder="Prizes">
             </div>
-        </fieldset>
         </div>
         <div class="one half unit row">
             <app-home-button class="one unit column">

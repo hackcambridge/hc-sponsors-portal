@@ -46,14 +46,14 @@
                 </select>
             </div>
         </div>
-        <fieldset class="one unit persistent row content" *ngIf="doingProductDemo">
+        <div class="one unit persistent row content" *ngIf="doingProductDemo">
             <div class="four unit column">
                 <input (ngModelChange)="saveProductDemo()" type="text" [(ngModel)]="productDemo.title" placeholder="Title">
             </div>
             <div class="four unit column">
                 <input (ngModelChange)="saveProductDemo()" type="text" [(ngModel)]="productDemo.speaker" placeholder="Speaker(s)">
             </div>
-        </fieldset>
+        </div>
         <div class="two unit persistent row content" *ngIf="doingProductDemo">
             <textarea (ngModelChange)="saveProductDemo()" [(ngModel)]="productDemo.description" placeholder="Description"></textarea>
         </div>
@@ -86,14 +86,14 @@
                 </select>
             </div>
         </div>
-        <fieldset class="one unit persistent row content" *ngIf="doingWorkshop">
+        <div class="one unit persistent row content" *ngIf="doingWorkshop">
             <div class="four unit column">
                 <input (ngModelChange)="saveWorkshop()" type="text" [(ngModel)]="workshop.title" placeholder="Title">
             </div>
             <div class="four unit column">
                 <input (ngModelChange)="saveWorkshop()" type="text" [(ngModel)]="workshop.speaker" placeholder="Speaker(s)">
             </div>
-        </fieldset>
+        </div>
         <div class="two unit persistent row content" *ngIf="doingWorkshop">
             <textarea (ngModelChange)="saveWorkshop()" [(ngModel)]="workshop.description" placeholder="Description"></textarea>
         </div>

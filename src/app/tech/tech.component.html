@@ -40,7 +40,7 @@
                 <button (click)="addTechListing()">Add Tech.</button>
             </div>
         </div>
-        <fieldset class="half unit persistent row content centred" *ngFor="let techListing of techListings; let i = index">
+        <div class="one unit persistent row content centred" *ngFor="let techListing of techListings; let i = index">
             <div class="two unit column">
                 <input type="text" [(ngModel)]="techListings[i].name" (ngModelChange)="saveTechListing()" placeholder="Name">
             </div>
@@ -63,7 +63,6 @@
             <div class="one unit column">
                 <button (click)="deleteTechListing(i)">Delete!</button>
             </div>
-        </fieldset>
         </div>
         <div class="one half unit row">
             <app-home-button class="one unit column">
