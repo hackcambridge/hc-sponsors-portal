@@ -52,12 +52,12 @@
         </div>
         <div class="one half unit row" *ngIf="!uploadInProgress && (presentation && !uploadNewFile)">
             <div class="two unit column">
-                <button (click)="uploadNewFile = true">Upload New File</button>
+                <button (click)="uploadNewFile = true">Upload new file &rarr;</button>
             </div>
         </div>
         <div class="one half unit row" *ngIf="!uploadInProgress && (!presentation || uploadNewFile)">
             <div class="three unit column">
-                <input type="file" (change)="uploadFile($event)" value="Upload File" placeholder="Upload File" accept=".pptx,.ppt,.pdf,.key">
+                <input type="file" (change)="uploadFile($event)" value="Upload file." placeholder="Upload file." accept=".pptx,.ppt,.pdf,.key">
             </div>
         </div>
         <div class="one half unit row">

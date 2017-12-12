@@ -53,8 +53,8 @@
             </div>
         </div>
         <div class="half unit row">
-                <input type="button" value="Add Swag Item." (click)="addSwag()">
             <div>
+                <input type="button" value="Add Swag Item &rarr;" (click)="addSwag()">
             </div>
         </div>
         <div class="half unit row" *ngFor="let swag of swagList; let i = index">
@@ -65,7 +65,7 @@
                     <input type="checkbox" [(ngModel)]="swagList[i].orderByUs">
                     Order This For Us
                 </label>
-                <input type="button" value="Delete." (click)="deleteSwag(i)">
+                <input type="button" value="Delete!" (click)="deleteSwag(i)">
             </div>
         </div>
         <div class="one half unit row">
