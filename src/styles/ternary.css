@@ -80,6 +80,17 @@ div.unavailable .label, .error {
     color: var(--accent-color);
 }
 
+/* Highlights */
+
+::selection {
+    background: var(--accent-color);
+    color: var(--primary-color);
+}
+-moz-::selection {
+    background: var(--accent-color);
+    color: var(--primary-color);
+}
+
 /* Link area */
 
 section.links:hover, section.links:hover * {
@@ -94,7 +105,7 @@ section.links:hover, section.links:hover * {
 .secondary {
     color: var(--accent-color);
 }
-.pixel:not(:placeholder-shown), .label {
+.pixel:not(:placeholder-shown), .pixel:not(:placeholder-shown) *, .label {
     font-family: "PxGrotesk-Screen", Helvetica, Arial, sans-serif;
     font-synthesis: none;
 }
@@ -159,14 +170,6 @@ h4:not(:last-child) {
 h5, h5 span {
     font-size: 16pt;
     line-height: 120%;
-}
-h6 {
-    font-size: 11pt;
-    font-weight: bold;
-    margin: 0pt;
-}
-h6:not(:last-child) {
-    margin-bottom: 10pt;
 }
 p {
     font-size: 11pt;
@@ -236,7 +239,7 @@ li {
 
 /* Anchors */
 
-a {
+a:not(.logo) {
     color: var(--accent-color);
     text-decoration: none;
     white-space: pre-wrap;
@@ -348,18 +351,18 @@ input, button {
     color: var(--secondary-color);
 }
 
-input[type="email"], input[type="text"] {
+input[type="email"], input[type="text"], input[type="number"], input[type="password"] {
     border-bottom: 1pt solid var(--secondary-color);
     width: 100%;
 }
 
-input[type="email"]:-webkit-autofill {
+input:-webkit-autofill {
     -webkit-text-fill-color: var(--primary-color);
     -webkit-box-shadow: 0 0 0px 1000px var(--secondary-color) inset;
     border-bottom: 1pt solid var(--accent-color);
 }
 
-::placeholder {
+input::placeholder {
     color: var(--accent-color);
 }
 
@@ -411,16 +414,19 @@ legend {
     margin-bottom: var(--gutter);
 }
 
-input[type="submit"]:hover, button:hover, select {
+input[type="submit"]:hover:not([disabled]), button:hover:not([disabled]){
     background-color: unset;
     color: var(--secondary-color);
     border: 1pt solid var(--secondary-color);
 }
 
-input[type="submit"]:active, button:active{
+input[type="submit"]:active:not([disabled]), button:active:not([disabled]){
     background-color: var(--secondary-color);
     color: var(--primary-color);
     border: 1pt solid var(--secondary-color);
+}
+input[disabled], button[disabled] {
+    opacity: 0.5;
 }
 
 .logo.mega, .logo.kilo {
