@@ -3,12 +3,7 @@
     <div class="container a4">
         <div class="three unit row">
             <div class="unit column grows">
-                <h1>Opening Ceremony Presentation</h1>
-            </div>
-        </div>
-        <div class="two unit row">
-            <div class="unit column grows">
-                <h4>Your Slides</h4>
+                <h1>Opening Ceremony <wbr>Presentation</h1>
             </div>
         </div>
         <div class="three half unit row">
@@ -50,12 +45,12 @@
                 <a rel="diagonal" [href]="presentation.url">{{ presentation.name }}</a>
             </div>
         </div>
-        <div class="one half unit row" *ngIf="!uploadInProgress && (presentation && !uploadNewFile)">
+        <div class="two unit row" *ngIf="!uploadInProgress && (presentation && !uploadNewFile)">
             <div class="two unit column">
                 <button (click)="uploadNewFile = true">Upload new file &rarr;</button>
             </div>
         </div>
-        <div class="one half unit row" *ngIf="!uploadInProgress && (!presentation || uploadNewFile)">
+        <div class="two unit row" *ngIf="!uploadInProgress && (!presentation || uploadNewFile)">
             <div class="three unit column">
                 <input type="file" (change)="uploadFile($event)" value="Upload file." placeholder="Upload file." accept=".pptx,.ppt,.pdf,.key">
             </div>
