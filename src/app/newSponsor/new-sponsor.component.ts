@@ -34,7 +34,7 @@ export class NewSponsorComponent {
         }
 
         const benefit: SponsorshipBenefitModel = {
-            id: name.replace(/\s+/, '-').toLowerCase(),
+            id: name.replace(/\s+/g, '-').toLowerCase(),
             name: name
         };
 
