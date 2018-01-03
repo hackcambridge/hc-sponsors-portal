@@ -13,19 +13,24 @@ export abstract class BaseComponent {
     protected guid$ = new BehaviorSubject<string>(undefined);
 
     constructor(
-        private sponsorsService: SponsorsService,
-        private activatedRoute: ActivatedRoute,
-        private router: Router) {
+        protected sponsorsService: SponsorsService,
+        protected activatedRoute: ActivatedRoute,
+        protected router: Router) {
             this.activatedRoute.params.subscribe(
                 params => this.guid$.next(params['guid'])
             );
 
+
             this.guid$.subscribe(
-                guid => this.sponsorsService.setSponsorGuid(guid, name => {
-                    if (name == null) {
+                guid => this.sponsorsService.setSponsorGuid(guid)
+            );
+
+            this.sponsorsService.getSponsorName().subscribe(
+                name => {
+                    if (name === null) {
                         router.navigate([ '/404' ]);
                     }
-                })
+                }
             );
     }
 }

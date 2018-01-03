@@ -8,15 +8,15 @@ export class PeopleService {
     constructor(private db: AngularFireDatabase) {}
 
     private getMentorsObject(guid: string): AngularFireObject<PersonModel[]> {
-        return this.db.object(`sponsors/${guid}/people/mentors`)
+        return this.db.object(`sponsors/${guid}/people/mentors`);
     }
 
     private getRecruitersObject(guid: string): AngularFireObject<PersonModel[]> {
-        return this.db.object(`sponsors/${guid}/people/recruiters`)
+        return this.db.object(`sponsors/${guid}/people/recruiters`);
     }
 
     private getJudgeObject(guid: string): AngularFireObject<number> {
-        return this.db.object(`sponsors/${guid}/people/judge`)
+        return this.db.object(`sponsors/${guid}/people/judge`);
     }
 
     getMentors(guid: string): Observable<PersonModel[]> {

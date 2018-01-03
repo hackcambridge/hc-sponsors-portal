@@ -10,7 +10,7 @@ import { SponsorsService } from 'app/sponsors/sponsors.service';
     templateUrl: './portal.component.html'
 })
 export class PortalComponent extends BaseComponent implements OnInit {
-    sponsorshipTier = 'Tera';
+    sponsorshipTier = '';
     sponsorshipBenefits: SponsorshipBenefitModel[];
 
     portalLinks: PortalLink[] = [];
@@ -32,16 +32,25 @@ export class PortalComponent extends BaseComponent implements OnInit {
      */
     private determineVisibleLinks(): void {
         this.guid$.subscribe(
-            guid => this.showLinksForSponsor(guid)
+            guid => {
+                this.showLinksForSponsor(guid);
+                this.getSponsorshipTier(guid);
+            }
         );
     }
 
-    private showLinksForSponsor(guid: string) {
+    private showLinksForSponsor(guid: string): void {
         this.benefitsService.getSponsorBenefitDescriptions(guid).first().subscribe(
             benefits => {
                 this.showLinksFromBenefits(benefits);
                 this.sponsorshipBenefits = benefits;
             }
+        );
+    }
+
+    private getSponsorshipTier(guid: string): void {
+        this.sponsorsService.getSponsorTier().subscribe(
+            tier => this.sponsorshipTier = tier
         );
     }
 

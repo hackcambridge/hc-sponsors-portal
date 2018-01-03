@@ -15,16 +15,25 @@ export class SponsorsService {
         return this.db.object(`sponsors/${guid}/name`);
     }
 
-    setSponsorGuid(guid: string, onSet: (name: string) => void): void {
+    private getSponsorTierObject(guid: string): AngularFireObject<SponsorshipTier> {
+        return this.db.object(`sponsors/${guid}/tier`);
+    }
+
+    setSponsorGuid(guid: string): void {
         this.getSponsorNameObject(guid).valueChanges<string>().subscribe(
-            name => {
-                this.sponsorName$.next(name);
-                onSet(name);
-            }
+            name => this.sponsorName$.next(name)
+        );
+
+        this.getSponsorTierObject(guid).valueChanges<SponsorshipTier>().subscribe(
+            tier => this.sponsorTier$.next(tier)
         );
     }
 
     getSponsorName(): Observable<string> {
         return this.sponsorName$;
+    }
+
+    getSponsorTier(): Observable<string> {
+        return this.sponsorTier$;
     }
 }
