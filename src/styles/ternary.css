@@ -49,7 +49,7 @@ section, header, footer {
 section {
     border-top: 1pt solid var(--primary-color);
 }
-section:last-of-type:not(.black):not(.red) {
+main > section:last-child:not(.black):not(.red), *:last-child > section:last-child:not(.black):not(.red) {
     border-bottom: 1pt solid var(--secondary-color);
 }
 section:not(.black):not(.red) + section:not(.black):not(.red) {
@@ -58,7 +58,7 @@ section:not(.black):not(.red) + section:not(.black):not(.red) {
 section.black + section.home-link, section.red + section.home-link {
     border-top: 1pt solid var(--primary-color);
 }
-header, :not(header) + main section:first-child {
+header, :not(header) + main section:first-of-type {
     padding-top: var(--one);
 }
 section.image {
@@ -76,8 +76,19 @@ div.unavailable .label {
     z-index: 1;
     display: block;
 }
-div.unavailable .label {
+div.unavailable .label, .error {
     color: var(--accent-color);
+}
+
+/* Highlights */
+
+::selection {
+    background: var(--accent-color);
+    color: var(--primary-color);
+}
+-moz-::selection {
+    background: var(--accent-color);
+    color: var(--primary-color);
 }
 
 /* Link area */
@@ -94,9 +105,9 @@ section.links:hover, section.links:hover * {
 .secondary {
     color: var(--accent-color);
 }
-.pixel, .label {
-    font-family: "PxGroteskScreen", Helvetica, Arial, sans-serif;
-    font-weight: 400;
+.pixel:not(:placeholder-shown), .pixel:not(:placeholder-shown) *, .label {
+    font-family: "PxGrotesk-Screen", Helvetica, Arial, sans-serif;
+    font-synthesis: none;
 }
 .shadow {
     text-shadow: 3pt -3pt var(--accent-color);
@@ -125,40 +136,28 @@ section, a, a::after, svg, input, button, .secondary {
 /* Fonts */
 
 html * {
-    font-family: "PxGroteskRegular", Helvetica, Arial, sans-serif;
-}
-h1, h2, h5, h5 * {
-    font-family: "PxGroteskBold", Helvetica, Arial, sans-serif;
-}
-h3, h4 {
-    font-family: "PxGroteskLight", Helvetica, Arial, sans-serif;
+    font-family: "PxGrotesk", Helvetica, Arial, sans-serif;
 }
 
 /* Paragraph styles */
 
 #hack-cambridge-wordmark {
-    font-family: "PxGroteskBold", Helvetica, Arial, sans-serif;
     line-height: 95%;
-    font-weight: 300;
 }
 h1, h2, h2 * {
-    font-family: "PxGroteskBold", Helvetica, Arial, sans-serif;
     font-size: 36pt;
     line-height: 95%;
-    font-weight: 200;
     hyphens: auto;
     -webkit-hyphens: auto;
 }
 h3 {
-    font-family: "PxGroteskLight", Helvetica, Arial, sans-serif;
+    font-weight: lighter;
     font-size: 20pt;
-    font-weight: 200;
     line-height: 120%;
 }
 h4 {
-    font-family: "PxGroteskLight", Helvetica, Arial, sans-serif;
     font-size: 14pt;
-    font-weight: 200;
+    font-weight: lighter;
     border-top: solid var(--secondary-color) 1pt;
     padding-top: 2pt;
 }
@@ -169,12 +168,16 @@ h4:not(:last-child) {
     margin-bottom: 10pt;
 }
 h5, h5 span {
-    font-family: "PxGroteskBold", Helvetica, Arial, sans-serif;
     font-size: 16pt;
-    font-weight: 300;
     line-height: 120%;
 }
 p {
+    font-size: 11pt;
+}
+th {
+    font-size: 11pt;
+}
+td {
     font-size: 11pt;
 }
 label {
@@ -192,7 +195,7 @@ textarea {
     font-size: 11pt;
     padding: 3pt;
 }
-*:not(h5) a {
+*:not(span) > a {
     font-size: 11pt;
 }
 input {
@@ -206,7 +209,7 @@ input[type="email"] {
     background: var(--primary-color);
     color: var(--secondary-color);
     border: 1pt solid var(--secondary-color);
-    font-family: "PxGroteskRegular", Helvetica, Arial, sans-serif;
+    font-family: "PxGrotesk", Helvetica, Arial, sans-serif;
     padding: 1pt 3pt;
 }
 button {
@@ -217,7 +220,10 @@ button {
 p, *:not(h5) a {
     line-height: 1.4;
 }
-p:not(:last-child) {
+:not(.content) > :not(h4):not(p) + p:not(:first-child), :not(h4):not(ul) + ul:not(:first-child) {
+    margin-top: 10pt;
+}
+p:not(:last-child), ul:not(:last-child) {
     margin-bottom: 10pt;
 }
 li:not(:last-child) {
@@ -233,12 +239,12 @@ li {
 
 /* Anchors */
 
-a {
+a:not(.logo) {
     color: var(--accent-color);
     text-decoration: none;
-    white-space: pre;
+    white-space: pre-wrap;
 }
-a::after {
+a:not(.logo)::after {
     content: " →";
     color: var(--primary-color);
 }
@@ -279,18 +285,10 @@ object {
 }
 
 svg.icon {
-    color: var(--red);
+    color: var(--accent-color);
     fill: currentColor;
     width: var(--half);
     height: var(--half);
-}
-
-.icons a {
-    margin: calc(var(--gutter) / 2);
-}
-
-symbol#icon {
-    height: 57pt;
 }
 
 a:hover svg.icon, a:active svg.icon {
@@ -302,11 +300,11 @@ section.black a:hover svg.icon {
 }
 
 section.red svg.icon {
-    filter: saturate(0) contrast(3);
+    filter: invert(0);
 }
 
 section.red a:hover svg.icon {
-    filter: saturate(0) contrast(3) invert(1);
+    filter: invert(1);
 }
 
 section.image .wrapper {
@@ -326,6 +324,20 @@ section.image .wrapper {
     background-size: cover;
 }
 
+table {
+    width: 100%;
+    border-spacing: var(--gutter) 0;
+    margin: calc(var(--gutter) * -1);
+}
+th {
+    text-align: left;
+}
+table, th, td {
+    padding: 0;
+}
+td:not(:first-child) {
+    margin-left: var(--gutter);
+}
 /* Input */
 
 input, button {
@@ -339,12 +351,12 @@ input, button {
     color: var(--secondary-color);
 }
 
-input[type="email"] {
+input[type="email"], input[type="text"], input[type="number"], input[type="password"] {
     border-bottom: 1pt solid var(--secondary-color);
     width: 100%;
 }
 
-input[type="email"]:-webkit-autofill {
+input:-webkit-autofill {
     -webkit-text-fill-color: var(--primary-color);
     -webkit-box-shadow: 0 0 0px 1000px var(--secondary-color) inset;
     border-bottom: 1pt solid var(--accent-color);
@@ -366,7 +378,11 @@ input:placeholder-shown {
     border-bottom: 1pt solid var(--accent-color);
 }
 
-input[type="submit"], input[type="checkbox"], button{
+textarea:placeholder-shown {
+    border: 1pt solid var(--accent-color);
+}
+
+input[type="submit"], input[type="checkbox"], button {
     background-color: unset;
     color: var(--accent-color);
     border: 1pt solid var(--accent-color);
@@ -393,22 +409,36 @@ fieldset {
 
 legend {
     padding: 0;
-    font-family: "PxGroteskLight", Helvetica, Arial, sans-serif;
     font-size: 14pt;
-    font-weight: 200;
+    font-weight: lighter;
     margin-bottom: var(--gutter);
 }
 
-input[type="submit"]:hover, button:hover{
+input[type="submit"]:hover:not([disabled]), button:hover:not([disabled]){
     background-color: unset;
     color: var(--secondary-color);
     border: 1pt solid var(--secondary-color);
 }
 
-input[type="submit"]:active, button:active{
+input[type="submit"]:active:not([disabled]), button:active:not([disabled]){
     background-color: var(--secondary-color);
     color: var(--primary-color);
     border: 1pt solid var(--secondary-color);
+}
+input[disabled], button[disabled] {
+    opacity: 0.5;
+}
+
+.logo.mega, .logo.kilo {
+    max-height: var(--one);
+}
+.logo.unit.column {
+    flex-basis: var(--base);
+    min-width: min-content;
+    flex-grow: 0
+}
+.logo.unit.column.grows {
+    max-width: var(--second-base);
 }
 
 #hack-cambridge-logo-object {
@@ -418,7 +448,6 @@ input[type="submit"]:active, button:active{
     font-size: 24pt;
     margin-bottom: 20pt;
 }
-
 /* Media queries */
 
 @media (min-width: 596pt) {

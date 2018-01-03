@@ -1,23 +1,19 @@
-<section class="red">
-    <div class="container width">
-        <div class="one unit row">
-            <h1>Login</h1>
-        </div>
-        <div class="one unit row">
-            <h3>Hack Cambridge Sponsorship Admin.</h3>
-        </div>
-    </div>
-</section>
-
 <section>
-    <div class="container width">
-        <div class="one half unit row">
-            <div class="twelve unit column">
-                <fieldset>
-                    <input type="text" placeholder="Email" [(ngModel)]="email">
-                    <input type="password" placeholder="Password" [(ngModel)]="password">
-                    <input type="button" value="Login" (click)="login()">
-                </fieldset>
+    <div class="container a4">
+        <div class="three unit row">
+            <div class="unit column grows">
+                <h1>Log in</h1>
+            </div>
+        </div>
+        <div class="one half unit persistent row content">
+            <div class="three unit column">
+                <input type="text" placeholder="Email" [(ngModel)]="email">
+            </div>
+            <div class="three unit column">
+                <input type="password" placeholder="Password" [(ngModel)]="password">
+            </div>
+            <div class="one unit column">
+                <button type="button" (click)="login()">Log in</button>
             </div>
         </div>
     </div>

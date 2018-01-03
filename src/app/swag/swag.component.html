@@ -1,3 +1,5 @@
+<app-home-link></app-home-link>
+<app-changes-saved></app-changes-saved>
 <section class="red">
     <div class="container width">
         <div class="one unit row">
@@ -51,22 +53,24 @@
             </div>
         </div>
         <div class="half unit row">
-            <fieldset>
-                <input type="button" value="Add Swag Item." (click)="addSwag()">
-            </fieldset>
+            <div>
+                <input type="button" value="Add Swag Item &rarr;" (click)="addSwag()">
+            </div>
         </div>
         <div class="half unit row" *ngFor="let swag of swagList; let i = index">
-            <fieldset>
+            <div>
                 <input type="text" [(ngModel)]="swagList[i].name" placeholder="Name">
                 <input type="text" [(ngModel)]="swagList[i].description" placeholder="Description">
                 <label>
                     <input type="checkbox" [(ngModel)]="swagList[i].orderByUs">
-                    Order This For Us
+                    Order this for us
                 </label>
-                <input type="button" value="Delete." (click)="deleteSwag(i)">
-            </fieldset>
+                <input type="button" value="Delete!" (click)="deleteSwag(i)">
+            </div>
+        </div>
+        <div class="one half unit row">
+            <app-home-button class="one unit column">
+            </app-home-button>
         </div>
     </div>
 </section>
-
-<app-changes-saved></app-changes-saved>

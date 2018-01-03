@@ -1,47 +1,44 @@
 <section class="red">
     <div class="container width">
-        <div class="one unit row">
-        <h1>Important Information</h1>
+        <div class="two unit row">
+            <div class="unit column grows"> 
+                <h1>Key Info</h1>
+            </div>
         </div>
-        <div class="one unit row">
-            <h3>
-            When: <span class="pixel">Sat 20/01/18 &ndash; Sun 21/01/18</span><br>
-            Where: <span class="pixel">2 Wheeler St, Cambridge, CB2 3QB</span>
-            </h3>
+        <div class="two unit row">
+            <div class="unit column grows">
+                <h3>
+                    <span class="pixel">Sat 20/01/18 – Sun 21/01/18</span><br>
+                    <span class="pixel">2 Wheeler St, Cambridge, CB2 3QB</span>
+                </h3>
+            </div>
         </div>
-        <div class="one half unit row">
-            <p>
-                The opening ceremony will be at midday, but we recommend sponsors arrive earlier from
-                07:00 in order to set up.<br>
-                <a rel="next" href="https://hackcambridge.com/event">View the full schedule</a>
-            </p>
+        <div class="two unit row">
+            <div class="unit column grows">
+                <p>
+                    The opening ceremony will be at midday, but we recommend sponsors arrive earlier from
+                    07:00 in order to set up.<br>
+                    <a rel="next" href="https://hackcambridge.com/event">View the full schedule</a>
+                </p>
+            </div>
         </div>
     </div>
 </section>
 
 <section>
     <div class="container width">
-        <div class="one unit row">
-            <h1>Sponsors' Portal</h1>
-        </div>
-        <div class="one unit row">
-            <h3>What You Need To Do</h3>
-        </div>
         <div class="three unit row">
-            <div class="four unit column">
-                <div *ngFor="let link of portalLinksLeft" class="one unit row">
-                    <a rel="next" [routerLink]="[ link.pageUrl ]">{{ link.text }}</a>
-                </div>
+            <div class="unit column grows">
+                <h1>Your Tasks</h1>
             </div>
-            <div class="four unit column">
-                <div *ngFor="let link of portalLinksCentre" class="one unit row">
-                    <a rel="next" [routerLink]="[ link.pageUrl ]">{{ link.text }}</a>
-                </div>
-            </div>
-            <div class="four unit column">
-                <div *ngFor="let link of portalLinksRight" class="one unit row">
-                    <a rel="next" [routerLink]="[ link.pageUrl ]">{{ link.text }}</a>
-                </div>
+        </div>
+        <div class="two half unit row">
+            <div class="columns balance">
+                <ul>
+                    <li *ngFor="let link of portalLinks">
+                        <a rel="next" [routerLink]="[ link.pageUrl ]">{{ link.text }}</a>
+                    </li>
+                </ul>
             </div>
         </div>
     </div>
@@ -49,23 +46,25 @@
 
 <section id="sponsorship-tiers">
     <div class="container width">
-        <div class="one unit row">
-            <h2>
-                Your Sponsorship Benefits
-            </h2>
+        <div class="two unit row">
+            <div class="unit column grows">
+                <h2>
+                    Your Benefits
+                </h2>
+            </div>
         </div>
-        <div class="one unit row">
-            <h3>Your sponsorship tier: <span class="pixel">{{ sponsorshipTier }}</span></h3>
+        <div class="two unit row">
+            <div class="unit column grows">
+                <h3>Your sponsorship tier is <span class="pixel">{{ sponsorshipTier }}</span></h3>
+            </div>
         </div>
-        <div class="body">
-            <div class="three half unit row">
-                <div class="columns">
-                    <ul>
-                        <li *ngFor="let benefit of sponsorshipBenefits">
-                            {{ benefit.name }}
-                        </li>
-                    </ul>
-                </div>
+        <div class="four unit row">
+            <div class="columns balance">
+                <ul>
+                    <li *ngFor="let benefit of sponsorshipBenefits">
+                        {{ benefit.name }}
+                    </li>
+                </ul>
             </div>
         </div>
     </div>

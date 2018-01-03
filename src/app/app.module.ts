@@ -20,6 +20,8 @@ import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { firebase } from '../environments/firebase';
 import { AngularFireDatabase, AngularFireDatabaseModule } from 'angularfire2/database';
 import { ChangesSavedComponent } from 'app/changes-saved/changes-saved.component';
+import { HomeLinkComponent } from 'app/home-link/home-link.component';
+import { HomeButtonComponent } from 'app/home-button/home-button.component';
 import { PeopleService } from 'app/people/people.service';
 import { EventsService } from 'app/events/events.service';
 import { PresentationService } from 'app/presentation/presentation.service';
@@ -64,6 +66,8 @@ const appRoutes: Routes = [
     EventsComponent,
     PresentationComponent,
     ChangesSavedComponent,
+    HomeLinkComponent,
+    HomeButtonComponent,
     TipsComponent,
     AdminComponent,
     NewSponsorComponent,

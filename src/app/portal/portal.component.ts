@@ -13,9 +13,7 @@ export class PortalComponent extends BaseComponent implements OnInit {
     sponsorshipTier = 'Tera';
     sponsorshipBenefits: SponsorshipBenefitModel[];
 
-    portalLinksLeft: PortalLink[] = [];
-    portalLinksCentre: PortalLink[] = [];
-    portalLinksRight: PortalLink[] = [];
+    portalLinks: PortalLink[] = [];
 
     constructor(sponsorsService: SponsorsService,
                 activatedRoute: ActivatedRoute,
@@ -48,23 +46,21 @@ export class PortalComponent extends BaseComponent implements OnInit {
     }
 
     private showLinksFromBenefits(benefits: SponsorshipBenefitModel[]): void {
-        const portalLinks: PortalLink[] = [];
+        this.portalLinks.push({ pageUrl: 'tips', text: 'Read our tips and tricks' });
 
-        portalLinks.push({ pageUrl: 'tips', text: 'Read our tips and tricks' });
-
-        portalLinks.push({ pageUrl: 'people', text: 'Let Us Know Who\'s Coming' });
+        this.portalLinks.push({ pageUrl: 'people', text: 'Let us know who’s coming' });
 
         // This year we will not be asking for social media via this, as we have
         // already asked for it via email
 
-        // portalLinks.push({ pageUrl: 'social-media', text: 'Provide Social Media Assets' });
+        // this.portalLinks.push({ pageUrl: 'social-media', text: 'Provide Social Media Assets' });
 
         if (this.benefitsService.canRunWorkshopLikeEvent(benefits)) {
-            portalLinks.push({ pageUrl: 'workshops', text: 'Tell us about any workshops' });
+            this.portalLinks.push({ pageUrl: 'workshops', text: 'Tell us about any workshops' });
         }
 
         if (this.benefitsService.canListHardwareAndApis(benefits)) {
-            portalLinks.push({ pageUrl: 'tech', text: 'Register your tech with us' });
+            this.portalLinks.push({ pageUrl: 'tech', text: 'Register your tech with us' });
         }
 
         // This year we will not be asking for swag details via this, as we have
@@ -75,28 +71,11 @@ export class PortalComponent extends BaseComponent implements OnInit {
         // }
 
         if (this.benefitsService.canRunCompetitionAndEvents(benefits)) {
-            portalLinks.push({ pageUrl: 'events', text: 'Plan competitions and events' });
+            this.portalLinks.push({ pageUrl: 'events', text: 'Plan competitions and events' });
         }
 
         if (this.benefitsService.canRunOpeningCeremonyPresentation(benefits)) {
-            portalLinks.push({ pageUrl: 'presentation', text: 'Send us your presentation' });
-        }
-
-        // Now split the links evenly across the three columns
-        this.portalLinksLeft = [];
-        this.portalLinksCentre = [];
-        this.portalLinksRight = [];
-
-        for (let i = 0; i < portalLinks.length; i++) {
-            if (i % 3 === 0) {
-                this.portalLinksLeft.push(portalLinks[i]);
-            }
-            else if (i % 3 === 1) {
-                this.portalLinksCentre.push(portalLinks[i]);
-            }
-            else {
-                this.portalLinksRight.push(portalLinks[i]);
-            }
+            this.portalLinks.push({ pageUrl: 'presentation', text: 'Send us your presentation' });
         }
     }
 }

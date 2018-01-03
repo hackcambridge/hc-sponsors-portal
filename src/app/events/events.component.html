@@ -1,74 +1,64 @@
-<section class="red">
-    <div class="container width">
-        <div class="one unit row">
-            <h1>Competitions and Events</h1>
+<app-home-link></app-home-link>
+<app-changes-saved></app-changes-saved>
+<section>
+    <div class="container a4">
+        <div class="three unit row">
+            <div class="unit column grows">
+                <h1>Competitions and Events</h1>
+            </div>
         </div>
-        <div class="one unit row">
-            <h3>Give hackers a challenge.</h3>
-        </div>
-        <div class="half unit row">
-            <div class="twelve unit column">
+        <div class="two unit row">
+            <div class="unit column grows">
                 <p>
                     We are more than happy to offer advice and guidance as to
-                    what sort of events and competitions tend to go down well.
+                    what sort of events and competitions tend to work best.
                 </p>
             </div>
         </div>
-    </div>
-</section>
-
-<section *ngIf="canAwardThemedPrize">
-    <div class="container width">
-        <div class="one unit row">
-            <h2>Themed Prize</h2>
+        <div class="two unit row" *ngIf="canAwardThemedPrize">
+            <div class="unit column grows">
+                <h3>Themed Prize</h3>
+            </div>
         </div>
-        <div class="one unit row">
-            <h3>Set whatever challenge you want to.</h3>
-        </div>
-        <div class="one half unit row">
-            <div class="twelve unit column">
+        <div class="three unit row" *ngIf="canAwardThemedPrize">
+            <div class="unit column grows">
                 <p>
                     A themed prize can be for whatever challenge you want. This
                     can include not just software engineering but also data
                     analysis challenges, or design problems, for example. If you
                     plan to run a workshop, it may be a good idea to tie it in
-                    with the competition &mdash; for example, if you were to run
+                    with the competition—for example, if you were to run
                     a competition centred around blockchain, giving a workshop
                     on blockchain technology is likely to be well-received.
                 </p>
             </div>
         </div>
-        <div class="half unit row">
-            <fieldset>
-                <label>
-                    Do you plan to run a themed prize?
-                    <select [(ngModel)]="doingThemedPrize" (ngModelChange)="onDoingThemedPrizeChanged($event)">
-                        <option [ngValue]="false">No</option>
-                        <option [ngValue]="true">Yes</option>
-                    </select>
-                </label>
-            </fieldset>
+        <div class="one unit persistent row content" *ngIf="canAwardThemedPrize">
+            <div class="four unit column">
+                <select [(ngModel)]="doingThemedPrize" (ngModelChange)="onDoingThemedPrizeChanged($event)">
+                    <option [ngValue]="false">We do not plan to run a themed prize</option>
+                    <option [ngValue]="true">We plan to run a themed prize</option>
+                </select>
+            </div>
         </div>
-        <div class="half unit row" *ngIf="doingThemedPrize">
-            <fieldset>
+        <div class="one half unit persistent row content" *ngIf="doingThemedPrize">
+            <div class="three unit column">
                 <input type="text" [(ngModel)]="themedPrize.title" (ngModelChange)="saveEventsState()" placeholder="Title">
+            </div>
+            <div class="five unit column">
                 <input type="text" [(ngModel)]="themedPrize.description" (ngModelChange)="saveEventsState()" placeholder="Description">
+            </div>
+            <div class="three unit column">
                 <input type="text" [(ngModel)]="themedPrize.prizes" (ngModelChange)="saveEventsState()" placeholder="Prize(s)">
-            </fieldset>
+            </div>
         </div>
-    </div>
-</section>
-
-<section *ngIf="canRunSideEvent">
-    <div class="container width">
-        <div class="one unit row">
-            <h2>Register a Side Event</h2>
+        <div class="two unit row" *ngIf="canRunSideEvent">
+            <div class="unit column grows">
+                <h3>Register a Side Event</h3>
+            </div>
         </div>
-        <div class="one unit row">
-            <h3>Give hackers a fun break from their hack.</h3>
-        </div>
-        <div class="one half unit row">
-            <div class="twelve unit column">
+        <div class="two half unit row" *ngIf="canRunSideEvent">
+            <div class="unit column grows">
                 <p>
                     A side-event can be anything you want! Examples include a
                     code-in-the-dark competition; hosting a dinner for hackers
@@ -79,36 +69,29 @@
                 </p>
             </div>
         </div>
-        <div class="half unit row">
-            <fieldset>
-                <label>
-                    Do you plan to run a side-event?
-                    <select [(ngModel)]="doingSideEvent" (ngModelChange)="onDoingSideEventChanged($event)">
-                        <option [ngValue]="false">No</option>
-                        <option [ngValue]="true">Yes</option>
-                    </select>
-                </label>
-            </fieldset>
+        <div class="one unit persistent row content" *ngIf="canRunSideEvent">
+            <div class="three half unit column">
+                <select [(ngModel)]="doingSideEvent" (ngModelChange)="onDoingSideEventChanged($event)">
+                    <option [ngValue]="false">We do not plan to run a side-event</option>
+                    <option [ngValue]="true">We plan to run a side-event</option>
+                </select>
+            </div>
         </div>
-        <div class="half unit row" *ngIf="doingSideEvent">
-            <fieldset>
+        <div class="one unit persistent row content" *ngIf="doingSideEvent">
+            <div class="three unit column">
                 <input type="text" [(ngModel)]="sideEvent.title" (ngModelChange)="saveEventsState()" placeholder="Title">
+            </div>
+            <div class="five unit column">
                 <input type="text" [(ngModel)]="sideEvent.description" (ngModelChange)="saveEventsState()" placeholder="Description">
-            </fieldset>
-        </div>
-    </div>
-</section>
-
-<section *ngIf="canRunHardwareApiPrize">
-    <div class="container width">
-        <div class="one unit row">
-            <h2>Run an API Prize</h2>
-        </div>
-        <div class="one unit row">
-            <h3>Encourage hackers to build on your product.</h3>
+            </div>
         </div>
         <div class="two unit row">
-            <div class="twelve unit column">
+            <div class="unit column grows">
+                <h3>Run an API Prize</h3>
+            </div>
+        </div>
+        <div class="three half unit row">
+            <div class="unit column grows">
                 <p>
                     An API Prize is a sponsor-run competition based around one
                     of your products. To clarify, whilst the API Prize was 
@@ -126,25 +109,28 @@
                 </p>
             </div>
         </div>
-        <div class="half unit row">
-            <fieldset>
-                <label>
-                    Do you plan to run a hardware or API prize?
-                    <select [(ngModel)]="doingHardwareApiPrize" (ngModelChange)="onDoingHardwareApiPrizeChanged($event)">
-                        <option [ngValue]="false">No</option>
-                        <option [ngValue]="true">Yes</option>
-                    </select>
-                </label>
-            </fieldset>
+        <div class="one unit persistent row content">
+            <div class="four half unit column">
+                <select [(ngModel)]="doingHardwareApiPrize" (ngModelChange)="onDoingHardwareApiPrizeChanged($event)">
+                    <option [ngValue]="false">We do not plan to run a hardware or API prize</option>
+                    <option [ngValue]="true">We plan to run a hardware or API prize</option>
+                </select>
+            </div>
         </div>
-        <div class="half unit row" *ngIf="doingHardwareApiPrize">
-            <fieldset>
+        <div class="one unit persistent row content" *ngIf="doingHardwareApiPrize">
+            <div class="three unit column">
                 <input type="text" [(ngModel)]="hardwareApiPrize.title" (ngModelChange)="saveEventsState()" placeholder="Title">
+            </div>
+            <div class="five unit column">
                 <input type="text" [(ngModel)]="hardwareApiPrize.description" (ngModelChange)="saveEventsState()" placeholder="Description">
+            </div>
+            <div class="three unit column">
                 <input type="text" [(ngModel)]="hardwareApiPrize.prizes" (ngModelChange)="saveEventsState()" placeholder="Prizes">
-            </fieldset>
+            </div>
+        </div>
+        <div class="one half unit row">
+            <app-home-button class="one unit column">
+            </app-home-button>
         </div>
     </div>
 </section>
-
-<app-changes-saved></app-changes-saved>
