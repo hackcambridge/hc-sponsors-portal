@@ -15,10 +15,6 @@ export class PeopleService {
         return this.db.object(`sponsors/${guid}/people/recruiters`);
     }
 
-    private getJudgeObject(guid: string): AngularFireObject<number> {
-        return this.db.object(`sponsors/${guid}/people/judge`);
-    }
-
     getMentors(guid: string): Observable<PersonModel[]> {
         return this.getMentorsObject(guid).valueChanges();
     }
@@ -27,13 +23,8 @@ export class PeopleService {
         return this.getRecruitersObject(guid).valueChanges();
     }
 
-    getJudge(guid: string): Observable<number> {
-        return this.getJudgeObject(guid).valueChanges();
-    }
-
-    saveState(guid: string, mentors: PersonModel[], recruiters: PersonModel[], judge: number): void {
+    saveState(guid: string, mentors: PersonModel[], recruiters: PersonModel[]): void {
         this.getMentorsObject(guid).set(mentors);
         this.getRecruitersObject(guid).set(recruiters);
-        this.getJudgeObject(guid).set(judge);
     }
 }

@@ -7,15 +7,22 @@
                 <h1>People</h1>
             </div>
         </div>
-        <div class="three unit row">
+        <div class="four unit row">
             <div class="unit column grows">
                 <p>
                     Everyone coming to Hack Cambridge will be added to our Slack
-                    channel before the event so you can chat to the hackers. You
-                    will also be added to HELPq, a ticketing system built by
-                    HackMIT specifically for hackathons. To do so we need to know
-                    who is coming in advance. Phone numbers will only be used if
-                    we need to contact you during the event urgently.
+                    channel so you can chat to the hackers. You will also be
+                    added to HELPq, a hackathon ticketing system. To do so we
+                    need to know who is coming in advance. Phone numbers will
+                    only be used if we need to contact you during the event
+                    urgently.
+                </p>
+                <p>
+                    Everyone can take part in deciding who gets the overall
+                    Hack Cambridge prizes. Judging will be done using Gavel, an
+                    expo judging system originally developed for HackMIT. Note
+                    that any competitions your company runs are separate and may
+                    be judged however you wish.
                 </p>
             </div>
         </div>
@@ -89,32 +96,6 @@
             </div>
             <div class="one unit column">
                 <button (click)="deleteRecruiter(i)">Delete.</button>
-            </div>
-        </div>
-        <div class="two unit row">
-            <div class="unit column grows">
-                <h3>Nominate a mentor to be a judge</h3>
-            </div>
-        </div>
-        <div class="three unit row">
-            <div class="unit column grows">
-                <p>
-                    Hack Cambridge judges take part in deciding who gets the overall
-                    Hack Cambridge prizes. If you would like to take part in this,
-                    nominate one of your mentors. Note that this does not mean anything for
-                    prizes which are run by you—you may run your own competitions
-                    as you wish. Judging will be done using Gavel, an expo judging system
-                    originally developed for HackMIT.
-                </p>
-                <a rel="external" href="https://github.com/anishathalye/gavel">More about Gavel</a>
-            </div>
-        </div>
-        <div class="one unit persistent row content">
-            <div class="three half unit column">
-                <select [(ngModel)]="judge" (ngModelChange)="onJudgeChange()">
-                    <option [value]="null">We do not wish to nominate a judge</option>
-                    <option *ngFor="let mentor of mentors; let i = index" [value]="i">{{ mentor.name }}</option>
-                </select>
             </div>
         </div>
         <div class="one half unit row">

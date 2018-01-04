@@ -26,9 +26,6 @@ export class PeopleComponent extends BaseComponent implements OnInit {
     /** True if the entries for all recruiters have been filled out. */
     recruiterDetailsCompleted = true;
 
-    /** The index of the mentor nominated to be Hack Cambridge judge. */
-    judge: number;
-
     constructor(sponsorsService: SponsorsService,
                 activatedRoute: ActivatedRoute,
                 router: Router,
@@ -51,10 +48,6 @@ export class PeopleComponent extends BaseComponent implements OnInit {
                 this.peopleService.getRecruiters(guid).first().subscribe(
                     recruiters => this.recruiters = recruiters ? recruiters : []
                 );
-
-                this.peopleService.getJudge(guid).first().subscribe(
-                    judge => this.judge =judge
-                );
             }
         );
     }
@@ -66,19 +59,10 @@ export class PeopleComponent extends BaseComponent implements OnInit {
             this.mentorDetailsCompleted = false;
         }
 
-        if (this.judge !== null) {
-            // The index of the judge must have increased
-            this.judge++;
-        }
-
         this.onMentorChanges();
     }
 
     deleteMentor(index: number): void {
-        if (index === this.judge) {
-            this.judge = null;
-        }
-
         if (this.mentors[index]) {
             this.mentors.splice(index, 1);
         }
@@ -117,18 +101,13 @@ export class PeopleComponent extends BaseComponent implements OnInit {
         this.saveChanges();
     }
 
-    onJudgeChange(): void {
-        this.saveChanges();
-    }
-
     private isPersonModelComplete(person: PersonModel): boolean {
         return !!person.name && !!person.email && !!person.phone;
     }
 
     private saveChanges(): void {
         this.guid$.first().subscribe(
-            guid => this.peopleService.saveState(guid, this.mentors,
-                this.recruiters, this.judge)
+            guid => this.peopleService.saveState(guid, this.mentors, this.recruiters)
         );
     }
 }
