@@ -53,7 +53,9 @@ export class AdminService {
     }
 
     addSponsor(sponsor: SponsorModel): Observable<string | void> {
-        if (!(sponsor.benefits && sponsor.maxRecruiters && sponsor.name && sponsor.tier)) {
+        if (!(sponsor.benefits &&
+                (sponsor.maxRecruiters !== undefined && sponsor.maxRecruiters !== null) &&
+                sponsor.name && sponsor.tier)) {
             return Observable.throw(new Error('Sponsor details not filled out'));
         }
 
