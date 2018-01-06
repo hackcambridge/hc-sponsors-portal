@@ -11,7 +11,7 @@ export class AdminComponent {
 
     constructor(private adminService: AdminService) {
         adminService.getSponsors().subscribe(
-            sponsors => this.sponsors = (sponsors ? sponsors : [])
+            sponsors => this.sponsors = (sponsors ? sponsors.sort((a, b) => a.name.localeCompare(b.name)) : [])
         );
     }
 }
