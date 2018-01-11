@@ -28,11 +28,11 @@
                 <h3>Make sure to browse through these sections and fill out any forms before the event</h3>
             </div>
         </div>
-        <div class="four half unit row">
+        <div class="three half unit row">
             <div class="columns balance">
                 <ul>
                     <li *ngFor="let link of portalLinks">
-                        <a class="one unit persistent row content centred" rel="next" [routerLink]="[ link.pageUrl ]">
+                        <a class="unit persistent row content centred" rel="next" [routerLink]="[ link.pageUrl ]">
                             <svg class="icon">
                                 <use x="0" y="0" attr.xlink:href="/assets/images/icons/{{ link.pageUrl }}.svg#icon"></use>
                             </svg>
