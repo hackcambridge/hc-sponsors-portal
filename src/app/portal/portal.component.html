@@ -41,6 +41,7 @@
             <div class="columns balance">
                 <ul>
                     <li *ngFor="let link of portalLinks">
+                        <img height="11pt" src="/assets/images/icons/{{ link.pageUrl }}.svg" />
                         <a rel="next" [routerLink]="[ link.pageUrl ]">{{ link.text }}</a>
                     </li>
                 </ul>
