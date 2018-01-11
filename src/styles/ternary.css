@@ -235,6 +235,9 @@ li:not(:last-child) {
 li {
     list-style-type: none;
     list-style-position: outside;
+    -webkit-column-break-inside: avoid;
+    page-break-inside: avoid;
+    break-inside: avoid;
 }
 
 /* Anchors */
