@@ -36,6 +36,7 @@ import { LoginComponent } from 'app/login/login.component';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AuthGuard } from 'app/auth-guard';
 import { NotFoundComponent } from 'app/404/not-found.component';
+import { SchedulesComponent } from 'app/schedule/schedule.component';
 
 const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -51,6 +52,7 @@ const appRoutes: Routes = [
   { path: ':guid/events', component: EventsComponent },
   { path: ':guid/presentation', component: PresentationComponent },
   { path: ':guid/tips', component: TipsComponent },
+  { path: ':guid/schedule', component: SchedulesComponent },
   { path: '**', redirectTo: '/404' }
 ];
 
@@ -71,6 +73,7 @@ const appRoutes: Routes = [
     TipsComponent,
     AdminComponent,
     NewSponsorComponent,
+    SchedulesComponent,
     LoginComponent,
     NotFoundComponent
   ],
