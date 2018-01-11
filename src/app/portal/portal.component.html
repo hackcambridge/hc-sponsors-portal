@@ -34,15 +34,19 @@
         </div>
         <div class="two unit row">
             <div class="unit column grows">
-                <h3>Make sure to browse through these sections and fill out any forms before the event.</h3>
+                <h3>Make sure to browse through these sections and fill out any forms before the event</h3>
             </div>
         </div>
-        <div class="two half unit row">
+        <div class="four half unit row">
             <div class="columns balance">
                 <ul>
                     <li *ngFor="let link of portalLinks">
-                        <img height="11pt" src="/assets/images/icons/{{ link.pageUrl }}.svg" />
-                        <a rel="next" [routerLink]="[ link.pageUrl ]">{{ link.text }}</a>
+                        <a class="one unit persistent row content centred" rel="next" [routerLink]="[ link.pageUrl ]">
+                            <svg class="icon">
+                                <use x="0" y="0" attr.xlink:href="/assets/images/icons/{{ link.pageUrl }}.svg#icon"></use>
+                            </svg>
+                            <p>{{ link.text }}</p>
+                        </a>
                     </li>
                 </ul>
             </div>
