@@ -14,6 +14,8 @@ export class PortalComponent extends BaseComponent implements OnInit {
     sponsorshipBenefits: SponsorshipBenefitModel[];
 
     portalLinks: PortalLink[] = [];
+    
+    guid: string;
 
     constructor(sponsorsService: SponsorsService,
                 activatedRoute: ActivatedRoute,
@@ -35,6 +37,7 @@ export class PortalComponent extends BaseComponent implements OnInit {
             guid => {
                 this.showLinksForSponsor(guid);
                 this.getSponsorshipTier(guid);
+                this.guid = guid;
             }
         );
     }
