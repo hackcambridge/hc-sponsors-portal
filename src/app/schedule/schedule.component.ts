@@ -7,11 +7,5 @@ import { ActivatedRoute, Router } from '@angular/router';
     selector: 'app-schedule',
     templateUrl: './schedule.component.html'
 })
-export class SchedulesComponent extends BaseComponent {
-
-    constructor(sponsorsService: SponsorsService,
-                activatedRoute: ActivatedRoute,
-                router: Router) {
-        super(sponsorsService, activatedRoute, router);
-    }
+export class SchedulesComponent {
 }
