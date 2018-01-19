@@ -43,6 +43,7 @@ const appRoutes: Routes = [
   { path: 'admin', component: AdminComponent, canActivate: [AuthGuard] },
   { path: 'admin/new', component: NewSponsorComponent, canActivate: [AuthGuard] },
   { path: '404', component: NotFoundComponent },
+  { path: 'schedule', component: SchedulesComponent },
   { path: ':guid', component: PortalComponent },
   { path: ':guid/people', component: PeopleComponent },
   { path: ':guid/social-media', component: SocialMediaComponent },
@@ -52,7 +53,7 @@ const appRoutes: Routes = [
   { path: ':guid/events', component: EventsComponent },
   { path: ':guid/presentation', component: PresentationComponent },
   { path: ':guid/tips', component: TipsComponent },
-  { path: ':guid/schedule', component: SchedulesComponent },
+  { path: ':guid/schedule', redirectTo: '/schedule' },
   { path: '**', redirectTo: '/404' }
 ];
 
