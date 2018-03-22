@@ -2,11 +2,13 @@ export class TechListingModel {
     name: string;
     description: string;
     type: TechListingType;
+    link: string;
 
     constructor() {
         this.name = '';
         this.description = '';
         this.type = TechListingType.API;
+        this.link = '';
     }
 }
 

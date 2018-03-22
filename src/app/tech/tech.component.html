@@ -40,7 +40,7 @@
                 <button (click)="addTechListing()">Add Tech &rarr;</button>
             </div>
         </div>
-        <div class="one unit persistent row content centred" *ngFor="let techListing of techListings; let i = index">
+        <div class="one half unit persistent row content centred" *ngFor="let techListing of techListings; let i = index" style="padding-bottom: 35px">
             <div class="two unit column">
                 <input type="text" [(ngModel)]="techListings[i].name" (ngModelChange)="saveTechListing()" placeholder="Name">
             </div>
@@ -57,10 +57,14 @@
                     <option [value]="'other'">Other</option>
                 </select>
             </div>
+            <div class="two unit column">
+                <input type="text" onclick="this.select()" [(ngModel)]="techListings[i].link" (ngModelChange)="saveTechListing()" placeholder="Link">
+            </div>
             <div class="one unit column">
                 <button (click)="deleteTechListing(i)">Delete!</button>
             </div>
         </div>
+        <br>
         <div class="one half unit row">
             <app-home-button class="one unit column">
             </app-home-button>
