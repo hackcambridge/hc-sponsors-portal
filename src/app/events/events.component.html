@@ -41,7 +41,7 @@
                 </select>
             </div>
         </div>
-        <div class="one half unit persistent row content" *ngIf="doingThemedPrize">
+        <div class="one half unit persistent row content" *ngIf="doingThemedPrize" style="padding-bottom: 35px">
             <div class="three unit column">
                 <input type="text" [(ngModel)]="themedPrize.title" (ngModelChange)="saveEventsState()" placeholder="Title">
             </div>
@@ -77,7 +77,7 @@
                 </select>
             </div>
         </div>
-        <div class="one unit persistent row content" *ngIf="doingSideEvent">
+        <div class="one unit persistent row content" *ngIf="doingSideEvent" style="padding-bottom: 35px">
             <div class="three unit column">
                 <input type="text" [(ngModel)]="sideEvent.title" (ngModelChange)="saveEventsState()" placeholder="Title">
             </div>
@@ -87,21 +87,19 @@
         </div>
         <div class="two unit row">
             <div class="unit column grows">
-                <h3>Run an API Prize</h3>
+                <h3>Run a Product Prize</h3>
             </div>
         </div>
         <div class="three half unit row">
             <div class="unit column grows">
                 <p>
-                    An API Prize is a sponsor-run competition based around one
-                    of your products. To clarify, whilst the API Prize was 
-                    originally intended as a hack around a company's API, we
-                    have extended it to all software and hardware products
-                    produced by the sponsor.
+                    A Product Prize is a sponsor-run competition based around one
+                    of your products, perhaps the best use of your API or some
+                    tech which you have brought to the event.
                 </p>
                 <p>
                     Hackers always love to try out new technologies, and
-                    providing an API prize can encourage them to try yours!
+                    providing a Product Prize can encourage them to try yours!
                     Past sponsors have seen continued adoption of their service
                     after the event. The competition should highlight the
                     most exciting aspects of your product whilst being open-ended
@@ -112,12 +110,12 @@
         <div class="one unit persistent row content">
             <div class="four half unit column">
                 <select [(ngModel)]="doingHardwareApiPrize" (ngModelChange)="onDoingHardwareApiPrizeChanged($event)">
-                    <option [ngValue]="false">We do not plan to run a hardware or API prize</option>
-                    <option [ngValue]="true">We plan to run a hardware or API prize</option>
+                    <option [ngValue]="false">We do not plan to run a Product prize</option>
+                    <option [ngValue]="true">We plan to run a Product prize</option>
                 </select>
             </div>
         </div>
-        <div class="one unit persistent row content" *ngIf="doingHardwareApiPrize">
+        <div class="one unit persistent row content" *ngIf="doingHardwareApiPrize" style="padding-bottom: 35px">
             <div class="three unit column">
                 <input type="text" [(ngModel)]="hardwareApiPrize.title" (ngModelChange)="saveEventsState()" placeholder="Title">
             </div>
