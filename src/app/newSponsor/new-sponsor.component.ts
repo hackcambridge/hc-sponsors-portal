@@ -4,6 +4,8 @@ import { SponsorshipBenefitModel } from 'app/benefits/sponsorship-benefit.model'
 import { SponsorModel } from 'app/admin/sponsor.model';
 import { SponsorshipTier } from 'app/sponsors/sponsorship-tier.enum';
 import { Router } from '@angular/router';
+import { first } from 'rxjs/operators';
+import { stringify } from '@firebase/util';
 
 @Component({
     selector: 'app-new-sponsor',
@@ -18,7 +20,7 @@ export class NewSponsorComponent {
 
     constructor(private adminService: AdminService,
                 private router: Router) {
-        adminService.getBenefits().first().subscribe(
+        adminService.getBenefits().pipe(first()).subscribe(
             benefits => {
                 this.benefits = benefits;
                 this.selectedBenefits = [].fill(false, 0, benefits.length);
@@ -51,7 +53,7 @@ export class NewSponsorComponent {
             name: this.sponsorName,
             maxRecruiters: this.maxRecruiters,
             tier: this.tier,
-            benefits: this.benefits.filter((value, index, array) => this.selectedBenefits[index])
+            benefits: this.benefits.filter((_value, index, _array) => this.selectedBenefits[index])
         };
 
         this.adminService.addSponsor(sponsor).subscribe(

@@ -2,8 +2,9 @@ import { Injectable } from '@angular/core';
 import { AngularFireDatabase, AngularFireObject } from 'angularfire2/database';
 import { FirebaseApp } from 'angularfire2';
 import { PresentationModel } from 'app/presentation/presentation.model';
-import { Observable } from 'rxjs/Observable';
+import { Observable, of } from 'rxjs';
 import 'firebase/storage';
+import { map, first, flatMap } from 'rxjs/operators';
 
 @Injectable()
 export class PresentationService {
@@ -25,7 +26,7 @@ export class PresentationService {
     }
 
     private deletePresentation(guid: string): Promise<void> {
-        const del = this.getUploadedPresentation(guid).flatMap(
+        const del = this.getUploadedPresentation(guid).pipe(flatMap(
             presentation => {
                 if (presentation) {
                     const deleteTask = this.af.storage().ref(presentation.refPath).delete();
@@ -38,10 +39,10 @@ export class PresentationService {
                     );
                 }
                 else {
-                    return Observable.of(null);
+                    return new Promise<void>(resolve => resolve(null));
                 }
             }
-        ).first();
+        )).pipe(first());
 
         const subscription = del.subscribe();
 

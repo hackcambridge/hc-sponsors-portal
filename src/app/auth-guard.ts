@@ -1,7 +1,8 @@
 import { CanActivate, CanActivateChild, Router } from '@angular/router';
 import { AdminService } from 'app/admin/admin.service';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
@@ -9,7 +10,7 @@ export class AuthGuard implements CanActivate {
                 private adminService: AdminService) { }
 
     canActivate(): Observable<boolean> {
-        return this.adminService.isLoggedIn().map(
+        return this.adminService.isLoggedIn().pipe(map(
             loggedIn => {
                 if (!loggedIn) {
                     this.router.navigate(['/login']);
@@ -17,6 +18,6 @@ export class AuthGuard implements CanActivate {
 
                 return loggedIn;
             }
-        );
+        ));
     }
 }

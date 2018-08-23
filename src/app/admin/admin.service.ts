@@ -1,13 +1,13 @@
+
+import {throwError as observableThrowError,  Observable, defer, of, concat } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { AngularFireObject, AngularFireDatabase, AngularFireList } from 'angularfire2/database';
 import { SponsorIndexModel } from 'app/admin/sponsor-index.model';
-import { Observable } from 'rxjs/Observable';
 import { SponsorshipBenefitModel } from 'app/benefits/sponsorship-benefit.model';
 import { SponsorModel } from 'app/admin/sponsor.model';
 import { UUID } from 'angular2-uuid';
-import { SponsorsService } from 'app/sponsors/sponsors.service';
-import { FirebaseApp } from 'angularfire2';
 import { AngularFireAuth } from 'angularfire2/auth';
+import { first, flatMap, map, mapTo } from 'rxjs/operators';
 
 @Injectable()
 export class AdminService {
@@ -19,9 +19,9 @@ export class AdminService {
     }
 
     isLoggedIn(): Observable<boolean> {
-        return this.auth.authState.map(
+        return this.auth.authState.pipe(map(
             user => user != null
-        );
+        ));
     }
 
     private getSponsorIndexObjects(): AngularFireObject<SponsorIndexModel[]> {
@@ -52,40 +52,42 @@ export class AdminService {
         return this.getBenefitsObjects().set(benefits);
     }
 
-    addSponsor(sponsor: SponsorModel): Observable<string | void> {
+    addSponsor(sponsor: SponsorModel): Observable<string | void | {}> {
         if (!(sponsor.benefits &&
                 (sponsor.maxRecruiters !== undefined && sponsor.maxRecruiters !== null) &&
                 sponsor.name && sponsor.tier)) {
-            return Observable.throw(new Error('Sponsor details not filled out'));
+            return observableThrowError(new Error('Sponsor details not filled out'));
         }
 
-        const guid$ = this.generateUniqueGuid().first();
+        const guid$ = this.generateUniqueGuid().pipe(first());
 
-        return guid$.flatMap(
-            guid => {
-                const setSponsor = Observable.defer<void>(() => this.addSponsorObject(guid, sponsor));
-                const setIndex = Observable.defer(() => this.addSponsorIndex(guid, sponsor.name));
-                const setGuid = Observable.defer<string>(() => Observable.of(guid));
+        return guid$.pipe(flatMap(
+            (guid, _) => {
+                const setSponsor = defer(() => this.addSponsorObject(guid, sponsor));
+                const setIndex = defer(() => this.addSponsorIndex(guid, sponsor.name));
+                const setGuid = defer<string>(() => of(guid));
 
-                return Observable.concat(setSponsor, setIndex, setGuid);
+                return concat(setSponsor, setIndex, setGuid);
             }
-        );
+        ));
     }
 
     private generateUniqueGuid(): Observable<string> {
         // Mae sure the GUID isn't already taken.
         const guid = UUID.UUID();
 
-        return this.getSponsorName(guid).valueChanges().first().flatMap(
+        return this.getSponsorName(guid).valueChanges()
+        .pipe(first())
+        .pipe(flatMap(
             name => {
                 if (name) {
                     return this.generateUniqueGuid();
                 }
                 else {
-                    return Observable.of(guid);
+                    return of(guid);
                 }
             }
-        );
+        ));
     }
 
     private addSponsorObject(guid: string, sponsor: SponsorModel): Promise<void> {
@@ -100,11 +102,12 @@ export class AdminService {
 
         const indexObjects = this.getSponsorIndexObjects();
 
-        return indexObjects.valueChanges().first().flatMap(
-            (indices: SponsorIndexModel[]) => {
-                indices.push(index);
-                return indexObjects.set(indices);
-            }
-        );
+        return indexObjects.valueChanges().pipe(first()).pipe(
+            flatMap(
+                (indices: SponsorIndexModel[]) => {
+                    indices.push(index);
+                    return indexObjects.set(indices);
+                }
+            ));
     }
 }

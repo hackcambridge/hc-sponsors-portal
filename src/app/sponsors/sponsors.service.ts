@@ -1,8 +1,7 @@
 import { AngularFireDatabase, AngularFireObject } from 'angularfire2/database';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { BehaviorSubject ,  Observable } from 'rxjs';
 import { SponsorshipTier } from 'app/sponsors/sponsorship-tier.enum';
-import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class SponsorsService {
@@ -20,11 +19,11 @@ export class SponsorsService {
     }
 
     setSponsorGuid(guid: string): void {
-        this.getSponsorNameObject(guid).valueChanges<string>().subscribe(
+        this.getSponsorNameObject(guid).valueChanges().subscribe(
             name => this.sponsorName$.next(name)
         );
 
-        this.getSponsorTierObject(guid).valueChanges<SponsorshipTier>().subscribe(
+        this.getSponsorTierObject(guid).valueChanges().subscribe(
             tier => this.sponsorTier$.next(tier)
         );
     }

@@ -1,7 +1,6 @@
 import { SponsorsService } from 'app/sponsors/sponsors.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable } from 'rxjs/Observable';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { Observable ,  BehaviorSubject } from 'rxjs';
 import { OnInit } from '@angular/core/src/metadata/lifecycle_hooks';
 
 /**

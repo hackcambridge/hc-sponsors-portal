@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { BaseComponent } from 'app/base.component';
 import { SponsorsService } from 'app/sponsors/sponsors.service';
 import { TechService } from 'app/tech/tech.service';
+import { first } from 'rxjs/operators';
 
 @Component({
     selector: 'app-swag',
@@ -26,7 +27,7 @@ export class TechComponent extends BaseComponent implements OnInit {
     }
 
     getTechListing(guid: string): void {
-        this.techService.getTechList(guid).first().subscribe(
+        this.techService.getTechList(guid).pipe(first()).subscribe(
             listing => this.techListings = (listing ? listing : [])
         );
     }

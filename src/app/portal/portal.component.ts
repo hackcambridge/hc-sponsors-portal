@@ -4,6 +4,7 @@ import { SponsorshipBenefitModel } from 'app/benefits/sponsorship-benefit.model'
 import { ActivatedRoute, Router } from '@angular/router';
 import { BaseComponent } from 'app/base.component';
 import { SponsorsService } from 'app/sponsors/sponsors.service';
+import { first } from 'rxjs/operators';
 
 @Component({
     selector: 'app-portal',
@@ -43,7 +44,7 @@ export class PortalComponent extends BaseComponent implements OnInit {
     }
 
     private showLinksForSponsor(guid: string): void {
-        this.benefitsService.getSponsorBenefitDescriptions(guid).first().subscribe(
+        this.benefitsService.getSponsorBenefitDescriptions(guid).pipe(first()).subscribe(
             benefits => {
                 this.showLinksFromBenefits(benefits);
                 this.sponsorshipBenefits = benefits;
