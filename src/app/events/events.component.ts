@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { EventsService } from 'app/events/events.service';
 import { BaseComponent } from 'app/base.component';
 import { SponsorsService } from 'app/sponsors/sponsors.service';
+import { first } from 'rxjs/operators';
 
 @Component({
     selector: 'app-events',
@@ -68,14 +69,14 @@ export class EventsComponent extends BaseComponent implements OnInit {
     }
 
     private getBenefits(guid: string): void {
-        this.benefitsService.getSponsorBenefitDescriptions(guid).first().subscribe(
+        this.benefitsService.getSponsorBenefitDescriptions(guid).pipe(first()).subscribe(
             benefits => {
                 this.canAwardThemedPrize = this.benefitsService.canAwardThemedPrize(benefits);
                 this.canRunHardwareApiPrize = this.benefitsService.canRunHardwareApiPrize(benefits);
                 this.canRunSideEvent = this.benefitsService.canRunSideEvent(benefits);
             });
 
-        this.eventsService.getHardwareApiCompetition(guid).first().subscribe(
+        this.eventsService.getHardwareApiCompetition(guid).pipe(first()).subscribe(
             competitions => {
                 if (competitions) {
                     this.hardwareApiPrize = competitions.hardwareApiCompetition;

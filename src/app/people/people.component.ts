@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { PeopleService } from 'app/people/people.service';
 import { SponsorsService } from 'app/sponsors/sponsors.service';
 import { BaseComponent } from 'app/base.component';
+import { first } from 'rxjs/operators';
 
 @Component({
     selector: 'app-people',
@@ -41,11 +42,11 @@ export class PeopleComponent extends BaseComponent implements OnInit {
                    limit => this.recruiterLimit = limit
                 );
 
-                this.peopleService.getMentors(guid).first().subscribe(
+                this.peopleService.getMentors(guid).pipe(first()).subscribe(
                     mentors => this.mentors = mentors ? mentors : []
                 );
 
-                this.peopleService.getRecruiters(guid).first().subscribe(
+                this.peopleService.getRecruiters(guid).pipe(first()).subscribe(
                     recruiters => this.recruiters = recruiters ? recruiters : []
                 );
             }
@@ -106,7 +107,7 @@ export class PeopleComponent extends BaseComponent implements OnInit {
     }
 
     private saveChanges(): void {
-        this.guid$.first().subscribe(
+        this.guid$.pipe(first()).subscribe(
             guid => this.peopleService.saveState(guid, this.mentors, this.recruiters)
         );
     }
