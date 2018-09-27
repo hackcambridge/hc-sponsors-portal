@@ -14,7 +14,7 @@ export class AdminService {
     constructor(private auth: AngularFireAuth,
                 private db: AngularFireDatabase) {}
 
-    loginUser(email: string, password: string): Promise<void> {
+    loginUser(email: string, password: string): Promise<firebase.auth.UserCredential> {
         return this.auth.auth.signInWithEmailAndPassword(email, password);
     }
 
