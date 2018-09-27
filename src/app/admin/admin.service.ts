@@ -1,5 +1,5 @@
 
-import {throwError as observableThrowError,  Observable, defer, of, concat } from 'rxjs';
+import { throwError as observableThrowError,  Observable, defer, of, concat } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { AngularFireObject, AngularFireDatabase, AngularFireList } from '@angular/fire/database';
 import { SponsorIndexModel } from 'app/admin/sponsor-index.model';
