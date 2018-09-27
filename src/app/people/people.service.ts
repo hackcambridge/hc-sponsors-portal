@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { PersonModel } from 'app/people/person.model';
 import { Observable } from 'rxjs';
-import { AngularFireDatabase, AngularFireObject } from 'angularfire2/database';
+import { AngularFireDatabase, AngularFireObject } from '@angular/fire/database';
 
 @Injectable()
 export class PeopleService {

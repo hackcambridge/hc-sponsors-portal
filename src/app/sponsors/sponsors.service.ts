@@ -1,4 +1,4 @@
-import { AngularFireDatabase, AngularFireObject } from 'angularfire2/database';
+import { AngularFireDatabase, AngularFireObject } from '@angular/fire/database';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject ,  Observable } from 'rxjs';
 import { SponsorshipTier } from 'app/sponsors/sponsorship-tier.enum';

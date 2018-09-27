@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { TechListingModel } from 'app/tech/tech-listing.model';
-import { AngularFireObject, AngularFireDatabase } from 'angularfire2/database';
+import { AngularFireObject, AngularFireDatabase } from '@angular/fire/database';
 import { Observable } from 'rxjs';
 
 @Injectable()

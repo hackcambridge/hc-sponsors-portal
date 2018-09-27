@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { SponsorshipBenefitModel } from 'app/benefits/sponsorship-benefit.model';
-import { AngularFireDatabase, AngularFireList, AngularFireObject } from 'angularfire2/database';
+import { AngularFireDatabase, AngularFireList, AngularFireObject } from '@angular/fire/database';
 import { Observable } from 'rxjs';
 
 @Injectable()
