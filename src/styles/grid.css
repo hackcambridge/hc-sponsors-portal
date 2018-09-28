@@ -1,6 +1,6 @@
 /* Variables */
 :root {
-    --one: 57pt;
+    --one: 53pt;
     --gutter: 13pt;
     --two: calc(var(--one) * 2);
     --three: calc(var(--one) * 3);
@@ -195,7 +195,7 @@ th, td {
 }
 
 @media (max-width: 595pt) {
-    
+
     .container.a4 {
         width: calc(484 / 595 * 100vw);
     }
@@ -222,7 +222,7 @@ th, td {
     .unit.row {
         min-height: var(--base);
     }
-    
+
     /* Columns */
     .column {
         flex-grow: 0;

@@ -71,6 +71,10 @@ export class BenefitsService {
     hasProductDemoSlot(benefits: SponsorshipBenefitModel[]): boolean {
         return benefits.some((benefit, i, a) => benefit.id === SponsorBenefitTypes.ProductDemoSlot);
     }
+
+    getPresentationObject(guid: String): Observable<Object> {
+        return
+    }
 }
 
 export enum SponsorBenefitTypes {
