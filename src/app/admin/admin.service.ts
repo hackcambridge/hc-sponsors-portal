@@ -1,12 +1,12 @@
 
-import {throwError as observableThrowError,  Observable, defer, of, concat } from 'rxjs';
+import { throwError as observableThrowError,  Observable, defer, of, concat } from 'rxjs';
 import { Injectable } from '@angular/core';
-import { AngularFireObject, AngularFireDatabase, AngularFireList } from 'angularfire2/database';
+import { AngularFireObject, AngularFireDatabase, AngularFireList } from '@angular/fire/database';
 import { SponsorIndexModel } from 'app/admin/sponsor-index.model';
 import { SponsorshipBenefitModel } from 'app/benefits/sponsorship-benefit.model';
 import { SponsorModel } from 'app/admin/sponsor.model';
 import { UUID } from 'angular2-uuid';
-import { AngularFireAuth } from 'angularfire2/auth';
+import { AngularFireAuth } from '@angular/fire/auth';
 import { first, flatMap, map, mapTo } from 'rxjs/operators';
 
 @Injectable()
@@ -14,7 +14,7 @@ export class AdminService {
     constructor(private auth: AngularFireAuth,
                 private db: AngularFireDatabase) {}
 
-    loginUser(email: string, password: string): Promise<void> {
+    loginUser(email: string, password: string): Promise<firebase.auth.UserCredential> {
         return this.auth.auth.signInWithEmailAndPassword(email, password);
     }
 
