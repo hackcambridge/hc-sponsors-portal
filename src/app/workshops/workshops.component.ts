@@ -19,7 +19,9 @@ export class WorkshopComponent extends BaseComponent implements OnInit {
     workshop: WorkshopModel;
 
     doingProductDemo: boolean;
+    doingProductDemoUnset: boolean;
     doingWorkshop: boolean;
+    doingWorkshopUnset: boolean;
 
     constructor(sponsorsService: SponsorsService,
                 activatedRoute: ActivatedRoute,
@@ -74,24 +76,36 @@ export class WorkshopComponent extends BaseComponent implements OnInit {
     }
 
     private getWorkshops(guid: string): void {
-        this.workshopService.getWorkshop(guid).pipe(first()).subscribe(
-            workshop => {
-                this.workshop = workshop;
-                this.doingWorkshop = workshop !== null;
+
+        // Whether to display the "-- Select --" option.
+        this.workshopService.getDoingProductDemo(guid).pipe(first()).subscribe(
+            doingProductDemo => {
+                this.doingProductDemoUnset = doingProductDemo == null;
+                this.workshopService.getProductDemos(guid).pipe(first()).subscribe(
+                    demo => {
+                        this.productDemo = demo;
+                        this.doingProductDemo = demo !== null;
+                    }
+                );
             }
         );
 
-        this.workshopService.getProductDemos(guid).pipe(first()).subscribe(
-            demo => {
-                this.productDemo = demo;
-                this.doingProductDemo = demo !== null;
+        this.workshopService.getDoingWorkshop(guid).pipe(first()).subscribe(
+            workshop => {
+                this.doingWorkshopUnset = workshop == null;
+                this.workshopService.getWorkshop(guid).pipe(first()).subscribe(
+                    workshop => {
+                        this.workshop = workshop;
+                        this.doingWorkshop = workshop !== null;
+                    }
+                );
             }
         );
+
     }
 
     saveProductDemo(): void {
         const productDemo = this.doingProductDemo ? this.productDemo : null;
-
         this.guid$.pipe(first()).subscribe(
             guid => this.workshopService.saveProductDemo(guid, productDemo)
         );
@@ -99,7 +113,6 @@ export class WorkshopComponent extends BaseComponent implements OnInit {
 
     saveWorkshop(): void {
         const workshop = this.doingWorkshop ? this.workshop : null;
-
         this.guid$.pipe(first()).subscribe(
             guid => this.workshopService.saveWorkshop(guid, workshop)
         );

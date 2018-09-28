@@ -9,6 +9,7 @@ import { SponsorsService } from 'app/sponsors/sponsors.service';
 })
 export class AppComponent implements OnInit {
     companyName: string;
+    year: number = (new Date()).getFullYear();
 
     constructor(private sponsorsService: SponsorsService,
                 private router: Router) { }

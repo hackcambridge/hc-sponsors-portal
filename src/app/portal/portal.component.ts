@@ -3,7 +3,12 @@ import { BenefitsService, SponsorBenefitTypes } from 'app/benefits/benefits.serv
 import { SponsorshipBenefitModel } from 'app/benefits/sponsorship-benefit.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BaseComponent } from 'app/base.component';
+import { EventsService } from 'app/events/events.service';
+import { PeopleService } from 'app/people/people.service';
+import { PresentationService } from 'app/presentation/presentation.service';
 import { SponsorsService } from 'app/sponsors/sponsors.service';
+import { TechService } from 'app/tech/tech.service';
+import { WorkshopService } from 'app/workshops/workshop.service';
 import { first } from 'rxjs/operators';
 
 @Component({
@@ -15,13 +20,19 @@ export class PortalComponent extends BaseComponent implements OnInit {
     sponsorshipBenefits: SponsorshipBenefitModel[];
 
     portalLinks: PortalLink[] = [];
-    
+    todoLinks: CheckedPortalLink[] = [];
+
     guid: string;
 
     constructor(sponsorsService: SponsorsService,
                 activatedRoute: ActivatedRoute,
                 router: Router,
-                private benefitsService: BenefitsService) {
+                private benefitsService: BenefitsService,
+                private workshopService: WorkshopService,
+                private presentationService: PresentationService,
+                private eventsService: EventsService,
+                private peopleService: PeopleService,
+                private techService: TechService) {
         super(sponsorsService, activatedRoute, router);
     }
 
@@ -46,7 +57,7 @@ export class PortalComponent extends BaseComponent implements OnInit {
     private showLinksForSponsor(guid: string): void {
         this.benefitsService.getSponsorBenefitDescriptions(guid).pipe(first()).subscribe(
             benefits => {
-                this.showLinksFromBenefits(benefits);
+                this.showLinksFromBenefits(guid, benefits);
                 this.sponsorshipBenefits = benefits;
             }
         );
@@ -58,10 +69,8 @@ export class PortalComponent extends BaseComponent implements OnInit {
         );
     }
 
-    private showLinksFromBenefits(benefits: SponsorshipBenefitModel[]): void {
+    private showLinksFromBenefits(guid: string, benefits: SponsorshipBenefitModel[]): void {
         this.portalLinks.push({ pageUrl: 'tips', text: 'Read our tips and tricks' });
-
-        this.portalLinks.push({ pageUrl: 'people', text: 'Let us know who’s coming' });
 
         // This year we will not be asking for social media via this, as we have
         // already asked for it via email
@@ -70,10 +79,28 @@ export class PortalComponent extends BaseComponent implements OnInit {
 
         if (this.benefitsService.canRunWorkshopLikeEvent(benefits)) {
             this.portalLinks.push({ pageUrl: 'workshops', text: 'Tell us about any workshops' });
-        }
 
-        if (this.benefitsService.canListHardwareAndApis(benefits)) {
-            this.portalLinks.push({ pageUrl: 'tech', text: 'Register your tech with us' });
+            this.workshopService.getDoingProductDemo(guid).pipe(first()).subscribe(
+                doingProductDemo => {
+                    this.todoLinks.push({
+                        pageUrl: 'workshops',
+                        text: 'Let us know if you want to do a product demo',
+                        checked: doingProductDemo !== null,
+                        care: true
+                    });
+                }
+            );
+
+            this.workshopService.getDoingWorkshop(guid).pipe(first()).subscribe(
+                doingWorkshop => {
+                    this.todoLinks.push({
+                        pageUrl: 'workshops',
+                        text: 'Let us know if you want to run a workshop',
+                        checked: doingWorkshop !== null,
+                        care: true
+                    });
+                }
+            );
         }
 
         // This year we will not be asking for swag details via this, as we have
@@ -85,15 +112,131 @@ export class PortalComponent extends BaseComponent implements OnInit {
 
         if (this.benefitsService.canRunCompetitionAndEvents(benefits)) {
             this.portalLinks.push({ pageUrl: 'events', text: 'Plan competitions and events' });
+            this.eventsService.getCompetitions(guid).pipe(first()).subscribe(
+                competitions => {
+                    var hardwareAPIComp = competitions == null ?
+                                          false :
+                                          competitions["doingHardwareApiCompetition"] !== undefined;
+
+                    var sideEventFlag = competitions == null ?
+                                        false :
+                                        competitions["doingSideEvent"] !== undefined;
+
+                    var themedComp = competitions == null ?
+                                     false :
+                                     competitions["doingThemedCompetition"] !== undefined;
+
+                    this.todoLinks.push({
+                        pageUrl: 'events',
+                        text: 'Tell us if you want to sponsor a hardware/API competition',
+                        checked: hardwareAPIComp,
+                        care: true
+                    });
+                    this.todoLinks.push({
+                        pageUrl: 'events',
+                        text: 'Tell us if you want to host a side event',
+                        checked: sideEventFlag,
+                        care: true
+                    });
+                    this.todoLinks.push({
+                        pageUrl: 'events',
+                        text: 'Tell us if you want to sponsor a themed competition',
+                        checked: themedComp,
+                        care: true
+                    });
+                }
+            );
         }
 
         if (this.benefitsService.canRunOpeningCeremonyPresentation(benefits)) {
             this.portalLinks.push({ pageUrl: 'presentation', text: 'Send us your presentation' });
+            this.presentationService.getUploadedPresentation(guid).pipe(first()).subscribe(
+                presentation => {
+                    this.todoLinks.push({
+                        pageUrl: 'presentation',
+                        text: 'Send us your opening ceremony presentation',
+                        checked: presentation !== null,
+                        care: true
+                    });
+                }
+            );
         }
+
+        this.portalLinks.push({ pageUrl: 'people', text: 'Let us know who’s coming' });
+        this.peopleService.getMentors(guid).pipe(first()).subscribe(
+            mentors => {
+                var numMentors = mentors == null ? 0 : mentors.length;
+                var mentorsString = numMentors == 0 ?
+                                    "You're not bringing any mentors" :
+                                    numMentors == 1 ?
+                                    "You've told us you're bringing a single mentor" :
+                                    "You've told us you're bringing "+ numMentors +" mentors";
+                this.todoLinks.push({
+                    pageUrl: 'people',
+                    text: mentorsString,
+                    checked: false,
+                    care: false
+                });
+            }
+        );
+        this.benefitsService.getMaxNumberOfRecruiters(guid).subscribe(
+           limit => {
+               if(limit > 0) {
+                   this.peopleService.getRecruiters(guid).pipe(first()).subscribe(
+                       recruiters => {
+                           var numRecruiters = recruiters == null ? 0 : recruiters.length;
+                           var recruitersString = numRecruiters == 0 ?
+                                                "You're not bringing any recruiters" :
+                                                numRecruiters == 1 ?
+                                                "You've told us you're bringing a single recruiter" :
+                                                "You've told us you're bringing "+ numRecruiters +" recruiters";
+                           this.todoLinks.push({
+                               pageUrl: 'people',
+                               text: recruitersString,
+                               checked: false,
+                               care: false
+                           });
+                       }
+                   );
+               }
+           }
+        );
+
+
+
+        if (this.benefitsService.canListHardwareAndApis(benefits)) {
+            this.portalLinks.push({ pageUrl: 'tech', text: 'Register your tech with us' });
+            this.techService.getTechList(guid).pipe(first()).subscribe(
+                tech => {
+                    var numTech = tech == null ? 0 : tech.length;
+                    var techString = numTech == 0 ?
+                                     "You're not bringing any tech" :
+                                     numTech == 1 ?
+                                     "You've told us you're bringing one item of tech" :
+                                     "You've told us you're bringing "+ numTech +" items of tech";
+                    this.todoLinks.push({
+                        pageUrl: 'tech',
+                        text: techString,
+                        checked: false,
+                        care: false
+                    });
+                }
+            );
+        }
+
+
     }
+
 }
 
 class PortalLink {
     pageUrl: string;
     text: string;
+}
+
+class CheckedPortalLink {
+    pageUrl: string;
+    text: string;
+    checked: boolean;
+    care: boolean; // Whether or not to do the strikethrough
 }

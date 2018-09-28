@@ -35,7 +35,12 @@
         </div>
         <div class="one unit persistent row content" *ngIf="canAwardThemedPrize">
             <div class="four unit column">
-                <select [(ngModel)]="doingThemedPrize" (ngModelChange)="onDoingThemedPrizeChanged($event)">
+                <select *ngIf="doingThemedPrizeUnset" [(ngModel)]="doingThemedPrize" (ngModelChange)="onDoingThemedPrizeChanged($event)">
+                    <option [ngValue]="false">-- Select --</option>
+                    <option [ngValue]="false">We do not plan to run a themed prize</option>
+                    <option [ngValue]="true">We plan to run a themed prize</option>
+                </select>
+                <select *ngIf="!doingThemedPrizeUnset" [(ngModel)]="doingThemedPrize" (ngModelChange)="onDoingThemedPrizeChanged($event)">
                     <option [ngValue]="false">We do not plan to run a themed prize</option>
                     <option [ngValue]="true">We plan to run a themed prize</option>
                 </select>
@@ -71,7 +76,12 @@
         </div>
         <div class="one unit persistent row content" *ngIf="canRunSideEvent">
             <div class="three half unit column">
-                <select [(ngModel)]="doingSideEvent" (ngModelChange)="onDoingSideEventChanged($event)">
+                <select *ngIf="doingSideEventUnset" [(ngModel)]="doingSideEvent" (ngModelChange)="onDoingSideEventChanged($event)">
+                    <option [ngValue]="false">-- Select --</option>
+                    <option [ngValue]="false">We do not plan to run a side-event</option>
+                    <option [ngValue]="true">We plan to run a side-event</option>
+                </select>
+                <select *ngIf="!doingSideEventUnset" [(ngModel)]="doingSideEvent" (ngModelChange)="onDoingSideEventChanged($event)">
                     <option [ngValue]="false">We do not plan to run a side-event</option>
                     <option [ngValue]="true">We plan to run a side-event</option>
                 </select>
@@ -109,7 +119,12 @@
         </div>
         <div class="one unit persistent row content">
             <div class="four half unit column">
-                <select [(ngModel)]="doingHardwareApiPrize" (ngModelChange)="onDoingHardwareApiPrizeChanged($event)">
+                <select *ngIf="doingHardwareApiPrizeUnset" [(ngModel)]="doingHardwareApiPrize" (ngModelChange)="onDoingHardwareApiPrizeChanged($event)">
+                    <option [ngValue]="false">-- Select --</option>
+                    <option [ngValue]="false">We do not plan to run a Product prize</option>
+                    <option [ngValue]="true">We plan to run a Product prize</option>
+                </select>
+                <select *ngIf="!doingHardwareApiPrizeUnset" [(ngModel)]="doingHardwareApiPrize" (ngModelChange)="onDoingHardwareApiPrizeChanged($event)">
                     <option [ngValue]="false">We do not plan to run a Product prize</option>
                     <option [ngValue]="true">We plan to run a Product prize</option>
                 </select>
