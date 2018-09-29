@@ -54,6 +54,12 @@ export class EventsComponent extends BaseComponent implements OnInit {
      */
     doingThemedPrize: boolean;
 
+    doingHardwareApiPrizeUnset: boolean;
+    doingSideEventUnset: boolean;
+    doingThemedPrizeUnset: boolean;
+
+
+
     constructor(sponsorsService: SponsorsService,
                 activatedRoute: ActivatedRoute,
                 router: Router,
@@ -76,17 +82,25 @@ export class EventsComponent extends BaseComponent implements OnInit {
                 this.canRunSideEvent = this.benefitsService.canRunSideEvent(benefits);
             });
 
-        this.eventsService.getHardwareApiCompetition(guid).pipe(first()).subscribe(
+        this.eventsService.getCompetitions(guid).pipe(first()).subscribe(
             competitions => {
                 if (competitions) {
                     this.hardwareApiPrize = competitions.hardwareApiCompetition;
                     this.sideEvent = competitions.sideEvent;
                     this.themedPrize = competitions.themedCompetition;
+
+                    this.doingHardwareApiPrizeUnset = competitions["doingHardwareApiCompetition"] == undefined;
+                    this.doingSideEventUnset = competitions["doingSideEvent"] == undefined;
+                    this.doingThemedPrizeUnset = competitions["doingThemedCompetition"] == undefined;
                 }
                 else {
                     this.hardwareApiPrize = undefined;
                     this.sideEvent = undefined;
                     this.themedPrize = undefined;
+
+                    this.doingHardwareApiPrizeUnset = true;
+                    this.doingSideEventUnset = true;
+                    this.doingThemedPrizeUnset = true;
                 }
 
                 this.doingHardwareApiPrize = this.hardwareApiPrize !== undefined;
@@ -168,7 +182,11 @@ export class EventsComponent extends BaseComponent implements OnInit {
         const events: EventsSummaryModel = {
             hardwareApiCompetition: this.hardwareApiPrize,
             sideEvent: this.sideEvent,
-            themedCompetition: this.themedPrize
+            themedCompetition: this.themedPrize,
+
+            doingHardwareApiCompetition: Boolean(this.doingHardwareApiPrize),
+            doingSideEvent: Boolean(this.doingSideEvent),
+            doingThemedCompetition: Boolean(this.doingThemedPrize)
         };
 
         this.guid$.subscribe(

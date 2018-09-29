@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { AngularFireDatabase, AngularFireObject } from 'angularfire2/database';
-import { FirebaseApp } from 'angularfire2';
+import { AngularFireDatabase, AngularFireObject } from '@angular/fire/database';
+import { FirebaseApp } from '@angular/fire';
 import { PresentationModel } from 'app/presentation/presentation.model';
 import { Observable, of } from 'rxjs';
 import 'firebase/storage';

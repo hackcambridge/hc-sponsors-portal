@@ -40,7 +40,12 @@
         </div>
         <div class="one unit persistent row content" *ngIf="hasProductDemoSlot">
             <div class="three half unit column">
-                <select (ngModelChange)="onDoingProductDemoChange($event)" [(ngModel)]="doingProductDemo">
+                <select *ngIf="doingProductDemoUnset" (ngModelChange)="onDoingProductDemoChange($event)" [(ngModel)]="doingProductDemo">
+                    <option [ngValue]="false">-- Select --</option>
+                    <option [ngValue]="false">We do not plan to do a product demo</option>
+                    <option [ngValue]="true">We plan to do a product demo</option>
+                </select>
+                <select *ngIf="doingProductDemoUnset == false" (ngModelChange)="onDoingProductDemoChange($event)" [(ngModel)]="doingProductDemo">
                     <option [ngValue]="false">We do not plan to do a product demo</option>
                     <option [ngValue]="true">We plan to do a product demo</option>
                 </select>
@@ -80,7 +85,12 @@
         </div>
         <div class="one unit persistent row content" *ngIf="hasWorkshopSlot">
             <div class="three half unit column">
-                <select (ngModelChange)="onDoingWorkshopChange($event)" [(ngModel)]="doingWorkshop">
+                <select *ngIf="doingWorkshopUnset" (ngModelChange)="onDoingWorkshopChange($event)" [(ngModel)]="doingWorkshop">
+                    <option [ngValue]="false">-- Select --</option>
+                    <option [ngValue]="false">We do not plan to do a workshop</option>
+                    <option [ngValue]="true">We plan to do a workshop</option>
+                </select>
+                <select *ngIf="doingWorkshopUnset == false" (ngModelChange)="onDoingWorkshopChange($event)" [(ngModel)]="doingWorkshop">
                     <option [ngValue]="false">We do not plan to do a workshop</option>
                     <option [ngValue]="true">We plan to do a workshop</option>
                 </select>

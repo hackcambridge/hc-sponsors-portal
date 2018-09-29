@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AngularFireDatabase, AngularFireObject } from 'angularfire2/database';
+import { AngularFireDatabase, AngularFireObject } from '@angular/fire/database';
 import { EventsSummaryModel } from 'app/events/events.model';
 import { Observable } from 'rxjs';
 
@@ -7,12 +7,11 @@ import { Observable } from 'rxjs';
 export class EventsService {
     constructor(private db: AngularFireDatabase) {}
 
-
     private getCompetitionsObject(guid: string): AngularFireObject<EventsSummaryModel> {
         return this.db.object(`/sponsors/${guid}/competitions`);
     }
 
-    getHardwareApiCompetition(guid: string): Observable<EventsSummaryModel> {
+    getCompetitions(guid: string): Observable<EventsSummaryModel> {
         return this.getCompetitionsObject(guid).valueChanges();
     }
 
@@ -29,6 +28,7 @@ export class EventsService {
             delete events['themedCompetition'];
         }
 
+        console.log(JSON.stringify(events));
         this.getCompetitionsObject(guid).set(events);
     }
 }
