@@ -1,6 +1,6 @@
-<h1 rows="3">Account Admin</h1>
-<h3 rows="2">Registered sponsors</h3>
-<a rel="next" rows="1.5" *ngFor="let sponsor of sponsors" [routerLink]="[ '/', sponsor.id ]">{{ sponsor.name }}</a>
-<div rows="1.5">
+<h1 rows="1">Admin Interface</h1>
+<h3 rows="1">Registered sponsors</h3>
+<a rel="next" rows="0.5" *ngFor="let sponsor of sponsors" [routerLink]="[ '/', sponsor.id ]">{{ sponsor.name }}</a>
+<div rows="0.5">
   <button [routerLink]="[ '/admin/new' ]">Add Sponsor &rarr;</button>
 </div>
