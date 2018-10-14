@@ -1,6 +1,8 @@
-<h1 rows="3.0">Log in</h1>
-<div grid="columns" rows="0.5" columns="1.0" align-last="right">
-  <input type="text" placeholder="Email" [(ngModel)]="email">
-  <input type="password" placeholder="Password" [(ngModel)]="password">
-  <button type="button" (click)="login()">Log in</button>
+<h1 rows="1.0">Log in</h1>
+<div grid="rows" rows="2.0">
+  <input type="email" placeholder="Email" rows="0.5" [(ngModel)]="email">
+  <input type="password" placeholder="Password" rows="0.5" [(ngModel)]="password">
+  <div rows="0.5">
+    <button type="button" rows="0.5" (click)="login()">Log in</button>
+  </div>
 </div>
