@@ -4,7 +4,7 @@ import { Component } from '@angular/core';
 import { OnInit } from '@angular/core/src/metadata/lifecycle_hooks';
 
 @Component({
-    selector: 'app-login',
+    selector: 'section[component="app-login"][grid="rows"]',
     templateUrl: './login.component.html'
 })
 export class LoginComponent implements OnInit {

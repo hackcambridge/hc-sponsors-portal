@@ -3,7 +3,7 @@ import { AdminService } from 'app/admin/admin.service';
 import { Component } from '@angular/core';
 
 @Component({
-    selector: 'app-admin',
+    selector: 'section[component="app-admin"][grid="rows"]',
     templateUrl: './admin.component.html'
 })
 export class AdminComponent {

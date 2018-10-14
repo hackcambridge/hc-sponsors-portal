@@ -12,7 +12,7 @@ import { WorkshopService } from 'app/workshops/workshop.service';
 import { first } from 'rxjs/operators';
 
 @Component({
-    selector: 'app-portal',
+    selector: 'section[component="app-portal"][grid="grid"]',
     templateUrl: './portal.component.html'
 })
 export class PortalComponent extends BaseComponent implements OnInit {

@@ -8,7 +8,7 @@ import { first } from 'rxjs/operators';
 import { stringify } from '@firebase/util';
 
 @Component({
-    selector: 'app-new-sponsor',
+    selector: 'section[component="app-new-sponsor"][grid="rows"]',
     templateUrl: 'new-sponsor.component.html'
 })
 export class NewSponsorComponent {
