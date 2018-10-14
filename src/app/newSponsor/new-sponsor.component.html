@@ -1,52 +1,17 @@
-<section>
-    <div class="container a4">
-        <div class="three unit row">
-            <div class="unit column grows">
-                <h1>New Sponsor</h1>
-            </div>
-        </div>
-        <div class="two half unit row">
-            <div class="unit column grows">
-                <div class="unit persistent content row">
-                    <div class="five unit column grows">
-                        <div><input type="text" placeholder="Company name" [(ngModel)]="sponsorName"></div>
-                    </div>
-                    <div class="two unit column grows">
-                        <input type="text" placeholder="Tier name" [(ngModel)]="tier">
-                    </div>
-                    <div class="three unit column grows">
-                        <input type="number" placeholder="Maximum number of recruiters" [(ngModel)]="maxRecruiters">
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="two unit row">
-            <div class="unit column grows">
-                <h3>Benefits</h3>
-            </div>
-        </div>
-        <div class="five unit row">
-            <div class="four half unit columns balance">
-                <label *ngFor="let benefit of benefits; let i = index">
-                    <input type="checkbox" value="Company Name" [(ngModel)]="selectedBenefits[i]">
-                    {{ benefit.name }}<br>
-                </label>
-            </div>
-        </div>
-        <div class="two unit row">
-            <div class="unit column grows">
-                <div>
-                    <button (click)="addBenefit()">Add new benefit &rarr;</button>
-                </div>
-            </div>
-        </div>
-        <div class="one half unit row">
-            <div class="one unit column grows">
-                <div>
-                    <button type="submit" (click)="saveSponsor()">Save.</button>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-    
+<h1 rows="3.0">New Sponsor</h1>
+<div rows="4.0">
+  <input type="text" placeholder="Company name" [(ngModel)]="sponsorName">
+  <input type="text" placeholder="Tier name" [(ngModel)]="tier">
+  <input type="number" placeholder="Maximum number of recruiters" [(ngModel)]="maxRecruiters">
+</div>
+<h3 rows="3.0">Benefits</h3>
+<label rows="0.5" *ngFor="let benefit of benefits; let i = index">
+  <input type="checkbox" value="Company Name" [(ngModel)]="selectedBenefits[i]">
+  {{ benefit.name }}<br>
+</label>
+<div rows="2.0">
+  <button (click)="addBenefit()">Add new benefit &rarr;</button>
+</div>
+<div rows="1.5">
+  <button type="submit" (click)="saveSponsor()">Save.</button>
+</div>

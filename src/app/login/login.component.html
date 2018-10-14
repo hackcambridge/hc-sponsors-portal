@@ -1,20 +1,6 @@
-<section>
-    <div class="container a4">
-        <div class="three unit row">
-            <div class="unit column grows">
-                <h1>Log in</h1>
-            </div>
-        </div>
-        <div class="one half unit persistent row content">
-            <div class="three unit column">
-                <input type="text" placeholder="Email" [(ngModel)]="email">
-            </div>
-            <div class="three unit column">
-                <input type="password" placeholder="Password" [(ngModel)]="password">
-            </div>
-            <div class="one unit column">
-                <button type="button" (click)="login()">Log in</button>
-            </div>
-        </div>
-    </div>
-</section>
+<h1 rows="3.0">Log in</h1>
+<div grid="columns" rows="0.5" columns="1.0" align-last="right">
+  <input type="text" placeholder="Email" [(ngModel)]="email">
+  <input type="password" placeholder="Password" [(ngModel)]="password">
+  <button type="button" (click)="login()">Log in</button>
+</div>

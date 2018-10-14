@@ -21,6 +21,7 @@
             ],
             "styles": [
               "src/styles/all-stylesheets.css",
+              "src/styles/angular.css"
             ],
             "scripts": []
           },
@@ -71,6 +72,7 @@
             "scripts": [],
             "styles": [
               "src/styles/all-stylesheets.css",
+              "src/styles/angular.css"
             ],
             "assets": [
               "src/assets"

@@ -1,0 +1,22 @@
+router-outlet {
+  display: none;
+}
+
+@media (max-width: calc(482pt + (57pt * 2) - 1pt)) {
+  
+  /* Margins between top-level elements */
+  
+  app-not-found > *:not(:first-child) {
+    margin-top: calc(var(--unit) / 2);
+  }
+}
+
+@media (min-width: calc(482pt + (57pt * 2))) {
+    
+  app-not-found {
+    grid-auto-rows: calc(var(--unit) / 2);
+  }
+  app-not-found > * {
+    grid-row: span calc(var(--rows) * 2 + var(--half-row));
+  }
+}
