@@ -1,113 +1,41 @@
-<section class="red">
-    <div class="container width">
-        <div class="two unit row">
-            <div class="unit column grows">
-                <h1>Key Info</h1>
-            </div>
-        </div>
-        <div class="two half unit row">
-            <div class="unit column grows">
-                <h3>
-                    <span class="pixel">Sat 20/01/18 – Sun 21/01/18</span><br>
-                    <span class="pixel">2 Wheeler St, Cambridge, CB2 3QB</span>
-                </h3>
-            </div>
-        </div>
-    </div>
-</section>
-
-<section>
-    <div class="container width">
-        <div class="two unit row">
-            <div class="unit column grows">
-                <h3>Checklist</h3>
-                <p>Red is not done, Green is done, Black is for information</p>
-                <hr>
-            </div>
-        </div>
-        <div class="two half unit row">
-            <div class="unit column grows">
-                <ul>
-                    <li *ngFor="let link of todoLinks">
-                        <a class="unit persistent row content centred" rel="next" [routerLink]="[ link.pageUrl ]">
-                            <p *ngIf="!link.care"><span style="color:black">{{ link.text }}</span></p>
-                            <p *ngIf="link.checked && link.care"><s style="color:green">{{ link.text }}</s></p>
-                            <p *ngIf="!link.checked && link.care">{{ link.text }}</p>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</section>
-
-<section>
-    <div class="container width">
-        <div class="two unit row">
-            <div class="unit column grows">
-                <h1>Your Information</h1>
-            </div>
-        </div>
-        <div class="two unit row">
-            <div class="unit column grows">
-                <h3>Make sure to browse through these sections and fill out any forms before the event</h3>
-            </div>
-        </div>
-        <div class="three half unit row">
-            <div class="columns balance">
-                <ul>
-                    <li *ngFor="let link of portalLinks">
-                        <a class="unit persistent row content centred" rel="next" [routerLink]="[ link.pageUrl ]">
-                            <svg class="icon">
-                                <use x="0" y="0" attr.xlink:href="/assets/images/icons/{{ link.pageUrl }}.svg#icon"></use>
-                            </svg>
-                            <p>{{ link.text }}</p>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</section>
-
-<section id="sponsorship-tiers">
-    <div class="container width">
-        <div class="two unit row">
-            <div class="unit column grows">
-                <h2>
-                    Your Benefits
-                </h2>
-            </div>
-        </div>
-        <div class="two unit row">
-            <div class="unit column grows">
-                <h3>Your sponsorship tier is <span class="pixel">{{ sponsorshipTier }}</span></h3>
-            </div>
-        </div>
-        <div class="four unit row">
-            <div class="columns balance">
-                <ul>
-                    <li *ngFor="let benefit of sponsorshipBenefits">{{ benefit.name }}</li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</section>
-
-<section>
-    <div class="container width">
-        <div class="three unit row">
-            <div class="unit column grows">
-                <h2>Schedule</h2>
-            </div>
-        </div>
-        <div class="two unit row">
-            <div class="unit column grows">
-                <p>
-                    The schedule is being updated as we receive more information from sponsors.
-                </p>
-                <a rel="next" [routerLink]="[ '/', guid, 'schedule' ]">View the schedule</a>
-            </div>
-        </div>
-    </div>
-</section>
+<div rows="5.0" columns="4.5" grid="rows">
+  <h2 rows="1.0">Checklist</h2>
+  <ul rows="4.0">
+    <li *ngFor="let link of todoLinks">
+      <div *ngIf="!link.care">
+        {{ link.text }}&nbsp;<a rel="next" [routerLink]="[ link.pageUrl ]">Change</a>
+      </div>
+      <div *ngIf="link.checked && link.care">
+        <input type="checkbox" checked disabled />&nbsp;
+        <a rel="next" [routerLink]="[ link.pageUrl ]"><s>{{ link.text }}</s></a>
+      </div>
+      <div *ngIf="!link.checked && link.care">
+        <input type="checkbox" disabled />&nbsp;
+        <a rel="next" [routerLink]="[ link.pageUrl ]">{{ link.text }}</a>
+      </div>
+    </li>
+  </ul>
+</div>
+<div rows="3.5" columns="4.5" grid="rows">
+  <h2 rows="1.0">Key Info</h2>
+  <h3 rows="2.5">
+      <time datetime="2018-01-20">Saturday and Sunday<br>20/01/18–21/01/18</time><br>
+      <address>2 Wheeler St<br>Cambridge<br>CB2 3QB</address>
+  </h3>
+</div>
+<div rows="2.5" columns="4.5" grid="rows">
+  <h2 rows="1.0">Schedule</h2>
+  <div rows="1.5">
+    <p>The schedule is being updated as we receive more information from sponsors.</p>
+    <a rel="next" [routerLink]="[ '/', guid, 'schedule' ]">View the schedule</a>
+  </div>
+</div>
+<h2 rows="1.0" columns="all">Tasks</h2>
+<a *ngFor="let link of portalLinks" columns="1.5" rows="1.5" rel="next" [routerLink]="[ link.pageUrl ]"><svg width="28.5pt" height="28.5pt" class="icon"><use x="0" y="0" attr.xlink:href="/assets/images/icons/{{ link.pageUrl }}.svg#icon"></use></svg><br>{{ link.text }}</a>
+<div rows="7.5" columns="all" grid="rows">
+  <h2 rows="1.0">Benefits</h2>
+  <h3 rows="1.0">Your sponsorship tier is <span class="pixel">{{ sponsorshipTier }}</span></h3>
+  <ul rows="5.5" class="text-columns">
+    <li *ngFor="let benefit of sponsorshipBenefits">{{ benefit.name }}</li>
+  </ul>
+</div>
