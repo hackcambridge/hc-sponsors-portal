@@ -70,6 +70,10 @@ input::placeholder {
   opacity: 1;
 }
 
+[component="app-portal"] input[disabled][type="checkbox"] {
+  opacity: 1;
+}
+
 textarea {
   resize: none;
   width: calc(100% - 3pt * 2);
