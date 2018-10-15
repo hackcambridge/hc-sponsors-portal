@@ -105,6 +105,7 @@ export class AdminService {
         return indexObjects.valueChanges().pipe(first()).pipe(
             flatMap(
                 (indices: SponsorIndexModel[]) => {
+                    if(indices == null) return indexObjects.set([index]);
                     indices.push(index);
                     return indexObjects.set(indices);
                 }
