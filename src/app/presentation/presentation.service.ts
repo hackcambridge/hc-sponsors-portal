@@ -53,11 +53,11 @@ export class PresentationService {
         const refPath = `${guid}/${data.name}`;
         const task = this.af.storage().ref(refPath).put(data);
 
-        return task.then(
-            snapshot => {
+        return task.then(s => task.snapshot.ref.getDownloadURL().then(
+            url => {
                 const presentation: PresentationModel = {
                     name: data.name,
-                    url: snapshot.downloadURL,
+                    url: url,
                     refPath: refPath
                 };
 
@@ -65,6 +65,6 @@ export class PresentationService {
 
                 return presentation;
             }
-        );
+        ));
     }
 }
