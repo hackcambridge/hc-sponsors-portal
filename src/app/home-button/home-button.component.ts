@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
-    selector: 'app-home-button',
+    selector: '[component="home-button"]',
     templateUrl: './home-button.component.html'
 })
 export class HomeButtonComponent {

@@ -5,10 +5,11 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { PeopleService } from 'app/people/people.service';
 import { SponsorsService } from 'app/sponsors/sponsors.service';
 import { BaseComponent } from 'app/base.component';
+import { LayoutService } from 'app/layout.service';
 import { first } from 'rxjs/operators';
 
 @Component({
-    selector: 'app-people',
+    selector: 'section[component="app-people"][grid="rows"]',
     templateUrl: './people.component.html'
 })
 export class PeopleComponent extends BaseComponent implements OnInit {
@@ -31,8 +32,10 @@ export class PeopleComponent extends BaseComponent implements OnInit {
                 activatedRoute: ActivatedRoute,
                 router: Router,
                 private benefitsService: BenefitsService,
-                private peopleService: PeopleService) {
+                private peopleService: PeopleService,
+                private layoutService: LayoutService) {
         super(sponsorsService, activatedRoute, router);
+        this.layoutService.setLayoutMode('a4');
     }
 
     ngOnInit(): void {

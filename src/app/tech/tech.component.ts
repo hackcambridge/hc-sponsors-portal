@@ -4,10 +4,11 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { BaseComponent } from 'app/base.component';
 import { SponsorsService } from 'app/sponsors/sponsors.service';
 import { TechService } from 'app/tech/tech.service';
+import { LayoutService } from 'app/layout.service';
 import { first } from 'rxjs/operators';
 
 @Component({
-    selector: 'app-swag',
+    selector: 'section[component="tech"][grid="rows"]',
     templateUrl: './tech.component.html'
 })
 export class TechComponent extends BaseComponent implements OnInit {
@@ -16,8 +17,10 @@ export class TechComponent extends BaseComponent implements OnInit {
     constructor(sponsorsService: SponsorsService,
                 activatedRoute: ActivatedRoute,
                 router: Router,
-                private techService: TechService) {
+                private techService: TechService,
+                private layoutService: LayoutService) {
         super(sponsorsService, activatedRoute, router);
+        this.layoutService.setLayoutMode('a4');
     }
 
     ngOnInit(): void {

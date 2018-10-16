@@ -9,10 +9,11 @@ import { PresentationService } from 'app/presentation/presentation.service';
 import { SponsorsService } from 'app/sponsors/sponsors.service';
 import { TechService } from 'app/tech/tech.service';
 import { WorkshopService } from 'app/workshops/workshop.service';
+import { LayoutService } from 'app/layout.service';
 import { first } from 'rxjs/operators';
 
 @Component({
-    selector: 'section[component="app-portal"][grid="grid"]',
+    selector: 'section[component="portal"][grid="grid"]',
     templateUrl: './portal.component.html'
 })
 export class PortalComponent extends BaseComponent implements OnInit {
@@ -32,8 +33,10 @@ export class PortalComponent extends BaseComponent implements OnInit {
                 private presentationService: PresentationService,
                 private eventsService: EventsService,
                 private peopleService: PeopleService,
-                private techService: TechService) {
+                private techService: TechService,
+                private layoutService: LayoutService) {
         super(sponsorsService, activatedRoute, router);
+        this.layoutService.setLayoutMode('width');
     }
 
     ngOnInit(): void {

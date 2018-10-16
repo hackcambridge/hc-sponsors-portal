@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
-    selector: 'app-home-link',
+    selector: '[component="home-link"]',
     templateUrl: './home-link.component.html'
 })
 export class HomeLinkComponent {

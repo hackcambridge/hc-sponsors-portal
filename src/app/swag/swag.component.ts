@@ -3,9 +3,10 @@ import { SwagModel } from 'app/swag/swag.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BaseComponent } from 'app/base.component';
 import { SponsorsService } from 'app/sponsors/sponsors.service';
+import { LayoutService } from 'app/layout.service';
 
 @Component({
-    selector: 'app-swag',
+    selector: 'section[component="swag"][grid="rows"]',
     templateUrl: './swag.component.html'
 })
 export class SwagComponent extends BaseComponent {
@@ -13,8 +14,10 @@ export class SwagComponent extends BaseComponent {
 
     constructor(sponsorsService: SponsorsService,
                 activatedRoute: ActivatedRoute,
-                router: Router) {
+                router: Router,
+                private layoutService: LayoutService) {
         super(sponsorsService, activatedRoute, router);
+        this.layoutService.setLayoutMode('a4');
     }
 
     addSwag(): void {

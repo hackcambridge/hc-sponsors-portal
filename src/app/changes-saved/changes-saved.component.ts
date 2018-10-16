@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
-    selector: 'app-changes-saved',
+    selector: '[component="changes-saved"]',
     templateUrl: './changes-saved.component.html'
 })
 export class ChangesSavedComponent {

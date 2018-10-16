@@ -4,11 +4,12 @@ import { SponsorshipBenefitModel } from 'app/benefits/sponsorship-benefit.model'
 import { SponsorModel } from 'app/admin/sponsor.model';
 import { SponsorshipTier } from 'app/sponsors/sponsorship-tier.enum';
 import { Router } from '@angular/router';
+import { LayoutService } from 'app/layout.service';
 import { first } from 'rxjs/operators';
 import { stringify } from '@firebase/util';
 
 @Component({
-    selector: 'section[component="app-new-sponsor"][grid="rows"]',
+    selector: 'section[component="new-sponsor"][grid="rows"]',
     templateUrl: 'new-sponsor.component.html'
 })
 export class NewSponsorComponent {
@@ -19,13 +20,15 @@ export class NewSponsorComponent {
     selectedBenefits: boolean[];
 
     constructor(private adminService: AdminService,
-                private router: Router) {
+                private router: Router,
+                private layoutService: LayoutService) {
         adminService.getBenefits().pipe(first()).subscribe(
             benefits => {
                 this.benefits = benefits;
                 this.selectedBenefits = [].fill(false, 0, benefits.length);
             }
         );
+        this.layoutService.setLayoutMode('a4');
     }
 
     addBenefit(): void {
