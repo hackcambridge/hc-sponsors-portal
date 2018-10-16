@@ -9,10 +9,11 @@ import { PresentationService } from 'app/presentation/presentation.service';
 import { SponsorsService } from 'app/sponsors/sponsors.service';
 import { TechService } from 'app/tech/tech.service';
 import { WorkshopService } from 'app/workshops/workshop.service';
+import { LayoutService } from 'app/layout.service';
 import { first } from 'rxjs/operators';
 
 @Component({
-    selector: 'app-portal',
+    selector: 'section[component="portal"][grid="grid"]',
     templateUrl: './portal.component.html'
 })
 export class PortalComponent extends BaseComponent implements OnInit {
@@ -32,8 +33,10 @@ export class PortalComponent extends BaseComponent implements OnInit {
                 private presentationService: PresentationService,
                 private eventsService: EventsService,
                 private peopleService: PeopleService,
-                private techService: TechService) {
+                private techService: TechService,
+                private layoutService: LayoutService) {
         super(sponsorsService, activatedRoute, router);
+        this.layoutService.setLayoutMode('width');
     }
 
     ngOnInit(): void {
@@ -78,13 +81,13 @@ export class PortalComponent extends BaseComponent implements OnInit {
         // this.portalLinks.push({ pageUrl: 'social-media', text: 'Provide Social Media Assets' });
 
         if (this.benefitsService.canRunWorkshopLikeEvent(benefits)) {
-            this.portalLinks.push({ pageUrl: 'workshops', text: 'Tell us about any workshops' });
+            this.portalLinks.push({ pageUrl: 'workshops', text: 'Submit your workshops' });
 
             this.workshopService.getDoingProductDemo(guid).pipe(first()).subscribe(
                 doingProductDemo => {
                     this.todoLinks.push({
                         pageUrl: 'workshops',
-                        text: 'Let us know if you want to do a product demo',
+                        text: 'Submit product demo information',
                         checked: doingProductDemo !== null,
                         care: true
                     });
@@ -95,7 +98,7 @@ export class PortalComponent extends BaseComponent implements OnInit {
                 doingWorkshop => {
                     this.todoLinks.push({
                         pageUrl: 'workshops',
-                        text: 'Let us know if you want to run a workshop',
+                        text: 'Submit workshop information',
                         checked: doingWorkshop !== null,
                         care: true
                     });
@@ -111,7 +114,7 @@ export class PortalComponent extends BaseComponent implements OnInit {
         // }
 
         if (this.benefitsService.canRunCompetitionAndEvents(benefits)) {
-            this.portalLinks.push({ pageUrl: 'events', text: 'Plan competitions and events' });
+            this.portalLinks.push({ pageUrl: 'events', text: 'Submit your competitions and events' });
             this.eventsService.getCompetitions(guid).pipe(first()).subscribe(
                 competitions => {
                     var hardwareAPIComp = competitions == null ?
@@ -128,19 +131,19 @@ export class PortalComponent extends BaseComponent implements OnInit {
 
                     this.todoLinks.push({
                         pageUrl: 'events',
-                        text: 'Tell us if you want to sponsor a hardware/API competition',
+                        text: 'Submit hardware/API competition information',
                         checked: hardwareAPIComp,
                         care: true
                     });
                     this.todoLinks.push({
                         pageUrl: 'events',
-                        text: 'Tell us if you want to host a side event',
+                        text: 'Submit side event information',
                         checked: sideEventFlag,
                         care: true
                     });
                     this.todoLinks.push({
                         pageUrl: 'events',
-                        text: 'Tell us if you want to sponsor a themed competition',
+                        text: 'Submit themed competition information',
                         checked: themedComp,
                         care: true
                     });
@@ -149,12 +152,12 @@ export class PortalComponent extends BaseComponent implements OnInit {
         }
 
         if (this.benefitsService.canRunOpeningCeremonyPresentation(benefits)) {
-            this.portalLinks.push({ pageUrl: 'presentation', text: 'Send us your presentation' });
+            this.portalLinks.push({ pageUrl: 'presentation', text: 'Submit your presentation' });
             this.presentationService.getUploadedPresentation(guid).pipe(first()).subscribe(
                 presentation => {
                     this.todoLinks.push({
                         pageUrl: 'presentation',
-                        text: 'Send us your opening ceremony presentation',
+                        text: 'Send opening ceremony presentation',
                         checked: presentation !== null,
                         care: true
                     });
@@ -162,15 +165,15 @@ export class PortalComponent extends BaseComponent implements OnInit {
             );
         }
 
-        this.portalLinks.push({ pageUrl: 'people', text: 'Let us know who’s coming' });
+        this.portalLinks.push({ pageUrl: 'people', text: 'Submit your attendees' });
         this.peopleService.getMentors(guid).pipe(first()).subscribe(
             mentors => {
                 var numMentors = mentors == null ? 0 : mentors.length;
                 var mentorsString = numMentors == 0 ?
-                                    "You're not bringing any mentors" :
+                                    "You're not bringing any mentors." :
                                     numMentors == 1 ?
-                                    "You've told us you're bringing a single mentor" :
-                                    "You've told us you're bringing "+ numMentors +" mentors";
+                                    "You're bringing a single mentor." :
+                                    "You're bringing "+ numMentors +" mentors.";
                 this.todoLinks.push({
                     pageUrl: 'people',
                     text: mentorsString,
@@ -186,10 +189,10 @@ export class PortalComponent extends BaseComponent implements OnInit {
                        recruiters => {
                            var numRecruiters = recruiters == null ? 0 : recruiters.length;
                            var recruitersString = numRecruiters == 0 ?
-                                                "You're not bringing any recruiters" :
+                                                "You're not bringing any recruiters." :
                                                 numRecruiters == 1 ?
-                                                "You've told us you're bringing a single recruiter" :
-                                                "You've told us you're bringing "+ numRecruiters +" recruiters";
+                                                "You're bringing a single recruiter." :
+                                                "You're bringing "+ numRecruiters +" recruiters.";
                            this.todoLinks.push({
                                pageUrl: 'people',
                                text: recruitersString,
@@ -205,15 +208,15 @@ export class PortalComponent extends BaseComponent implements OnInit {
 
 
         if (this.benefitsService.canListHardwareAndApis(benefits)) {
-            this.portalLinks.push({ pageUrl: 'tech', text: 'Register your tech with us' });
+            this.portalLinks.push({ pageUrl: 'tech', text: 'Submit your tech' });
             this.techService.getTechList(guid).pipe(first()).subscribe(
                 tech => {
                     var numTech = tech == null ? 0 : tech.length;
                     var techString = numTech == 0 ?
-                                     "You're not bringing any tech" :
+                                     "You're not bringing any tech." :
                                      numTech == 1 ?
-                                     "You've told us you're bringing one item of tech" :
-                                     "You've told us you're bringing "+ numTech +" items of tech";
+                                     "You're bringing one item of tech." :
+                                     "You're bringing "+ numTech +" items of tech.";
                     this.todoLinks.push({
                         pageUrl: 'tech',
                         text: techString,

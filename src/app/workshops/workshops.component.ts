@@ -5,10 +5,11 @@ import { WorkshopModel } from 'app/workshops/workshop.model';
 import { WorkshopService } from 'app/workshops/workshop.service';
 import { BaseComponent } from 'app/base.component';
 import { SponsorsService } from 'app/sponsors/sponsors.service';
+import { LayoutService } from 'app/layout.service';
 import { first } from 'rxjs/operators';
 
 @Component({
-    selector: 'app-mentors',
+    selector: 'section[component="workshops"][grid="rows"][ng-init="$parent.selected=item.counter-1"]',
     templateUrl: './workshops.component.html'
 })
 export class WorkshopComponent extends BaseComponent implements OnInit {
@@ -27,8 +28,10 @@ export class WorkshopComponent extends BaseComponent implements OnInit {
                 activatedRoute: ActivatedRoute,
                 router: Router,
                 private workshopService: WorkshopService,
-                private benefitsService: BenefitsService) {
+                private benefitsService: BenefitsService,
+                private layoutService: LayoutService) {
         super(sponsorsService, activatedRoute, router);
+        this.layoutService.setLayoutMode('a4');
     }
 
     ngOnInit(): void {

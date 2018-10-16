@@ -20,8 +20,8 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles/grid.css",
-              "src/styles/ternary.css"
+              "src/styles/all-stylesheets.css",
+              "src/styles/angular.css"
             ],
             "scripts": []
           },
@@ -71,8 +71,8 @@
             "tsConfig": "src/tsconfig.spec.json",
             "scripts": [],
             "styles": [
-              "src/styles/grid.css",
-              "src/styles/ternary.css"
+              "src/styles/all-stylesheets.css",
+              "src/styles/angular.css"
             ],
             "assets": [
               "src/assets"

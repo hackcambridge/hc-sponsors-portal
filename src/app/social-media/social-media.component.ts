@@ -3,9 +3,10 @@ import { SocialMediaPostModel } from 'app/social-media/social-media.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BaseComponent } from 'app/base.component';
 import { SponsorsService } from 'app/sponsors/sponsors.service';
+import { LayoutService } from 'app/layout.service';
 
 @Component({
-    selector: 'app-social-media',
+    selector: 'section[component="social-media"][grid="rows"]',
     templateUrl: './social-media.component.html'
 })
 export class SocialMediaComponent extends BaseComponent {
@@ -15,8 +16,10 @@ export class SocialMediaComponent extends BaseComponent {
 
     constructor(sponsorsService: SponsorsService,
                 activatedRoute: ActivatedRoute,
-                router: Router) {
+                router: Router,
+                private layoutService: LayoutService) {
         super(sponsorsService, activatedRoute, router);
+        this.layoutService.setLayoutMode('a4');
     }
 
     publishToFacebook(): void {

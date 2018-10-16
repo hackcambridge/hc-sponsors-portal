@@ -5,10 +5,11 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { EventsService } from 'app/events/events.service';
 import { BaseComponent } from 'app/base.component';
 import { SponsorsService } from 'app/sponsors/sponsors.service';
+import { LayoutService } from 'app/layout.service';
 import { first } from 'rxjs/operators';
 
 @Component({
-    selector: 'app-events',
+    selector: 'section[component="events"][grid="rows"]',
     templateUrl: './events.component.html'
 })
 export class EventsComponent extends BaseComponent implements OnInit {
@@ -64,8 +65,10 @@ export class EventsComponent extends BaseComponent implements OnInit {
                 activatedRoute: ActivatedRoute,
                 router: Router,
                 private benefitsService: BenefitsService,
-                private eventsService: EventsService) {
+                private eventsService: EventsService,
+                private layoutService: LayoutService) {
         super(sponsorsService, activatedRoute, router);
+        this.layoutService.setLayoutMode('a4');
     }
 
     ngOnInit(): void {

@@ -1,15 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<?xml-stylesheet type="text/css" href="/assets/styles/hc-2018/all-stylesheets.css"?>
-<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xl="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 11 11" width="11pt" height="11pt" xmlns:dc="http://purl.org/dc/elements/1.1/">
-  <metadata> Produced by OmniGraffle 7.5 
-    <dc:date>2018-01-09 14:41:42 +0000</dc:date>
-  </metadata>
-  <defs/>
-  <symbol id="icon" viewBox="0 0 11 11">
-    <g>
-      <title>Layer 1</title>
-      <path d="M 4 11 L 4 9 L 5 9 L 5 8 L 6 8 L 6 9 L 7 9 L 7 11 L 8 11 L 8 8 L 7 8 L 7 7 L 4 7 L 4 8 L 3 8 L 3 11 Z M 5 4 L 5 7 L 6 7 L 6 4 L 7 4 L 7 3 L 8 3 L 8 0 L 7 0 L 7 2 L 6 2 L 6 3 L 5 3 L 5 2 L 4 2 L 4 0 L 3 0 L 3 3 L 4 3 L 4 4 Z"/>
-    </g>
-  </symbol>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 11 11">
+  <polygon id="icon" points="2 4 2 7 1 7 1 8 0 8 0 11 1 11 1 9 2 9 2 8 3 8 3 9 4 9 4 11 5 11 5 8 4 8 4 7 3 7 3 4 4 4 4 3 5 3 5 0 4 0 4 2 3 2 3 3 2 3 2 2 1 2 1 0 0 0 0 3 1 3 1 4" vector-effect="non-scaling-stroke"></polygon>
+  <path id="icon" d="M5 4v3H4v1H3v3h1V9h1V8h1v1h1v2h1V8H7V7H6V4h1V3h1V0H7v2H6v1H5V2H4V0H3v3h1v1z" vector-effect="non-scaling-stroke"/>
 </svg>

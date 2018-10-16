@@ -4,9 +4,10 @@ import { PresentationService } from 'app/presentation/presentation.service';
 import { PresentationModel } from 'app/presentation/presentation.model';
 import { SponsorsService } from 'app/sponsors/sponsors.service';
 import { BaseComponent } from 'app/base.component';
+import { LayoutService } from 'app/layout.service';
 
 @Component({
-    selector: 'app-presentation',
+    selector: 'section[component="presentation"][grid="rows"]',
     templateUrl: './presentation.component.html'
 })
 export class PresentationComponent extends BaseComponent implements OnInit {
@@ -22,8 +23,10 @@ export class PresentationComponent extends BaseComponent implements OnInit {
     constructor(sponsorsService: SponsorsService,
                 activatedRoute: ActivatedRoute,
                 router: Router,
-                private presentationService: PresentationService) {
+                private presentationService: PresentationService,
+                private layoutService: LayoutService) {
         super(sponsorsService, activatedRoute, router);
+        this.layoutService.setLayoutMode('a4');
     }
 
     ngOnInit(): void {

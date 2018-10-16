@@ -1,28 +1,6 @@
-<section>
-    <div class="container a4">
-        <div class="three unit row">
-            <div class="unit column grows">
-                <h1>Account Admin</h1>
-            </div>
-        </div>
-        <div class="two unit row">
-            <div class="unit column grows">
-                <h3>Registered sponsors</h3>
-            </div>
-        </div>
-        <div *ngFor="let sponsor of sponsors" class="one half unit row">
-            <div class="unit column grows">
-                <p>
-                    <a rel="next" [routerLink]="[ '/', sponsor.id ]">{{ sponsor.name }}</a>
-                </p>
-            </div>
-        </div>
-        <div class="one half unit row">
-            <div class="unit column grows">
-                <div>
-                    <button [routerLink]="[ '/admin/new' ]">Add Sponsor &rarr;</button>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
+<h1 rows="1">Admin Interface</h1>
+<h3 rows="1">Registered sponsors</h3>
+<a rel="next" rows="0.5" *ngFor="let sponsor of sponsors" [routerLink]="[ '/', sponsor.id ]">{{ sponsor.name }}</a>
+<div rows="0.5">
+  <button [routerLink]="[ '/admin/new' ]">Add Sponsor &rarr;</button>
+</div>

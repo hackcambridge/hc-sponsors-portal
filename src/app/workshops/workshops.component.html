@@ -1,115 +1,80 @@
-<app-home-link></app-home-link>
-<app-changes-saved></app-changes-saved>
-<section>
-    <div class="container a4">
-        <div class="three unit row">
-            <div class="unit column grows">
-                <h1>Workshops</h1>
-            </div>
-        </div>
-        <div class="two unit row">
-            <div class="unit column grows">
-                <p>
-                    You are entitled to
-                    {{ hasProductDemoSlot ? 'a 10-minute product demo slot' : ''}}
-                    {{ hasProductDemoSlot && hasWorkshopSlot ? 'and' : '' }}
-                    {{ hasWorkshopSlot ? 'a 30-minute workshop slot' : '' }}. These
-                    will be held in a room dedicated to workshops in the Guildhall.
-                    Tell us about them here.
-                </p>
-            </div>
-        </div>
-        <div class="two unit row" *ngIf="hasProductDemoSlot">
-            <div class="unit column grows">
-                <h3>Product Demo Details</h3>
-            </div>
-        </div>
-        <div class="three unit row" *ngIf="hasProductDemoSlot">
-            <div class="unit column grows">
-                <p>
-                    A product demo slot is a 10-minute chance to quickly show off your
-                    organisation's tech. We recommend that you focus your
-                    talk on tech rather than your company directly, as this is
-                    likely to draw a larger crowd. If you are running any
-                    competitions, or listing software or hardware products with
-                    us, we recommed you relate this talk to one of those as
-                    well. The information below will be shown in our event
-                    schedule.
-                </p>
-            </div>
-        </div>
-        <div class="one unit persistent row content" *ngIf="hasProductDemoSlot">
-            <div class="three half unit column">
-                <select *ngIf="doingProductDemoUnset" (ngModelChange)="onDoingProductDemoChange($event)" [(ngModel)]="doingProductDemo">
-                    <option [ngValue]="false">-- Select --</option>
-                    <option [ngValue]="false">We do not plan to do a product demo</option>
-                    <option [ngValue]="true">We plan to do a product demo</option>
-                </select>
-                <select *ngIf="doingProductDemoUnset == false" (ngModelChange)="onDoingProductDemoChange($event)" [(ngModel)]="doingProductDemo">
-                    <option [ngValue]="false">We do not plan to do a product demo</option>
-                    <option [ngValue]="true">We plan to do a product demo</option>
-                </select>
-            </div>
-        </div>
-        <div class="one unit persistent row content" *ngIf="doingProductDemo">
-            <div class="four unit column">
-                <input (ngModelChange)="saveProductDemo()" type="text" [(ngModel)]="productDemo.title" placeholder="Title">
-            </div>
-            <div class="four unit column">
-                <input (ngModelChange)="saveProductDemo()" type="text" [(ngModel)]="productDemo.speaker" placeholder="Speaker(s)">
-            </div>
-        </div>
-        <div class="two unit persistent row content" *ngIf="doingProductDemo">
-            <textarea (ngModelChange)="saveProductDemo()" [(ngModel)]="productDemo.description" placeholder="Description"></textarea>
-        </div>
-        <div class="two unit row" *ngIf="hasWorkshopSlot">
-            <div class="unit column grows">
-                <h3>Workshop Details</h3>
-            </div>
-        </div>
-        <div class="three unit row" *ngIf="hasWorkshopSlot">
-            <div class="unit column grows">
-                <p>
-                    A workshop provides half an hour for the hackers to learn
-                    something new, and for your organisation to really show off
-                    its engineering skills. We recommend that you focus your
-                    talk on tech rather than your company directly, as this is
-                    likely to draw a larger crowd. If you are running any
-                    competitions, or listing software or hardware products with
-                    us, we recommed you relate this talk to one of those as
-                    well. The information below will be shown in our event
-                    schedule. The information you provide here
-                    will be shown in our event schedule.
-                </p>
-            </div>
-        </div>
-        <div class="one unit persistent row content" *ngIf="hasWorkshopSlot">
-            <div class="three half unit column">
-                <select *ngIf="doingWorkshopUnset" (ngModelChange)="onDoingWorkshopChange($event)" [(ngModel)]="doingWorkshop">
-                    <option [ngValue]="false">-- Select --</option>
-                    <option [ngValue]="false">We do not plan to do a workshop</option>
-                    <option [ngValue]="true">We plan to do a workshop</option>
-                </select>
-                <select *ngIf="doingWorkshopUnset == false" (ngModelChange)="onDoingWorkshopChange($event)" [(ngModel)]="doingWorkshop">
-                    <option [ngValue]="false">We do not plan to do a workshop</option>
-                    <option [ngValue]="true">We plan to do a workshop</option>
-                </select>
-            </div>
-        </div>
-        <div class="one unit persistent row content" *ngIf="doingWorkshop">
-            <div class="four unit column">
-                <input (ngModelChange)="saveWorkshop()" type="text" [(ngModel)]="workshop.title" placeholder="Title">
-            </div>
-            <div class="four unit column">
-                <input (ngModelChange)="saveWorkshop()" type="text" [(ngModel)]="workshop.speaker" placeholder="Speaker(s)">
-            </div>
-        </div>
-        <div class="two unit persistent row content" *ngIf="doingWorkshop">
-            <textarea (ngModelChange)="saveWorkshop()" [(ngModel)]="workshop.description" placeholder="Description"></textarea>
-        </div>
-        <div class="one half unit row">
-            <app-home-button class="one unit column">
-            </app-home-button>
-        </div>
-    </div>
-</section>
+<div component="home-link" rows="0.5"></div>
+<div component="changes-saved" rows="1.0"></div>
+<h1 rows="1.0">Workshops</h1>
+<div rows="1.0">
+  <p>
+    You are entitled to
+    {{ hasProductDemoSlot ? 'a 10-minute product demo slot' : ''}}
+    {{ hasProductDemoSlot && hasWorkshopSlot ? 'and' : '' }}
+    {{ hasWorkshopSlot ? 'a 30-minute workshop slot' : '' }}. These
+    will be held in a room dedicated to workshops in the Guildhall.
+    Tell us about them here.
+  </p>
+</div>
+<h3 rows="1.0">Product Demo Details</h3>
+<div class="content" *ngIf="hasProductDemoSlot" rows="2.5">
+  <p>
+    A product demo slot is a 10-minute chance to quickly show off your
+    organisation's tech. We recommend that you focus your
+    talk on tech rather than your company directly, as this is
+    likely to draw a larger crowd. If you are running any
+    competitions, or listing software or hardware products with
+    us, we recommed you relate this talk to one of those as
+    well. The information below will be shown in our event
+    schedule.
+  </p>
+  <div *ngIf="doingProductDemoUnset">
+    <select (ngModelChange)="onDoingProductDemoChange($event)" [(ngModel)]="doingProductDemo">
+        <option [ngValue]="false">-- Select --</option>
+        <option [ngValue]="false">We do not plan to do a product demo</option>
+        <option [ngValue]="true">We plan to do a product demo</option>
+    </select>
+  </div>
+  <div *ngIf="doingProductDemoUnset == false">
+    <select (ngModelChange)="onDoingProductDemoChange($event)" [(ngModel)]="doingProductDemo">
+        <option [ngValue]="false">We do not plan to do a product demo</option>
+        <option [ngValue]="true">We plan to do a product demo</option>
+    </select>
+  </div>
+</div>
+<div rows="2.5" grid="rows" *ngIf="doingProductDemo">
+  <input rows="0.5" (ngModelChange)="saveProductDemo()" type="text" [(ngModel)]="productDemo.title" placeholder="Title">
+  <input rows="0.5" (ngModelChange)="saveProductDemo()" type="text" [(ngModel)]="productDemo.speaker" placeholder="Speaker(s)">
+  <div rows="1.0">
+    <textarea (ngModelChange)="saveProductDemo()" [(ngModel)]="productDemo.description" placeholder="Description"></textarea>
+  </div>
+</div>
+<h3 rows="1.0" *ngIf="hasWorkshopSlot">Workshop Details</h3>
+<div class="content" *ngIf="hasWorkshopSlot" rows="2.5">
+  <p>
+    A workshop provides half an hour for the hackers to learn
+    something new, and for your organisation to really show off
+    its engineering skills. We recommend that you focus your
+    talk on tech rather than your company directly, as this is
+    likely to draw a larger crowd. If you are running any
+    competitions, or listing software or hardware products with
+    us, we recommed you relate this talk to one of those as
+    well. The information below will be shown in our event
+    schedule. The information you provide here
+    will be shown in our event schedule.
+  </p>
+  <div>
+    <select rows="0.5" *ngIf="doingWorkshopUnset" (ngModelChange)="onDoingWorkshopChange($event)" [(ngModel)]="doingWorkshop">
+      <option [ngValue]="false">-- Select --</option>
+      <option [ngValue]="false">We do not plan to do a workshop</option>
+      <option [ngValue]="true">We plan to do a workshop</option>
+    </select>
+    <select rows="0.5" *ngIf="doingWorkshopUnset == false" (ngModelChange)="onDoingWorkshopChange($event)" [(ngModel)]="doingWorkshop">
+      <option [ngValue]="false">We do not plan to do a workshop</option>
+      <option [ngValue]="true">We plan to do a workshop</option>
+    </select>
+  </div>
+</div>
+<div rows="2.5" grid="rows" *ngIf="doingWorkshop">
+  <input rows="0.5" (ngModelChange)="saveWorkshop()" type="text" [(ngModel)]="workshop.title" placeholder="Title">
+  <input rows="0.5" (ngModelChange)="saveWorkshop()" type="text" [(ngModel)]="workshop.speaker" placeholder="Speaker(s)">
+  <div rows="1.0">
+    <textarea (ngModelChange)="saveWorkshop()" [(ngModel)]="workshop.description" placeholder="Description"></textarea>
+  </div>
+</div>
+<div component="home-button"></div>
