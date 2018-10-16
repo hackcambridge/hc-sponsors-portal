@@ -16,20 +16,22 @@
       can get involved hacking on your products.
   </p>
 </div>
-<p *ngIf="uploadInProgress" rows="1.0">
+<p *ngIf="uploadInProgress" rows="0.5">
   Your file is being uploaded…
 </p>
-<div *ngIf="!uploadInProgress && (presentation && !uploadNewFile)" rows="1.0">
-  <p>
+<div *ngIf="!uploadInProgress && (presentation && !uploadNewFile)" rows="1.5" grid="rows">
+  <p rows="0.5">
     You've already uploaded a slideshow for your presentation.
   </p>
-  <a rel="external" [href]="presentation.url">{{ presentation.name }}</a>
-  <button (click)="uploadNewFile = true">Upload new file &rarr;</button>
+  <a rel="external" [href]="presentation.url" rows="0.5">{{ presentation.name }}</a>
+  <div rows="0.5">
+    <button (click)="uploadNewFile = true">Upload new file &rarr;</button>
+  </div>
 </div>
-<div *ngIf="!uploadInProgress && (!presentation || uploadNewFile)" rows="1.0">
-  <p>
+<div *ngIf="!uploadInProgress && (!presentation || uploadNewFile)" rows="1.0" grid="rows">
+  <p rows="0.5">
     Please send us the slides as a Keynote, PDF, or PowerPoint file.
   </p>
-  <input type="file" (change)="uploadFile($event)" value="Upload file." placeholder="Upload file." accept=".pptx,.ppt,.pdf,.key">
+  <input type="file" (change)="uploadFile($event)" value="Upload file." placeholder="Upload file." accept=".pptx,.ppt,.pdf,.key" rows="0.5">
 </div>
 <div rows="0.5" component="home-button"></div>
