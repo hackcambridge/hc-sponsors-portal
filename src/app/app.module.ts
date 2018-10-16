@@ -14,6 +14,7 @@ import { SwagComponent } from 'app/swag/swag.component';
 import { EventsComponent } from 'app/events/events.component';
 import { PresentationComponent } from 'app/presentation/presentation.component';
 import { BenefitsService } from 'app/benefits/benefits.service';
+import { LayoutService } from 'app/layout.service';
 
 import { firebase } from '../environments/firebase';
 import { AngularFireModule } from '@angular/fire';
@@ -43,7 +44,7 @@ const appRoutes: Routes = [
   { path: 'admin', component: AdminComponent, canActivate: [AuthGuard] },
   { path: 'admin/new', component: NewSponsorComponent, canActivate: [AuthGuard] },
   { path: '404', component: NotFoundComponent },
-  { path: 'schedule', component: SchedulesComponent },
+  { path: ':guid/schedule', component: SchedulesComponent },
   { path: ':guid', component: PortalComponent },
   { path: ':guid/people', component: PeopleComponent },
   { path: ':guid/social-media', component: SocialMediaComponent },
@@ -53,7 +54,6 @@ const appRoutes: Routes = [
   { path: ':guid/events', component: EventsComponent },
   { path: ':guid/presentation', component: PresentationComponent },
   { path: ':guid/tips', component: TipsComponent },
-  { path: ':guid/schedule', redirectTo: '/schedule' },
   { path: '**', redirectTo: '/404' }
 ];
 
@@ -97,6 +97,7 @@ const appRoutes: Routes = [
     SponsorsService,
     TechService,
     AdminService,
+    LayoutService,
     AngularFireDatabase,
     AngularFireAuth,
     AuthGuard
