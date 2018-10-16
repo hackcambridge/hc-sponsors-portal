@@ -2,8 +2,18 @@ router-outlet {
   display: none;
 }
 
+@media (max-width: calc((57pt * 2) + (57pt * 5.0))) {
+  [columns="5.0"] {
+    grid-column: 1 / -1
+  }
+}
 @media (max-width: calc((57pt * 2) + (57pt * 4.5))) {
   [columns="4.5"] {
+    grid-column: 1 / -1
+  }
+}
+@media (max-width: calc((57pt * 2) + (57pt * 4.0))) {
+  [columns="4.0"] {
     grid-column: 1 / -1
   }
 }

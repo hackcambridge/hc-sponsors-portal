@@ -3,7 +3,8 @@
   /* Text columns */
   
   .text-columns {
-    column-count: 2;
+    --text-columns: 2;
+    column-count: var(--text-columns);
     column-gap: var(--column-gutter);
   }
   .text-columns > .span {

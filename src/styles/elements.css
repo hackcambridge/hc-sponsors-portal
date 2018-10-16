@@ -41,11 +41,17 @@ input[type="submit"], input[type="checkbox"], button {
   border: var(--border) var(--accent-color);
 }
 
+select {
+  border: var(--border) var(--secondary-color);
+}
+
 select{
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
   border-radius: 0;
+  margin: 0;
+  background: none;
 }
 
 input[type="email"],
@@ -70,6 +76,10 @@ input::placeholder {
   opacity: 1;
 }
 
+input[type="button"], button, select {
+  padding: 0 4px;
+}
+
 [component="app-portal"] input[disabled][type="checkbox"] {
   opacity: 1;
 }
@@ -79,6 +89,7 @@ textarea {
   width: calc(100% - 3pt * 2);
   height: var(--one);
   border: var(--border) var(--secondary-color);
+  text-indent: 0.75pt;
 }
 
 fieldset {

@@ -50,13 +50,6 @@ html * {
   align-items: start;
 }
 
-/* Margins between rows in A4 layout */
-
-[layout="a4"][grid="rows"] > *:not(:first-child),
-[layout="a4"] > [grid="rows"] > *:not(:first-child) {
-  margin-top: calc(var(--unit) / 2);
-}
-
 /* Sections */
 
 section, header, footer {
