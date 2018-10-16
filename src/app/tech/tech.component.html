@@ -1,73 +1,47 @@
-<app-home-link></app-home-link>
-<app-changes-saved></app-changes-saved>
-<section>
-    <div class="container a4">
-        <div class="two unit row">
-            <div class="unit column grows">
-                <h1>Tech</h1>
-            </div>
-        </div>
-        <div class="two unit row">
-            <div class="unit column grows">
-                <h3>Let hackers know what you have to offer</h3>
-            </div>
-        </div>
-        <div class="four unit row">
-            <div class="unit column grows">
-                <p>
-                    We will provide a list of the tech your company produces
-                    to all hackers before the event, so that they can
-                    use it too.
-                </p>
-                <p>
-                    You may list as many pieces of tech that your company
-                    produces, and we will advertise it before the hackathon.
-                    This is a great opportunity to increase adoption of
-                    your products ahead of the hackathon, but please bear in mind items
-                    you list should be related to soft/hardware engineering
-                    and design, not generic commercial products. If you have
-                    lots of relevant items, this may be more overwhelming
-                    than helpful; we recommend you focus on the perhaps 3 or 4
-                    technologies that you think may be most useful
-                    for a weekend hackathon project. If you are running any
-                    competitions, workshops or side-events, be sure to list any
-                    related tech!
-                </p>
-            </div>
-        </div>
-        <div class="one half unit row">
-            <div class="two unit column">
-                <button (click)="addTechListing()">Add Tech &rarr;</button>
-            </div>
-        </div>
-        <div class="one half unit persistent row content centred" *ngFor="let techListing of techListings; let i = index" style="padding-bottom: 35px">
-            <div class="two unit column">
-                <input type="text" [(ngModel)]="techListings[i].name" (ngModelChange)="saveTechListing()" placeholder="Name">
-            </div>
-            <div class="two unit column">
-                <input type="text" [(ngModel)]="techListings[i].description" (ngModelChange)="saveTechListing()" placeholder="Description">
-            </div>
-            <div class="two unit column">
-                <select [(ngModel)]="techListings[i].type" (ngModelChange)="saveTechListing()">
-                    <option [value]="'api'">API</option>
-                    <option [value]="'framework'">Framework</option>
-                    <option [value]="'hardware'">Hardware</option>
-                    <option [value]="'sdk'">SDK</option>
-                    <option [value]="'tooling'">Dev Tool</option>
-                    <option [value]="'other'">Other</option>
-                </select>
-            </div>
-            <div class="two unit column">
-                <input type="text" onclick="this.select()" [(ngModel)]="techListings[i].link" (ngModelChange)="saveTechListing()" placeholder="Link">
-            </div>
-            <div class="one unit column">
-                <button (click)="deleteTechListing(i)">Delete!</button>
-            </div>
-        </div>
-        <br>
-        <div class="one half unit row">
-            <app-home-button class="one unit column">
-            </app-home-button>
-        </div>
-    </div>
-</section>
+<div component="home-link" rows="0.5"></div>
+<div component="changes-saved" rows="1.0"></div>
+<h1 rows="1.0">Tech</h1>
+<h3 rows="1.0">Let hackers know what you have to offer</h3>
+<div rows="2.5">
+  <p>
+    We will provide a list of the tech your company produces
+    to all hackers before the event, so that they can
+    use it too.
+  </p>
+  <p>
+    You may list as many pieces of tech that your company
+    produces, and we will advertise it before the hackathon.
+    This is a great opportunity to increase adoption of
+    your products ahead of the hackathon, but please bear in mind items
+    you list should be related to soft/hardware engineering
+    and design, not generic commercial products. If you have
+    lots of relevant items, this may be more overwhelming
+    than helpful; we recommend you focus on the perhaps 3 or 4
+    technologies that you think may be most useful
+    for a weekend hackathon project. If you are running any
+    competitions, workshops or side-events, be sure to list any
+    related tech!
+  </p>
+</div>
+<div rows="1.0">
+  <button (click)="addTechListing()">Add Tech &rarr;</button>
+</div>
+<div rows="3.0" grid="rows" *ngFor="let techListing of techListings; let i = index">
+  <input rows="0.5" type="text" [(ngModel)]="techListings[i].name" (ngModelChange)="saveTechListing()" placeholder="Name">
+  <input rows="0.5" type="text" [(ngModel)]="techListings[i].description" (ngModelChange)="saveTechListing()" placeholder="Description">
+  <div rows="0.5">
+    <select [(ngModel)]="techListings[i].type" (ngModelChange)="saveTechListing()">
+      <option [value]="'api'">API</option>
+      <option [value]="'framework'">Framework</option>
+      <option [value]="'hardware'">Hardware</option>
+      <option [value]="'sdk'">SDK</option>
+      <option [value]="'tooling'">Dev Tool</option>
+      <option [value]="'other'">Other</option>
+    </select>
+  </div>
+  <input rows="0.5" type="text" onclick="this.select()" [(ngModel)]="techListings[i].link" (ngModelChange)="saveTechListing()" placeholder="Link">
+  <div rows="0.5">
+    <button (click)="deleteTechListing(i)">Delete!</button>
+  </div>
+</div>
+<div rows="0.5" component="home-button"></div>

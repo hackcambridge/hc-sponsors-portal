@@ -1,4 +1,4 @@
-<div rows="5.0" columns="4.5" grid="rows">
+<div rows="5.0" columns="5.0" grid="rows">
   <h2 rows="1.0">Checklist</h2>
   <ul rows="4.0">
     <li *ngFor="let link of todoLinks">
@@ -31,7 +31,15 @@
   </div>
 </div>
 <h2 rows="1.0" columns="all">Tasks</h2>
-<a *ngFor="let link of portalLinks" columns="1.5" rows="1.5" rel="next" [routerLink]="[ link.pageUrl ]"><svg width="28.5pt" height="28.5pt" class="icon"><use x="0" y="0" attr.xlink:href="/assets/images/icons/{{ link.pageUrl }}.svg#icon"></use></svg><br>{{ link.text }}</a>
+<a class="icon" *ngFor="let link of portalLinks" columns="1.5" rows="1.5" rel="next" [routerLink]="[ link.pageUrl ]">
+  <svg width="28.5pt" height="28.5pt" viewBox="0 0 11 11" preserveAspectRatio="xMidYMid" class="icon">
+    <clipPath [attr.id]="link.pageUrl + 'Clip'">
+      <use x="0" y="0" attr.xlink:href="/assets/images/icons/{{ link.pageUrl }}.svg#icon"/>
+    </clipPath>
+    <use x="0" y="0" attr.clip-path="url(#{{ link.pageUrl + 'Clip' }})" attr.xlink:href="/assets/images/icons/{{ link.pageUrl }}.svg#icon"/>
+  </svg>
+  <br>{{ link.text }}
+</a>
 <div rows="7.5" columns="all" grid="rows">
   <h2 rows="1.0">Benefits</h2>
   <h3 rows="1.0">Your sponsorship tier is <span class="pixel">{{ sponsorshipTier }}</span></h3>

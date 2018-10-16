@@ -1,106 +1,64 @@
-<app-home-link></app-home-link>
-<app-changes-saved></app-changes-saved>
-<section>
-    <div class="container a4">
-        <div class="three unit row">
-            <div class="unit column grows">
-                <h1>People</h1>
-            </div>
-        </div>
-        <div class="four unit row">
-            <div class="unit column grows">
-                <p>
-                    Everyone coming to Hack Cambridge will be added to our Slack
-                    channel so you can chat to the hackers. You will also be
-                    added to HELPq, a hackathon ticketing system. To do so we
-                    need to know who is coming in advance. Phone numbers will
-                    only be used if we need to contact you during the event
-                    urgently.
-                </p>
-                <p>
-                    Everyone can take part in deciding who gets the overall
-                    Hack Cambridge prizes. Judging will be done using Gavel, an
-                    expo judging system originally developed for HackMIT. Note
-                    that any competitions your company runs are separate and may
-                    be judged however you wish.
-                </p>
-            </div>
-        </div>
-        <div class="two unit row">
-            <div class="unit column grows">
-                <h3>Mentors</h3>
-            </div>
-        </div>
-        <div class="four unit row">
-            <div class="unit column grows">
-                <p>
-                    You may bring an unlimited number of mentors.
-                </p>
-                <p>
-                    Mentors are technically focused people—software
-                    engineers, developers, or similar. Their primary concern is
-                    to help hackers with technical issues, though they may also
-                    discuss the your company and your products. We recommend
-                    sending developers whose expertise covers a wide range of
-                    technical areas, and certainly ones who are knowledgeable
-                    about any software or hardware you have listed with us. The
-                    most important thing a mentor should remember is to be
-                    proactive. Hackers will often be shy and reluctant to ask
-                    for help when they're having problems.
-                </p>
-            </div>
-        </div>
-        <div class="two unit row">
-            <div class="two unit column">
-                <button (click)="addMentor()" [disabled]="!mentorDetailsCompleted">Add Mentor &rarr;</button>
-            </div>
-        </div>
-        <div class="one unit persistent row content" *ngFor="let mentor of mentors; let i = index">
-            <div class="two unit column">
-                <input type="text" [(ngModel)]="mentors[i].name" (ngModelChange)="onMentorChanges()" placeholder="Name">
-            </div>
-            <div class="three unit column">
-                <input type="text" [(ngModel)]="mentors[i].email" (ngModelChange)="onMentorChanges()" placeholder="Email">
-            </div>
-            <div class="one half unit column">
-                <input type="text" [(ngModel)]="mentors[i].phone" (ngModelChange)="onMentorChanges()" placeholder="Phone">
-            </div>
-            <div class="one unit column">
-                <button (click)="deleteMentor(i)">Delete!</button>
-            </div>
-        </div>
-        <div class="two unit row" *ngIf="recruiterLimit > 0">
-            <div class="unit column grows">
-                <h3>Recruiters</h3>
-            </div>
-        </div>
-        <div class="two unit row" *ngIf="recruiterLimit > 0">
-            <div class="unit column grows">
-                <p>You may bring {{ recruiterLimit }} recruiters.</p>
-            </div>
-        </div>
-        <div class="two unit row" *ngIf="recruiterLimit > 0">
-            <div class="two unit column">
-                <button (click)="addRecruiter()" [hidden]="recruiters ? recruiters.length >= recruiterLimit : true" [disabled]="!recruiterDetailsCompleted">Add Recruiter &rarr;</button>
-            </div>
-        </div>
-        <div class="one unit persistent row content" *ngFor="let recruiter of recruiters; let i = index">
-            <div class="two unit column">
-                <input type="text" [(ngModel)]="recruiters[i].name" (ngModelChange)="onRecruiterChanges()" placeholder="Name">
-            </div>
-            <div class="three unit column">
-                <input type="text" [(ngModel)]="recruiters[i].email" (ngModelChange)="onRecruiterChanges()" placeholder="Email">
-            </div>
-            <div class="one half unit column">
-                <input type="text" [(ngModel)]="recruiters[i].phone" (ngModelChange)="onRecruiterChanges()" placeholder="Phone">
-            </div>
-            <div class="one unit column">
-                <button (click)="deleteRecruiter(i)">Delete.</button>
-            </div>
-        </div>
-        <div class="one half unit row">
-            <app-home-button class="one unit column">
-            </app-home-button>
-        </div>
-    </div>
-</section>
+<div component="home-link" rows="0.5"></div>
+<div component="changes-saved" rows="1.0"></div>
+<h1 rows="1.0">People</h1>
+<div rows="2.0">
+  <p>
+    Everyone coming to Hack Cambridge will be added to our Slack
+    channel so you can chat to the hackers. You will also be
+    added to HELPq, a hackathon ticketing system. To do so we
+    need to know who is coming in advance. Phone numbers will
+    only be used if we need to contact you during the event
+    urgently.
+  </p>
+  <p>
+    Everyone can take part in deciding who gets the overall
+    Hack Cambridge prizes. Judging will be done using Gavel, an
+    expo judging system originally developed for HackMIT. Note
+    that any competitions your company runs are separate and may
+    be judged however you wish.
+  </p>
+</div>
+<h3 rows="1.0">Mentors</h3>
+<div rows="2.5">
+  <p>
+    You may bring an unlimited number of mentors.
+  </p>
+  <p>
+    Mentors are technically focused people—software
+    engineers, developers, or similar. Their primary concern is
+    to help hackers with technical issues, though they may also
+    discuss the your company and your products. We recommend
+    sending developers whose expertise covers a wide range of
+    technical areas, and certainly ones who are knowledgeable
+    about any software or hardware you have listed with us. The
+    most important thing a mentor should remember is to be
+    proactive. Hackers will often be shy and reluctant to ask
+    for help when they're having problems.
+  </p>
+</div>
+<div rows="1.0">
+  <button (click)="addMentor()" [disabled]="!mentorDetailsCompleted">Add Mentor &rarr;</button>
+</div>
+<div rows="2.5" grid="rows" *ngFor="let mentor of mentors; let i = index">
+  <input rows="0.5" type="text" [(ngModel)]="mentors[i].name" (ngModelChange)="onMentorChanges()" placeholder="Name">
+  <input rows="0.5" type="text" [(ngModel)]="mentors[i].email" (ngModelChange)="onMentorChanges()" placeholder="Email">
+  <input rows="0.5" type="text" [(ngModel)]="mentors[i].phone" (ngModelChange)="onMentorChanges()" placeholder="Phone">
+  <div rows="0.5">
+    <button (click)="deleteMentor(i)">Delete!</button>
+  </div>
+</div>
+<h3 rows="1.0" *ngIf="recruiterLimit > 0">Recruiters</h3>
+<p rows="0.5" *ngIf="recruiterLimit > 0">You may bring {{ recruiterLimit }} recruiters.</p>
+<div rows="1.0" *ngIf="recruiterLimit > 0">
+  <button (click)="addRecruiter()" [hidden]="recruiters ? recruiters.length >= recruiterLimit : true" [disabled]="!recruiterDetailsCompleted">Add Recruiter &rarr;</button>
+</div>
+<div rows="2.5" grid="rows" *ngFor="let recruiter of recruiters; let i = index">
+  <input rows="0.5" type="text" [(ngModel)]="recruiters[i].name" (ngModelChange)="onRecruiterChanges()" placeholder="Name">
+  <input rows="0.5" type="text" [(ngModel)]="recruiters[i].email" (ngModelChange)="onRecruiterChanges()" placeholder="Email">
+  <input rows="0.5" type="text" [(ngModel)]="recruiters[i].phone" (ngModelChange)="onRecruiterChanges()" placeholder="Phone">
+  <div rows="0.5">
+    <button (click)="deleteRecruiter(i)">Delete.</button>
+  </div>
+</div>
+<div rows="0.5" component="home-button"></div>
+        

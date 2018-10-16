@@ -1,16 +1,16 @@
-<header color="black" layout="width" grid="grid" rows="2.0">
+<header [attr.layout]=gridLayout grid="grid" rows="2.0">
   <img columns="2.5" draggable="false" src="/assets/images/logo.svg" alt="Hack Cambridge Logo"/>
   <div columns="5.5">
     <h1 id="wordmark">Hack Cambridge<br><span class="pixel">Sponsors' Portal</span></h1>
   </div>
 </header>
-<main layout="width">
-  <section *ngIf="companyName" color="red" grid="grid" rows="0.5">
-    <h3 columns="8.0">Hi {{companyName}}!</h3>
+<main [attr.layout]=gridLayout>
+  <section *ngIf="companyName" color="blue" grid="grid" rows="0.5">
+    <h3 columns="8.0">Hi {{ companyName }}!</h3>
   </section>
   <router-outlet></router-outlet>
 </main>
-<footer grid="rows" layout="width" rows="2.0">
+<footer grid="rows" [attr.layout]=gridLayout rows="2.0">
   <div>
     <ul>
       <li>
