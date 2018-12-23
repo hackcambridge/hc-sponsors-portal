@@ -1,6 +1,14 @@
 <h1 rows="1">Admin Interface</h1>
 <h3 rows="1">Registered sponsors</h3>
-<a rel="next" rows="0.5" *ngFor="let sponsor of sponsors" [routerLink]="[ '/', sponsor.id ]">{{ sponsor.name }}</a>
+<br>
+<div *ngFor="let sponsor of sponsors">
+    <p style="margin: 20px 0;"><a style="font-weight: 700;font-size: large;" rel="next" [routerLink]="[ '/', sponsor.id ]">{{ sponsor.name }}</a></p>
+    <ul>
+        <li *ngFor="let note of sponsor.notes"><a href="{{ note.link }}">{{ note.text }}</a></li>
+    </ul>
+    <hr style="border: 0.5px solid red;margin-top: 20px;">
+</div>
+
 <div rows="0.5">
-  <button [routerLink]="[ '/admin/new' ]">Add Sponsor &rarr;</button>
+    <button [routerLink]="[ '/admin/new' ]">Add Sponsor &rarr;</button>
 </div>
