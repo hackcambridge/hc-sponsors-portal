@@ -88,7 +88,7 @@ export class AdminComponent {
 
                     if(!hardwareAPIComp) {
                         sponsorNotes.push({
-                            text: "No Hardwarte/API Competition Information Submitted",
+                            text: "No Hardware/API Competition Information Submitted",
                             link: guid + "/events"
                         });
                     }
