@@ -5,7 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { LayoutService } from 'app/layout.service';
 
 @Component({
-    selector: 'section[component="schedule"][grid="rows"]',
+    selector: 'section[component="schedule"]',
     templateUrl: './schedule.component.html'
 })
 export class SchedulesComponent {

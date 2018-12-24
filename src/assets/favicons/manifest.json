@@ -1,5 +1,5 @@
 {
-    "name": "HC Ternary",
+    "name": "HackCambridge 4D",
     "icons": [
         {
             "src": "{{ asset('images/favicons/android-chrome-192x192.png') }}",
