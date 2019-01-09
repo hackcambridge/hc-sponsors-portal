@@ -46,11 +46,11 @@ export class PeopleComponent extends BaseComponent implements OnInit {
                 );
 
                 this.peopleService.getMentors(guid).pipe(first()).subscribe(
-                    mentors => this.mentors = mentors ? mentors : []
+                    mentors => this.mentors = mentors ? mentors.filter(n => n) : []
                 );
 
                 this.peopleService.getRecruiters(guid).pipe(first()).subscribe(
-                    recruiters => this.recruiters = recruiters ? recruiters : []
+                    recruiters => this.recruiters = recruiters.filter(n => n) ? recruiters : []
                 );
             }
         );
