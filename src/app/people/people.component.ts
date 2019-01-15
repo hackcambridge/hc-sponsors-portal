@@ -69,6 +69,7 @@ export class PeopleComponent extends BaseComponent implements OnInit {
     deleteMentor(index: number): void {
         if (this.mentors[index]) {
             this.mentors.splice(index, 1);
+            this.mentors = this.mentors.filter(n => n);
         }
 
         this.onMentorChanges();
@@ -94,6 +95,7 @@ export class PeopleComponent extends BaseComponent implements OnInit {
     deleteRecruiter(index: number): void {
         if (this.recruiters[index]) {
             this.recruiters.splice(index, 1);
+            this.recruiters = this.recruiters.filter(n => n);
         }
 
         this.onRecruiterChanges();
