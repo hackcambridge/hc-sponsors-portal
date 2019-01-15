@@ -1,6 +1,6 @@
 <div component="home-link" rows="0.5"></div>
 <div component="changes-saved" rows="1.0"></div>
-<h1 rows="1.0">Workshops</h1>
+<h1 rows="1.0">Workshops and Demos</h1>
 <div rows="1.0">
   <p>
     You are entitled to
@@ -11,7 +11,7 @@
     Tell us about them here.
   </p>
 </div>
-<h3 rows="1.0">Product Demo Details</h3>
+<h3 *ngIf="hasProductDemoSlot" rows="1.0">Product Demo Details</h3>
 <div class="content" *ngIf="hasProductDemoSlot" rows="2.5">
   <p>
     A product demo slot is a 10-minute chance to quickly show off your
@@ -44,6 +44,7 @@
     <textarea (ngModelChange)="saveProductDemo()" [(ngModel)]="productDemo.description" placeholder="Description"></textarea>
   </div>
 </div>
+
 <h3 rows="1.0" *ngIf="hasWorkshopSlot">Workshop Details</h3>
 <div class="content" *ngIf="hasWorkshopSlot" rows="2.5">
   <p>

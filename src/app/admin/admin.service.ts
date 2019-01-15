@@ -1,4 +1,3 @@
-
 import { throwError as observableThrowError,  Observable, defer, of, concat } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { AngularFireObject, AngularFireDatabase, AngularFireList } from '@angular/fire/database';
@@ -97,7 +96,8 @@ export class AdminService {
     private addSponsorIndex(guid: string, name: string): Observable<void> {
         const index: SponsorIndexModel = {
             id: guid,
-            name: name
+            name: name,
+            notes: []
         };
 
         const indexObjects = this.getSponsorIndexObjects();

@@ -46,11 +46,11 @@ export class PeopleComponent extends BaseComponent implements OnInit {
                 );
 
                 this.peopleService.getMentors(guid).pipe(first()).subscribe(
-                    mentors => this.mentors = mentors ? mentors : []
+                    mentors => this.mentors = mentors ? mentors.filter(n => n) : []
                 );
 
                 this.peopleService.getRecruiters(guid).pipe(first()).subscribe(
-                    recruiters => this.recruiters = recruiters ? recruiters : []
+                    recruiters => this.recruiters = recruiters.filter(n => n) ? recruiters : []
                 );
             }
         );
@@ -69,6 +69,7 @@ export class PeopleComponent extends BaseComponent implements OnInit {
     deleteMentor(index: number): void {
         if (this.mentors[index]) {
             this.mentors.splice(index, 1);
+            this.mentors = this.mentors.filter(n => n);
         }
 
         this.onMentorChanges();
@@ -94,6 +95,7 @@ export class PeopleComponent extends BaseComponent implements OnInit {
     deleteRecruiter(index: number): void {
         if (this.recruiters[index]) {
             this.recruiters.splice(index, 1);
+            this.recruiters = this.recruiters.filter(n => n);
         }
 
         this.onRecruiterChanges();

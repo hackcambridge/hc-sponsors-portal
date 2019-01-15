@@ -83,27 +83,31 @@ export class PortalComponent extends BaseComponent implements OnInit {
         if (this.benefitsService.canRunWorkshopLikeEvent(benefits)) {
             this.portalLinks.push({ pageUrl: 'workshops', text: 'Submit your workshops' });
 
-            this.workshopService.getDoingProductDemo(guid).pipe(first()).subscribe(
-                doingProductDemo => {
-                    this.todoLinks.push({
-                        pageUrl: 'workshops',
-                        text: 'Submit product demo information',
-                        checked: doingProductDemo !== null,
-                        care: true
-                    });
-                }
-            );
+            if(this.benefitsService.hasProductDemoSlot(benefits)) {
+                this.workshopService.getDoingProductDemo(guid).pipe(first()).subscribe(
+                    doingProductDemo => {
+                        this.todoLinks.push({
+                            pageUrl: 'workshops',
+                            text: 'Submit product demo information',
+                            checked: doingProductDemo !== null,
+                            care: true
+                        });
+                    }
+                );
+            }
 
-            this.workshopService.getDoingWorkshop(guid).pipe(first()).subscribe(
-                doingWorkshop => {
-                    this.todoLinks.push({
-                        pageUrl: 'workshops',
-                        text: 'Submit workshop information',
-                        checked: doingWorkshop !== null,
-                        care: true
-                    });
-                }
-            );
+            if(this.benefitsService.hasWorkshopSlot(benefits)) {
+                this.workshopService.getDoingWorkshop(guid).pipe(first()).subscribe(
+                    doingWorkshop => {
+                        this.todoLinks.push({
+                            pageUrl: 'workshops',
+                            text: 'Submit workshop information',
+                            checked: doingWorkshop !== null,
+                            care: true
+                        });
+                    }
+                );
+            }
         }
 
         // This year we will not be asking for swag details via this, as we have
