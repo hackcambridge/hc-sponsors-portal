@@ -47,3 +47,4 @@ src/environments/firebase.ts
 # Firebase
 .firebaserc
 functions/*
+.firebase/*

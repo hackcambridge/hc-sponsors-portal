@@ -65,9 +65,9 @@ header {
 }
 
 @media (max-width: calc(482pt + (57pt * 2))) {
-  
+
   /* Header, section, and footer padding */
-  
+
   header,
   main section,
   footer {
@@ -75,26 +75,26 @@ header {
     padding-right: calc((100vw - 88vw )/ 2);
     max-width: 88vw;
   }
-  
+
   /* Margins between top-level elements */
-  
+
   [grid="rows"] > *:not(:first-child) {
     margin-top: calc(var(--unit) / 2);
   }
 }
 
 @media (max-width: calc(482pt + 69pt)) {
-  
+
   /* Margins between top-level elements */
-  
+
   [layout="a4"] > *:not(:first-child),
   [layout="a4"] > section > *:not(:first-child) {
     margin-top: calc(var(--unit) / 2);
   }
-  
-  
+
+
   /* Flow */
-  
+
   [layout="width"] [grid="grid"],
   [layout="width"][grid="grid"],
   [layout="width"] [grid="columns"],
@@ -104,27 +104,27 @@ header {
 }
 
 @media (min-width: calc(482pt + (57pt * 2))) {
-  
+
   /* Header, section, and footer padding for A4 */
-  
+
   header[layout="a4"],
   main[layout="a4"] section,
   footer[layout="a4"] {
     padding-left: calc((100vw - 484pt)/2);
     padding-right: calc((100vw - 484pt)/2);
   }
-  
+
   /* Grid rows */
-  
+
   [grid="grid"], [grid="rows"] {
     grid-auto-rows: calc(var(--unit) / 2);
   }
   [grid="grid"] > *, [grid="rows"] > * {
     grid-row: span calc(var(--rows) * 2 + var(--half-row));
   }
-  
+
   /* Flow */
-  
+
   [grid="grid"], [grid="columns"] {
     grid-auto-flow: row;
   }
