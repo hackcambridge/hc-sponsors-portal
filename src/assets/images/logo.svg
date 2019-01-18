@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg viewBox="0 0 1024 1182" fill="none" xmlns="http://www.w3.org/2000/svg">
+<svg viewBox="0 0 1024 1182" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMinYMin">
   <g clip-path="url(#clip0)">
     <g opacity=".8">
       <path fill-rule="evenodd" clip-rule="evenodd" d="M512 0l512 295.603V886.81l-512 295.6L0 886.81V295.603L512 0z" fill="#0092DB"/>
