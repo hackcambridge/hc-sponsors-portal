@@ -23,7 +23,7 @@
     "@angular/router": "^6.1.10",
     "angular2-uuid": "^1.1.1",
     "core-js": "^2.6.5",
-    "firebase": "^5.9.0",
+    "firebase": "^5.9.1",
     "rxjs": "^6.4.0",
     "zone.js": "^0.8.29"
   },
